@@ -30,6 +30,15 @@ public class BuildMenu : MonoBehaviour {
 	private static GUIText productName;
 	private static GameObject company;
 	private static GUIText companyName;
+	//TODO:Init and place an logo on screen
+	private static GameObject companylogo;
+	private static GUITexture companyTexture;
+
+	
+	private static GameObject homeButton;
+	private static GUITexture homeTexture;
+	private static Texture2D homeIcon;
+	private static Rect homeIconRect;
 
 	public Vector3 test1;
 	public Rect test2;
@@ -38,30 +47,48 @@ public class BuildMenu : MonoBehaviour {
 
 		//Init Font
 		menuFont = Resources.Load("Fonts/HelveticaNeue") as Font;
+		//set standard font size
 		fontSize = 50;
+		//Init Textures
+		homeIcon = Resources.Load("Icons/home-36") as Texture2D;
+
 		//Init MainMenu Buttons
 		connectButton = new GameObject();
 		createButton = new GameObject();
 		playButton = new GameObject();
 		smokeButton = new GameObject();
 
+		product = new GameObject();
+		company = new GameObject();
+		
+		homeButton = new GameObject();
+
 		//Give Buttons a Name
 		connectButton.name = "Connect_Button";
 		createButton.name = "Create_Button";
 		playButton.name = "Play_Button";
 		smokeButton.name = "Smoke_Button";
+		product.name = "Product_Name";
+		company.name = "Company_Name";
+		homeButton.name = "Home_Button";
 
 		//Give Buttons the right components
 		connectButton.AddComponent<GUIText>();
 		createButton.AddComponent<GUIText>();
 		playButton.AddComponent<GUIText>();
 		smokeButton.AddComponent<GUIText>();
+		product.AddComponent<GUIText>();
+		company.AddComponent<GUIText>();
+		homeButton.AddComponent<GUITexture>();
 
 		//Select the Components a variable
 		connectButtonText = connectButton.GetComponent<GUIText>();
 		createButtonText = createButton.GetComponent<GUIText>();
 		playButtonText = playButton.GetComponent<GUIText>();
 		smokeButtonText = smokeButton.GetComponent<GUIText>();
+		productName = product.GetComponent<GUIText>();
+		companyName = company.GetComponent<GUIText>();
+		homeTexture = homeButton.GetComponent<GUITexture>();
 
 		//Give Components right values
 		//Text
@@ -69,53 +96,87 @@ public class BuildMenu : MonoBehaviour {
 		createButtonText.text = "Create";
 		playButtonText.text = "Play";
 		smokeButtonText.text = "Smoke Control";
+		productName.text = "Fire Trainer";
+		companyName.text = "ISC RISK";
 
 		connectButton.transform.position = new Vector3(0, 1, 0);
 		createButton.transform.position = new Vector3(0, 1, 0);
 		playButton.transform.position = new Vector3(0, 1, 0);
 		smokeButton.transform.position = new Vector3(0, 1, 0);
+		product.transform.position = new Vector3(0, 1, 0);
+		company.transform.position = new Vector3(0, 1, 0);
+		homeButton.transform.position = new Vector3(0, 1, 0);
 
 		//Posistion
 		connectButtonText.pixelOffset = new Vector2 (155,-245);
 		createButtonText.pixelOffset = new Vector2 (133,-318);
 		playButtonText.pixelOffset = new Vector2 (103,-390);
 		smokeButtonText.pixelOffset = new Vector2 (233,-460);
+		productName.pixelOffset = new Vector2 (Screen.width - 100,-50);
+		companyName.pixelOffset = new Vector2 (Screen.width - 100,-20);
+		homeTexture.pixelInset = new Rect(20,-36,36,36);
+
+		//set scale
+		homeButton.transform.localScale = new Vector3(0,0,1);
 
 		//anchor
 		connectButtonText.anchor = TextAnchor.MiddleCenter;
 		createButtonText.anchor = TextAnchor.MiddleCenter;
 		playButtonText.anchor = TextAnchor.MiddleCenter;
 		smokeButtonText.anchor = TextAnchor.MiddleCenter;
+		productName.anchor = TextAnchor.MiddleCenter;
+		companyName.anchor = TextAnchor.MiddleCenter;
 
 		//Color
 		connectButtonText.color = Color.white;
 		createButtonText.color = Color.white;
 		playButtonText.color = Color.white;
 		smokeButtonText.color = Color.white;
+		productName.color = Color.white;
+		companyName.color = Color.white;
+		homeTexture.color = Color.white;
 
 		//Font
 		connectButtonText.font = menuFont;	
 		createButtonText.font = menuFont;	
 		playButtonText.font = menuFont;	
 		smokeButtonText.font = menuFont;	
+		productName.font = menuFont;	
+		companyName.font = menuFont;	
 
 		//Font Style
 		connectButtonText.fontStyle = FontStyle.Bold;
 		createButtonText.fontStyle = FontStyle.Bold;
 		playButtonText.fontStyle = FontStyle.Bold;
 		smokeButtonText.fontStyle = FontStyle.Bold;
+		productName.fontStyle = FontStyle.Bold;
+		companyName.fontStyle = FontStyle.Normal;
 
 		//Font Size
-		connectButtonText.fontSize = 50;
-		createButtonText.fontSize = 50;
-		playButtonText.fontSize = 50;
-		smokeButtonText.fontSize = 50;
+		connectButtonText.fontSize = fontSize;
+		createButtonText.fontSize = fontSize;
+		playButtonText.fontSize = fontSize;
+		smokeButtonText.fontSize = fontSize;
+		productName.fontSize = 30;
+		companyName.fontSize = 30;
 
 		//set Rect
 		connectButtonRect = new Rect(50,220, connectButtonText.text.Length * 30, fontSize );
 		createButtonRect = new Rect(50,293, createButtonText.text.Length * 28, fontSize );
 		playButtonRect = new Rect(50,368, playButtonText.text.Length * 28, fontSize );
 		smokeButtonRect = new Rect(50,435, smokeButtonText.text.Length * 28, fontSize );
+		homeIconRect = new Rect(20,4,36,36);
+
+		//set Textures
+		homeTexture.texture = homeIcon;
+
+		connectButton.SetActive(false);
+		createButton.SetActive(false);
+		playButton.SetActive(false);
+		smokeButton.SetActive(false);
+		product.SetActive(false);
+		company.SetActive(false);
+		homeButton.SetActive(false);
 
 	}
 
@@ -128,7 +189,7 @@ public class BuildMenu : MonoBehaviour {
 
 		if(connectButtonRect.Contains(mousePos))
 		{
-			connectButtonText.color = Color.red;
+			connectButtonText.color = Color.black;
 			if (Input.GetMouseButtonUp(0)) {
 				GameManager.SetGameState(GameState.ConnectMenu);
 			}
@@ -138,7 +199,7 @@ public class BuildMenu : MonoBehaviour {
 
 		if(createButtonRect.Contains(mousePos))
 		{
-			createButtonText.color = Color.red;
+			createButtonText.color = Color.black;
 			if (Input.GetMouseButtonUp(0)) {
 				GameManager.SetGameState(GameState.CreateMenu);
 			}
@@ -148,7 +209,7 @@ public class BuildMenu : MonoBehaviour {
 
 		if(playButtonRect.Contains(mousePos))
 		{
-			playButtonText.color = Color.red;
+			playButtonText.color = Color.black;
 			if (Input.GetMouseButtonUp(0)) {
 				GameManager.SetGameState(GameState.PlayMenu);
 			}
@@ -158,13 +219,23 @@ public class BuildMenu : MonoBehaviour {
 
 		if(smokeButtonRect.Contains(mousePos))
 		{
-			smokeButtonText.color = Color.red;
+			smokeButtonText.color = Color.black;
 			//TODO: give smoke a gamestate
 			if (Input.GetMouseButtonUp(0)) {
 				GameManager.SetGameState(GameState.PlayMenu);
 			}
 		} else {
 			smokeButtonText.color = Color.white;
+		}
+
+		if(homeIconRect.Contains(mousePos))
+		{
+			homeTexture.color = Color.black;
+			if (Input.GetMouseButtonUp(0)) {
+				GameManager.SetGameState(GameState.MainMenu);
+			}
+		} else if (GameManager.getGameState != GameState.MainMenu)  {
+			homeTexture.color = Color.white;
 		}
 
 	}
@@ -174,6 +245,7 @@ public class BuildMenu : MonoBehaviour {
 		//GUI.Box(createButtonRect, "Create");
 		//GUI.Box(playButtonRect, "Play");
 		//GUI.Box(smokeButtonRect, "Smoke");
+		//GUI.Box(homeIconRect, "Home");
 	}
 
 	private static void Deconstruct() {
@@ -203,6 +275,8 @@ public class BuildMenu : MonoBehaviour {
 		createButton.SetActive(true);
 		playButton.SetActive(true);
 		smokeButton.SetActive(true);
+		product.SetActive(true);
+		company.SetActive(true);
 
 		//Give Components right values
 		//Text
@@ -210,47 +284,71 @@ public class BuildMenu : MonoBehaviour {
 		createButtonText.text = "Create";
 		playButtonText.text = "Play";
 		smokeButtonText.text = "Smoke Control";
+		productName.text = "Fire Trainer";
+		companyName.text = "ISC RISK";
 		
 		connectButton.transform.position = new Vector3(0, 1, 0);
 		createButton.transform.position = new Vector3(0, 1, 0);
 		playButton.transform.position = new Vector3(0, 1, 0);
 		smokeButton.transform.position = new Vector3(0, 1, 0);
+		product.transform.position = new Vector3(0, 1, 0);
+		company.transform.position = new Vector3(0, 1, 0);
 		
 		//Posistion
 		connectButtonText.pixelOffset = new Vector2 (155,-245);
 		createButtonText.pixelOffset = new Vector2 (133,-318);
 		playButtonText.pixelOffset = new Vector2 (103,-390);
 		smokeButtonText.pixelOffset = new Vector2 (233,-460);
+		productName.pixelOffset = new Vector2 (Screen.width - 100,-50);
+		companyName.pixelOffset = new Vector2 (Screen.width - 100,-20);
 		
 		//anchor
 		connectButtonText.anchor = TextAnchor.MiddleCenter;
 		createButtonText.anchor = TextAnchor.MiddleCenter;
 		playButtonText.anchor = TextAnchor.MiddleCenter;
 		smokeButtonText.anchor = TextAnchor.MiddleCenter;
+		productName.anchor = TextAnchor.MiddleCenter;
+		companyName.anchor = TextAnchor.MiddleCenter;
 		
 		//Color
 		connectButtonText.color = Color.white;
 		createButtonText.color = Color.white;
 		playButtonText.color = Color.white;
 		smokeButtonText.color = Color.white;
+		productName.color = Color.white;
+		companyName.color = Color.white;
 		
 		//Font
 		connectButtonText.font = menuFont;	
 		createButtonText.font = menuFont;	
 		playButtonText.font = menuFont;	
 		smokeButtonText.font = menuFont;	
+		productName.font = menuFont;	
+		companyName.font = menuFont;	
 		
 		//Font Style
 		connectButtonText.fontStyle = FontStyle.Bold;
 		createButtonText.fontStyle = FontStyle.Bold;
 		playButtonText.fontStyle = FontStyle.Bold;
 		smokeButtonText.fontStyle = FontStyle.Bold;
+		productName.fontStyle = FontStyle.Bold;
+		companyName.fontStyle = FontStyle.Normal;
 		
 		//Font Size
 		connectButtonText.fontSize = 50;
 		createButtonText.fontSize = 50;
 		playButtonText.fontSize = 50;
 		smokeButtonText.fontSize = 50;
+		productName.fontSize = 30;
+		companyName.fontSize = 30;
+
+		//set Color
+		connectButtonText.color = Color.white;
+		createButtonText.color = Color.white;
+		playButtonText.color = Color.white;
+		smokeButtonText.color = Color.white;
+		productName.color = Color.white;
+		companyName.color = Color.white;
 		
 		//set Rect
 		connectButtonRect = new Rect(50,220, connectButtonText.text.Length * 30, fontSize );
@@ -265,6 +363,8 @@ public class BuildMenu : MonoBehaviour {
 		createButton.SetActive(false);
 		playButton.SetActive(false);
 		smokeButton.SetActive(false);
+		product.SetActive(false);
+		company.SetActive(false);
 	}
 
 	public static void BuildPlayMenu() {
@@ -275,6 +375,7 @@ public class BuildMenu : MonoBehaviour {
 		createButton.SetActive(true);
 		playButton.SetActive(true);
 		smokeButton.SetActive(true);
+		homeButton.SetActive(true);
 		
 		//Give Components right values
 		//Text
@@ -323,12 +424,22 @@ public class BuildMenu : MonoBehaviour {
 		createButtonText.fontSize = 50;
 		playButtonText.fontSize = 50;
 		smokeButtonText.fontSize = 50;
+
+		//set Color
+		connectButtonText.color = Color.white;
+		createButtonText.color = Color.white;
+		playButtonText.color = Color.black;
+		smokeButtonText.color = Color.white;
+		productName.color = Color.white;
+		companyName.color = Color.white;
+
+		homeTexture.color = Color.white;
 		
 		//set Rect
-		connectButtonRect = new Rect(50,220, connectButtonText.text.Length * 30, fontSize );
-		createButtonRect = new Rect(50,293, createButtonText.text.Length * 28, fontSize );
-		playButtonRect = new Rect(50,368, playButtonText.text.Length * 28, fontSize );
-		smokeButtonRect = new Rect(50,435, smokeButtonText.text.Length * 28, fontSize );
+		connectButtonRect = new Rect(18,220, connectButtonText.text.Length * 30, fontSize );
+		createButtonRect = new Rect(18,293, createButtonText.text.Length * 28, fontSize );
+		playButtonRect = new Rect(18,368, playButtonText.text.Length * 28, fontSize );
+		smokeButtonRect = new Rect(18,435, smokeButtonText.text.Length * 34, fontSize );
 		#endregion
 	}
 	
@@ -337,6 +448,7 @@ public class BuildMenu : MonoBehaviour {
 		createButton.SetActive(false);
 		playButton.SetActive(false);
 		smokeButton.SetActive(false);
+		homeButton.SetActive(false);
 
 	}
 
