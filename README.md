@@ -1,3 +1,3 @@
-EMSRisicoStage
+Fire Trainer
 ==============
-This is a project to make an Fire trainer
+This is a project to make an training tool for an tablet
