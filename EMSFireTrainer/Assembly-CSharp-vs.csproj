@@ -46,6 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\Scripts\Main\GameManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\Main\ListExtenstions.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\BuildMenu.cs" />
      <Compile Include="Assets\Resources\Scripts\Test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
