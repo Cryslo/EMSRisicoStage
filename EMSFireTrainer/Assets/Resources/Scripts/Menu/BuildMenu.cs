@@ -6,51 +6,69 @@ using System.IO;
 
 public class BuildMenu : MonoBehaviour {
 
-	private static Font MenuFont;
+	private static Font menuFont;
+	private static int fontSize;
 
-	private static GameObject PlayButton;
-	private static GUIText PlayButtonText;
+	private static GameObject playButton;
+	private static GUIText playButtonText;
+	private static Rect playButtonRect;
+
+	public Vector3 test1;
+	public Rect test2;
 
 	void Awake() {
 		print("Start!");
 		//Init Font
-		MenuFont = Resources.Load("Fonts/HelveticaNeue") as Font;
+		menuFont = Resources.Load("Fonts/HelveticaNeue") as Font;
+		fontSize = 50;
 		//Init MainMenu Buttons
-		PlayButton = new GameObject();
+		playButton = new GameObject();
 
 		//Give Buttons a Name
-		PlayButton.name = "Play_Button";
+		playButton.name = "Play_Button";
 
 		//Give Buttons the right components
-		PlayButton.AddComponent<GUIText>();
+		playButton.AddComponent<GUIText>();
 
 		//Select the Components a variable
-		PlayButtonText = PlayButton.GetComponent<GUIText>();
+		playButtonText = playButton.GetComponent<GUIText>();
 
 		//Give Components right values
 		//Text
-		PlayButtonText.text = "Play";
+		playButtonText.text = "Play";
 
 		//Posistion
-		PlayButton.transform.position = new Vector3( 0, 1, 0);
+		playButton.transform.position = test1;
 
 		//Color
-		PlayButtonText.color = Color.white;
+		playButtonText.color = Color.white;
 
 		//Font
-		PlayButtonText.font = MenuFont;	
+		playButtonText.font = menuFont;	
 
 		//Font Style
-		PlayButtonText.fontStyle = FontStyle.Bold;
+		playButtonText.fontStyle = FontStyle.Bold;
 
 		//Font Size
-		PlayButtonText.fontSize = 50;
+		playButtonText.fontSize = 50;
+
+		//set Rect
+		playButtonRect = new Rect(0,8, playButtonText.text.Length * 26, fontSize );
 
 
+		test2 = new Rect(0,0, playButtonText.text.Length * 26, fontSize );
 	}
 
 	void Start() {
 
+	}
+
+	void Update() {
+		playButton.transform.position = test1;
+		playButtonRect = test2;
+	}
+	void OnGUI() {
+		GUI.Box(playButtonRect, " ");
 	}
 
 	private static void Deconstruct() {
