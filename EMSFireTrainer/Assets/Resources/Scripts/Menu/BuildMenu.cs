@@ -11,7 +11,15 @@ public class BuildMenu : MonoBehaviour {
 
 	void Awake() {
 		print("Start!");
+		//Init MainMenu Buttons
 		PlayButton = new GameObject();
+		PlayButtonText = new GUIText();
+
+		//Give Buttons a Name
+		PlayButton.name = "Play Button";
+
+		//Give Buttons the right components
+		PlayButton.AddComponent(PlayButtonText);
 
 	}
 
