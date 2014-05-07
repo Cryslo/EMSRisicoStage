@@ -10,6 +10,10 @@ public class BuildMenu : MonoBehaviour {
 	private static Font menuFont;
 	private static int fontSize;
 
+	private static GameObject background;
+	private static GUITexture backgroundTexture;
+	private static Texture2D backgroundImage;
+
 	private static GameObject connectButton;
 	private static GUIText connectButtonText;
 	private static Rect connectButtonRect;
@@ -53,7 +57,11 @@ public class BuildMenu : MonoBehaviour {
 		//Init Textures
 		homeIcon = Resources.Load("Icons/previous-36") as Texture2D;
 		companyIcon = Resources.Load("Icons/ISCRisk-36") as Texture2D;
+		backgroundImage = Resources.Load("Backgrounds/Orange") as Texture2D;
 
+		background = new GameObject();
+		background.isStatic = true;
+		background.layer = 8;
 		//Init MainMenu Buttons
 		connectButton = new GameObject();
 		createButton = new GameObject();
@@ -67,6 +75,7 @@ public class BuildMenu : MonoBehaviour {
 		homeButton = new GameObject();
 
 		//Give Buttons a Name
+		background.name = "Background";
 		connectButton.name = "Connect_Button";
 		createButton.name = "Create_Button";
 		playButton.name = "Play_Button";
@@ -77,6 +86,7 @@ public class BuildMenu : MonoBehaviour {
 		companylogo.name = "Company_Logo";
 
 		//Give Buttons the right components
+		background.AddComponent<GUITexture>();
 		connectButton.AddComponent<GUIText>();
 		createButton.AddComponent<GUIText>();
 		playButton.AddComponent<GUIText>();
@@ -87,6 +97,7 @@ public class BuildMenu : MonoBehaviour {
 		companylogo.AddComponent<GUITexture>();
 
 		//Select the Components a variable
+		backgroundTexture = background.GetComponent<GUITexture>();
 		connectButtonText = connectButton.GetComponent<GUIText>();
 		createButtonText = createButton.GetComponent<GUIText>();
 		playButtonText = playButton.GetComponent<GUIText>();
@@ -95,9 +106,13 @@ public class BuildMenu : MonoBehaviour {
 		companyName = company.GetComponent<GUIText>();
 		homeTexture = homeButton.GetComponent<GUITexture>();
 		companyTexture = companylogo.GetComponent<GUITexture>();
-
+		
+		backgroundTexture.texture = backgroundImage;
 		homeTexture.texture = homeIcon;
 		companyTexture.texture = companyIcon;
+
+
+		backgroundTexture.pixelInset = new Rect(0,0,Screen.width,Screen.height);
 
 		connectButton.SetActive(false);
 		createButton.SetActive(false);
