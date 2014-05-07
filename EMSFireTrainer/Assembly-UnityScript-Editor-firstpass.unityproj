@@ -47,12 +47,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\Editor\Unzip.js" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
      <None Include="Assets\uniSWF\Readme.txt" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
-     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
-     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
-     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+ <Reference Include="Assets\uniSWF\DLLs\LibUniSWF">
+ <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\uniSWF\DLLs\Editor\LibUniSWFEditor">
+ <HintPath>Assets\uniSWF\DLLs\Editor\LibUniSWFEditor.dll</HintPath>
+ </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
  <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -64,12 +70,6 @@
  </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions">
  <HintPath>\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="LibUniSWF">
- <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
- </Reference>
- <Reference Include="LibUniSWFEditor">
- <HintPath>Assets\uniSWF\DLLs\Editor\LibUniSWFEditor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
