@@ -47,14 +47,34 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\Editor\Unzip.js" />
+<<<<<<< HEAD
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+     <None Include="Assets\uniSWF\Readme.txt" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
+=======
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
      <None Include="Assets\uniSWF\Readme.txt" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
-     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
-     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
-     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+<<<<<<< HEAD
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:\Program Files (x86)\Unity - Copy\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
+=======
+ <Reference Include="Assets\uniSWF\DLLs\LibUniSWF">
+ <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\uniSWF\DLLs\Editor\LibUniSWFEditor">
+ <HintPath>Assets\uniSWF\DLLs\Editor\LibUniSWFEditor.dll</HintPath>
+ </Reference>
+>>>>>>> FETCH_HEAD
+ <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
+ <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs.dll</HintPath>
+>>>>>>> 4ec4b1e8c69da64eed7fb7a82965e9cd4dac26ec
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions">
  <HintPath>C:\Program Files (x86)\Unity - Copy\Editor\Data\PlaybackEngines\iPhonePlayer\EditorExtensions\UnityEditor.iOS.Extensions.dll</HintPath>
@@ -71,12 +91,15 @@
  <Reference Include="UnityEditor.Android.Extensions">
  <HintPath>C:\Program Files (x86)\Unity - Copy\Editor\Data\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
  </Reference>
- <Reference Include="LibUniSWF">
- <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
- </Reference>
- <Reference Include="LibUniSWFEditor">
+<<<<<<< HEAD
+ <Reference Include="Assets\uniSWF\DLLs\Editor\LibUniSWFEditor">
  <HintPath>Assets\uniSWF\DLLs\Editor\LibUniSWFEditor.dll</HintPath>
  </Reference>
+ <Reference Include="Assets\uniSWF\DLLs\LibUniSWF">
+ <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
+ </Reference>
+=======
+>>>>>>> FETCH_HEAD
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
