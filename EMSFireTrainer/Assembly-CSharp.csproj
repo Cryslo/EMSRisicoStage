@@ -43,18 +43,14 @@
 	</Reference>
 	<Reference Include="UnityEditor">
 	  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll</HintPath>
-	  <HintPath>C:/Program Files (x86)/Unity - Copy/Editor/Data/Managed/UnityEngine.dll</HintPath>
-	</Reference>
-	<Reference Include="UnityEditor">
-	  <HintPath>C:/Program Files (x86)/Unity - Copy/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Resources\Scripts\Main\GameManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Main\ListExtenstions.cs" />
      <Compile Include="Assets\Resources\Scripts\Main\User.cs" />
-     <Compile Include="Assets\Resources\Scripts\Menu\BuildMenu.cs" />
-     <Compile Include="Assets\Resources\Scripts\Menu\ScriptHolder.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Main\BuildMenu.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Main\ScriptHolder.cs" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

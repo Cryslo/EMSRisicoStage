@@ -334,16 +334,44 @@ public class BuildMenu : MonoBehaviour {
 
 	public static void BuildCreateMenu() {
 		Deconstruct();
+
+		homeButton.SetActive(true);
+		
+		//position
+		homeButton.transform.position = new Vector3(0,0,0);
+		
+		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 20,19,36);
+		
+		//scale
+		homeButton.transform.localScale = new Vector3(0,0,1);
+        
+        homeIconRect = new Rect(50,20, 19, 36);
 	}
 	
 	private static void DeconstructCreateMenu() {
+		homeIconRect = new Rect();
+		homeButton.SetActive(false);
 
 	}
 	public static void BuildConnectMenu() {
 		Deconstruct();
+
+		homeButton.SetActive(true);
+		
+		//position
+		homeButton.transform.position = new Vector3(0,0,0);
+		
+		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 20,19,36);
+		
+		//scale
+		homeButton.transform.localScale = new Vector3(0,0,1);
+        
+        homeIconRect = new Rect(50,20, 19, 36);
 	}
 	
 	private static void DeconstructConnectMenu() {
+		homeIconRect = new Rect();
+		homeButton.SetActive(false);
 		
 	}
 }
