@@ -50,8 +50,16 @@
      <Compile Include="Assets\Resources\Scripts\Main\ListExtenstions.cs" />
      <Compile Include="Assets\Resources\Scripts\Main\User.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\BuildMenu.cs" />
-     <Compile Include="Assets\Resources\Scripts\Menu\ScriptHolder.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\UnitytoJava.cs" />
+     <None Include="Assets\uniSWF\Readme.txt" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+ <Reference Include="LibUniSWF">
+ <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
