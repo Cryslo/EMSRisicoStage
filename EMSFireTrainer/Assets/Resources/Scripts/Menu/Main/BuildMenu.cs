@@ -319,12 +319,12 @@ public class BuildMenu : MonoBehaviour {
 		//position
 		homeButton.transform.position = new Vector3(0,0,0);
 
-		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 20,19,36);
+		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 50,19,36);
 		
 		//scale
 		homeButton.transform.localScale = new Vector3(0,0,1);
 
-		homeIconRect = new Rect(50,20, 19, 36);
+		homeIconRect = new Rect(50,50, 19, 36);
 	}
 	
 	private static void DeconstructPlayMenu() {
@@ -340,12 +340,12 @@ public class BuildMenu : MonoBehaviour {
 		//position
 		homeButton.transform.position = new Vector3(0,0,0);
 		
-		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 20,19,36);
+		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 50,19,36);
 		
 		//scale
 		homeButton.transform.localScale = new Vector3(0,0,1);
         
-        homeIconRect = new Rect(50,20, 19, 36);
+		homeIconRect = new Rect(50,50, 19, 36);
 	}
 	
 	private static void DeconstructCreateMenu() {
@@ -361,12 +361,12 @@ public class BuildMenu : MonoBehaviour {
 		//position
 		homeButton.transform.position = new Vector3(0,0,0);
 		
-		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 20,19,36);
+		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 50,19,36);
 		
 		//scale
 		homeButton.transform.localScale = new Vector3(0,0,1);
         
-        homeIconRect = new Rect(50,20, 19, 36);
+		homeIconRect = new Rect(50,50, 19, 36);
 	}
 	
 	private static void DeconstructConnectMenu() {
