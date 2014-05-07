@@ -51,7 +51,7 @@ public class BuildMenu : MonoBehaviour {
 		//set standard font size
 		fontSize = 90;
 		//Init Textures
-		homeIcon = Resources.Load("Icons/home-36") as Texture2D;
+		homeIcon = Resources.Load("Icons/previous-36") as Texture2D;
 		companyIcon = Resources.Load("Icons/ISCRisk-36") as Texture2D;
 
 		//Init MainMenu Buttons
@@ -314,11 +314,22 @@ public class BuildMenu : MonoBehaviour {
 	public static void BuildPlayMenu() {
 		Deconstruct();
 		
-		companyTexture.pixelInset = new Rect(Screen.width - 300,Screen.height - 93,36,36);
+		homeButton.SetActive(true);
+
+		//position
+		homeButton.transform.position = new Vector3(0,0,0);
+
+		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 20,19,36);
+		
+		//scale
+		homeButton.transform.localScale = new Vector3(0,0,1);
+
+		homeIconRect = new Rect(50,20, 19, 36);
 	}
 	
 	private static void DeconstructPlayMenu() {
-
+		homeIconRect = new Rect();
+		homeButton.SetActive(false);
 	}
 
 	public static void BuildCreateMenu() {
