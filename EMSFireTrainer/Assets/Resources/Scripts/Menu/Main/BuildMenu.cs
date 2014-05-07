@@ -12,7 +12,7 @@ public class BuildMenu : MonoBehaviour {
 
 	private static GameObject background;
 	private static GUITexture backgroundTexture;
-	private static Texture2D backgroundImage;
+	public static Texture2D backgroundImage;
 
 	private static GameObject connectButton;
 	private static GUIText connectButtonText;
@@ -217,6 +217,9 @@ public class BuildMenu : MonoBehaviour {
 
 		#region BuildMenu
 		
+		backgroundImage = Resources.Load("Backgrounds/Orange") as Texture2D;
+		backgroundTexture.texture = backgroundImage;
+		
 		fontSize = 90;
 
 		connectButton.SetActive(true);
@@ -329,6 +332,9 @@ public class BuildMenu : MonoBehaviour {
 	public static void BuildPlayMenu() {
 		Deconstruct();
 		
+		backgroundImage = Resources.Load("Backgrounds/Red") as Texture2D;
+		backgroundTexture.texture = backgroundImage;
+
 		homeButton.SetActive(true);
 
 		//position
