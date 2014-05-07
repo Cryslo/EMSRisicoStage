@@ -51,6 +51,9 @@
      <Compile Include="Assets\Resources\Scripts\Main\User.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Main\BuildMenu.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Main\ScriptHolder.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Play\DirectoryBox.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Play\FolderBuilder.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Play\FolderManager.cs" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
