@@ -20,6 +20,7 @@ public class UnitytoJava : MonoBehaviour
         Debug.Log("On recieve message: getURL");
         Debug.Log(message);
         File.Move(message, Application.persistentDataPath + "/" + Path.GetFileName(message));
+        
         bgTexture.LoadImage(File.ReadAllBytes(Application.persistentDataPath + "/" + Path.GetFileName(message)));
         bg.transform.renderer.material.mainTexture = bgTexture;
     }
