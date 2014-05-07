@@ -47,12 +47,27 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\Editor\Unzip.js" />
+<<<<<<< HEAD
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\uniSWF\Readme.txt" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
+=======
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Readme.txt" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+ <Reference Include="Assets\uniSWF\DLLs\LibUniSWF">
+ <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\uniSWF\DLLs\Editor\LibUniSWFEditor">
+ <HintPath>Assets\uniSWF\DLLs\Editor\LibUniSWFEditor.dll</HintPath>
+ </Reference>
+>>>>>>> FETCH_HEAD
  <Reference Include="\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs">
  <HintPath>\Applications\Unity\Unity.app\Contents\Frameworks\Managed\UnityEditor.Graphs.dll</HintPath>
  </Reference>
@@ -65,12 +80,15 @@
  <Reference Include="\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions">
  <HintPath>\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
  </Reference>
+<<<<<<< HEAD
  <Reference Include="Assets\uniSWF\DLLs\Editor\LibUniSWFEditor">
  <HintPath>Assets\uniSWF\DLLs\Editor\LibUniSWFEditor.dll</HintPath>
  </Reference>
  <Reference Include="Assets\uniSWF\DLLs\LibUniSWF">
  <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
  </Reference>
+=======
+>>>>>>> FETCH_HEAD
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
