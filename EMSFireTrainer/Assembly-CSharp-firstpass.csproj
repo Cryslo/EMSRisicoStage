@@ -47,13 +47,13 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Plugins\Perlin.cs" />
-     <None Include="Assets\uniSWF\Readme.txt" />
-     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
-     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
-     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
- <Reference Include="LibUniSWF">
+     <None Include="Assets\uniSWF\Readme.txt" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
+ <Reference Include="Assets\uniSWF\DLLs\LibUniSWF">
  <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
  </Reference>
   </ItemGroup>
