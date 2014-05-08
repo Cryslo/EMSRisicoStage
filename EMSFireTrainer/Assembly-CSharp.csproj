@@ -53,20 +53,32 @@
      <Compile Include="Assets\Resources\Scripts\Menu\Create\FlameScript.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Create\GameHandler.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Create\IconScript.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Loading Screen\LoadScreen.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Main\BuildMenu.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Main\ScriptHolder.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Play\DirectoryBox.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Play\FolderBuilder.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Play\FolderCreator.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Play\FolderManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Play\Unzip.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\UnitytoJava.cs" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
+     <None Include="Assets\Resources\Shaders\Grayscale.shader" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
+     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\uniSWF\Readme.txt" />
+     <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
  <Reference Include="LibUniSWF">
+ <Reference Include="Assets\uniSWF\DLLs\LibUniSWF">
  <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Resources\Scripts\ICSharpCode.SharpZipLib">
+ <HintPath>Assets\Resources\Scripts\ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

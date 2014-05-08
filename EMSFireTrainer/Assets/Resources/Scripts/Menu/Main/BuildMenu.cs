@@ -7,6 +7,8 @@ using System.IO;
 public class BuildMenu : MonoBehaviour {
 	private static Camera mainCamera;
 
+	private FolderBuilder folderBuilder;
+
 	private static Font menuFont;
 	private static int fontSize;
 
@@ -49,6 +51,7 @@ public class BuildMenu : MonoBehaviour {
 	public Rect test2;
 
 	void Awake() {
+		folderBuilder = gameObject.GetComponent<FolderBuilder>();
 
 		//Init Font
 		menuFont = Resources.Load("Fonts/HelveticaNeue") as Font;
@@ -248,13 +251,13 @@ public class BuildMenu : MonoBehaviour {
 
 
 		//Posistion
-		connectButtonText.pixelOffset = new Vector2 (50,-270);
-		createButtonText.pixelOffset = new Vector2 (50,-343);
-		playButtonText.pixelOffset = new Vector2 (50,-415);
-		smokeButtonText.pixelOffset = new Vector2 (50,-485);
+		connectButtonText.pixelOffset = new Vector2 (50, - (Screen.height - 400));
+		createButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 330));
+		playButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 262));
+		smokeButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 195));
 		productName.pixelOffset = new Vector2 (Screen.width - 250,-50);
-		companyName.pixelOffset = new Vector2 (Screen.width - 250,-75);
-		companyTexture.pixelInset = new Rect(Screen.width - 300,Screen.height - 93,36,36);
+		companyName.pixelOffset = new Vector2 (Screen.width - 250,-70);
+		companyTexture.pixelInset = new Rect(Screen.width - 300,Screen.height - 90,36,36);
 
 		//scale
 		companylogo.transform.localScale = new Vector3(0,0,1);
@@ -307,10 +310,10 @@ public class BuildMenu : MonoBehaviour {
 		companyName.color = Color.white;
 		
 		//set Rect
-		connectButtonRect = new Rect(50,283, connectButtonText.text.Length * 65, fontSize - 16 );
-		createButtonRect = new Rect(50,357, createButtonText.text.Length * 60, fontSize - 16);
-		playButtonRect = new Rect(50,431, playButtonText.text.Length * 60, fontSize - 20);
-		smokeButtonRect = new Rect(50,500, smokeButtonText.text.Length * 68, fontSize - 16);
+		connectButtonRect = new Rect(50,(Screen.height - 389), connectButtonText.text.Length * 65, fontSize - 16 );
+		createButtonRect = new Rect(50,(Screen.height - 315), createButtonText.text.Length * 60, fontSize - 20);
+		playButtonRect = new Rect(50,(Screen.height - 246), playButtonText.text.Length * 60, fontSize - 22);
+		smokeButtonRect = new Rect(50,(Screen.height - 178), smokeButtonText.text.Length * 68, fontSize - 16);
 		#endregion
 	}
 
@@ -331,8 +334,10 @@ public class BuildMenu : MonoBehaviour {
 
 	public static void BuildPlayMenu() {
 		Deconstruct();
-		
-		backgroundImage = Resources.Load("Backgrounds/Red") as Texture2D;
+
+		FolderBuilder.instance.OpenLoading();
+
+		backgroundImage = Resources.Load("Backgrounds/Green") as Texture2D;
 		backgroundTexture.texture = backgroundImage;
 
 		homeButton.SetActive(true);
@@ -351,6 +356,8 @@ public class BuildMenu : MonoBehaviour {
 	private static void DeconstructPlayMenu() {
 		homeIconRect = new Rect();
 		homeButton.SetActive(false);
+		
+		FolderBuilder.instance.CloseLoading();
 	}
 
 	public static void BuildCreateMenu() {
@@ -382,7 +389,7 @@ public class BuildMenu : MonoBehaviour {
 		//position
 		homeButton.transform.position = new Vector3(0,0,0);
 		
-		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 50,19,36);
+		homeTexture.pixelInset = new Rect(50,Screen.height - 36 - 50,19,36);
 		
 		//scale
 		homeButton.transform.localScale = new Vector3(0,0,1);
