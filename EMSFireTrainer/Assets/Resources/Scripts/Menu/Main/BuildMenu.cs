@@ -332,7 +332,7 @@ public class BuildMenu : MonoBehaviour {
 	public static void BuildPlayMenu() {
 		Deconstruct();
 		
-		backgroundImage = Resources.Load("Backgrounds/Red") as Texture2D;
+		backgroundImage = Resources.Load("Backgrounds/Green") as Texture2D;
 		backgroundTexture.texture = backgroundImage;
 
 		homeButton.SetActive(true);
