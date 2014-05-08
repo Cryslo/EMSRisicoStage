@@ -253,8 +253,8 @@ public class BuildMenu : MonoBehaviour {
 		playButtonText.pixelOffset = new Vector2 (50,-415);
 		smokeButtonText.pixelOffset = new Vector2 (50,-485);
 		productName.pixelOffset = new Vector2 (Screen.width - 250,-50);
-		companyName.pixelOffset = new Vector2 (Screen.width - 250,-75);
-		companyTexture.pixelInset = new Rect(Screen.width - 300,Screen.height - 93,36,36);
+		companyName.pixelOffset = new Vector2 (Screen.width - 250,-70);
+		companyTexture.pixelInset = new Rect(Screen.width - 300,Screen.height - 90,36,36);
 
 		//scale
 		companylogo.transform.localScale = new Vector3(0,0,1);
@@ -382,7 +382,7 @@ public class BuildMenu : MonoBehaviour {
 		//position
 		homeButton.transform.position = new Vector3(0,0,0);
 		
-		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 50,19,36);
+		homeTexture.pixelInset = new Rect(50,Screen.height - 36 - 50,19,36);
 		
 		//scale
 		homeButton.transform.localScale = new Vector3(0,0,1);
