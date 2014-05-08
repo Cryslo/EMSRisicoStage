@@ -7,6 +7,8 @@ using System.IO;
 public class BuildMenu : MonoBehaviour {
 	private static Camera mainCamera;
 
+	private FolderBuilder folderBuilder;
+
 	private static Font menuFont;
 	private static int fontSize;
 
@@ -49,6 +51,7 @@ public class BuildMenu : MonoBehaviour {
 	public Rect test2;
 
 	void Awake() {
+		folderBuilder = gameObject.GetComponent<FolderBuilder>();
 
 		//Init Font
 		menuFont = Resources.Load("Fonts/HelveticaNeue") as Font;
@@ -331,7 +334,9 @@ public class BuildMenu : MonoBehaviour {
 
 	public static void BuildPlayMenu() {
 		Deconstruct();
-		
+
+		FolderBuilder.instance.OpenLoading();
+
 		backgroundImage = Resources.Load("Backgrounds/Green") as Texture2D;
 		backgroundTexture.texture = backgroundImage;
 
@@ -351,6 +356,8 @@ public class BuildMenu : MonoBehaviour {
 	private static void DeconstructPlayMenu() {
 		homeIconRect = new Rect();
 		homeButton.SetActive(false);
+		
+		FolderBuilder.instance.CloseLoading();
 	}
 
 	public static void BuildCreateMenu() {

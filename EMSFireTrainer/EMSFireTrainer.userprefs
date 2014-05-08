@@ -1,14 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/Menu/Main/BuildMenu.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/Menu/Play/FolderCreator.cs">
     <Files>
+      <File FileName="Assets/Resources/Scripts/Menu/Play/FolderBuilder.cs" Line="217" Column="42" />
+      <File FileName="Assets/Resources/Scripts/Menu/Play/DirectoryBox.cs" Line="83" Column="34" />
       <File FileName="Assets/Resources/Scripts/Menu/Play/FolderManager.cs" Line="39" Column="18" />
-      <File FileName="Assets/Resources/Scripts/Menu/Play/FolderBuilder.cs" Line="192" Column="156" />
-      <File FileName="../../../Projects/Unity3D/EMSBrandBlusSim/Assets/Resources/Scripts/FileSystem/FolderManager.cs" Line="280" Column="42" />
-      <File FileName="../../../Projects/Unity3D/EMSBrandBlusSim/Assets/Resources/Scripts/FileSystem/FolderBuilder.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/Scripts/Menu/Play/DirectoryBox.cs" Line="3" Column="26" />
-      <File FileName="../../../Projects/Unity3D/EMSBrandBlusSim/Assets/Resources/Scripts/FileSystem/DirectoryBox.cs" Line="22" Column="34" />
-      <File FileName="Assets/Resources/Scripts/Menu/Main/BuildMenu.cs" Line="369" Column="32" />
+      <File FileName="Assets/Resources/Scripts/Menu/Play/FolderCreator.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

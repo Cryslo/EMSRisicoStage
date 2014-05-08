@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Plugins\Editor\Unzip.js" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
+     <None Include="Assets\Resources\Shaders\Grayscale.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\uniSWF\Readme.txt" />
@@ -70,6 +71,9 @@
  </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions">
  <HintPath>\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Resources\Scripts\ICSharpCode.SharpZipLib">
+ <HintPath>Assets\Resources\Scripts\ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

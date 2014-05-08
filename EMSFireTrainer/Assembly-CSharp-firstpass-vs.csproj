@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Plugins\Perlin.cs" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Add-Alpha-Diffuse.shader" />
+     <None Include="Assets\Resources\Shaders\Grayscale.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Colour-Diffuse.shader" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\uniSWF\Readme.txt" />
@@ -55,6 +56,9 @@
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
  <Reference Include="Assets\uniSWF\DLLs\LibUniSWF">
  <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
+ </Reference>
+ <Reference Include="Assets\Resources\Scripts\ICSharpCode.SharpZipLib">
+ <HintPath>Assets\Resources\Scripts\ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
