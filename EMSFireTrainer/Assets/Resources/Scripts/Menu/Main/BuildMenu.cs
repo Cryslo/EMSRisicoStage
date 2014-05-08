@@ -248,10 +248,10 @@ public class BuildMenu : MonoBehaviour {
 
 
 		//Posistion
-		connectButtonText.pixelOffset = new Vector2 (50,-270);
-		createButtonText.pixelOffset = new Vector2 (50,-343);
-		playButtonText.pixelOffset = new Vector2 (50,-415);
-		smokeButtonText.pixelOffset = new Vector2 (50,-485);
+		connectButtonText.pixelOffset = new Vector2 (50, - (Screen.height - 400));
+		createButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 330));
+		playButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 262));
+		smokeButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 195));
 		productName.pixelOffset = new Vector2 (Screen.width - 250,-50);
 		companyName.pixelOffset = new Vector2 (Screen.width - 250,-70);
 		companyTexture.pixelInset = new Rect(Screen.width - 300,Screen.height - 90,36,36);
@@ -307,10 +307,10 @@ public class BuildMenu : MonoBehaviour {
 		companyName.color = Color.white;
 		
 		//set Rect
-		connectButtonRect = new Rect(50,283, connectButtonText.text.Length * 65, fontSize - 16 );
-		createButtonRect = new Rect(50,357, createButtonText.text.Length * 60, fontSize - 16);
-		playButtonRect = new Rect(50,431, playButtonText.text.Length * 60, fontSize - 20);
-		smokeButtonRect = new Rect(50,500, smokeButtonText.text.Length * 68, fontSize - 16);
+		connectButtonRect = new Rect(50,(Screen.height - 389), connectButtonText.text.Length * 65, fontSize - 16 );
+		createButtonRect = new Rect(50,(Screen.height - 315), createButtonText.text.Length * 60, fontSize - 20);
+		playButtonRect = new Rect(50,(Screen.height - 246), playButtonText.text.Length * 60, fontSize - 22);
+		smokeButtonRect = new Rect(50,(Screen.height - 178), smokeButtonText.text.Length * 68, fontSize - 16);
 		#endregion
 	}
 
