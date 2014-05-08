@@ -25,12 +25,19 @@ public class DirectoryBox {
 	
 	private float x;
 	private float y;
+	private float boxX;
+	private float boxY;
 	private float width = 200;
-	private float heigth = 200;
+	private float height = 200;
 	private float startY;
 	private int boxNumber;
 
 	private int columns;
+
+	private Rect boxCollider;
+	private float testY;
+
+	private float newStartY;
 	#endregion
 	
 	#region Porperties
@@ -44,6 +51,21 @@ public class DirectoryBox {
 		get{return this.y;}
 	}
 
+	public float TestY{
+		set{this.testY = value;}
+		get{return this.testY;}
+	}
+	
+	public float BoxX{
+		set{this.boxX = value;}
+		get{return this.boxX;}
+	}
+
+	public float BoxY{
+		set{this.boxY = value;}
+		get{return this.boxY;}
+	}
+
 	public int Columns {
 		set{this.columns = value;}
 		get{return this.columns;}
@@ -52,6 +74,11 @@ public class DirectoryBox {
 	public float StartY{
 		set{this.startY = value;}
 		get{return this.startY;}
+	}
+
+	public float NewStartY{
+		set{this.newStartY = value;}
+		get{return this.newStartY;}
 	}
 
 	public GameObject Parent{
@@ -90,6 +117,9 @@ public class DirectoryBox {
 	public FolderBuilder folderBuilderScript{
 		set{this.folderBuilder = value;}
 	}
+	public Rect BoxCollider{
+		get{return this.boxCollider;}
+	}
 	#endregion
 	
 	// Use this for initialization
@@ -97,6 +127,11 @@ public class DirectoryBox {
 		backgroundImage = Resources.Load("Sprites/Folder") as Texture2D;
 		columns = 3;
 		width = Screen.width / 4;
+		height = Screen.height / 4;
+
+		boxX = (Screen.width - ((width * columns) - width * x));
+		boxY = (Screen.height - (height + (height * y)));
+		TestY = (height * y);
 
 		folderBox = new GameObject();
 		folderBox.name = directoryName;
@@ -105,11 +140,19 @@ public class DirectoryBox {
 		folderBox.AddComponent<GUITexture>();
 		backgroundTexture = folderBox.GetComponent<GUITexture>();
 		backgroundTexture.texture = backgroundImage;
-		backgroundTexture.pixelInset = new Rect((Screen.width - ((width * columns) - width * x)),(Screen.height - (heigth + (heigth * y))),width,heigth);
+		backgroundTexture.pixelInset = new Rect(boxX,boxY,width,height);
+		
+		boxCollider = new Rect(boxX, TestY,width,height);
+		Debug.Log("Backgrounds/" + BoxNumber);
+			backgroundImage = Resources.Load("Backgrounds/" + BoxNumber) as Texture2D;
+			backgroundTexture.texture = backgroundImage;
+
 	}
 	
 	public void Update()
 	{
+		backgroundTexture.pixelInset = new Rect(boxX,boxY,width,height);
+		boxCollider = new Rect(boxX, TestY ,width,height);
 		if (editActive) {
 			if (!Input.GetMouseButton(0)) {
 				if (keyboard.done && !keyboard.wasCanceled) {
@@ -192,7 +235,7 @@ public class DirectoryBox {
 	
 	// Call this Function to remove this box
 	public void Remove () {
-
+		boxCollider = new Rect();
 	}
 	
 	// Call this Function when Selected

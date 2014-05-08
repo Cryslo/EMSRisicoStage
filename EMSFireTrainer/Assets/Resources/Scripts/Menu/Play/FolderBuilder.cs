@@ -40,6 +40,8 @@ public class FolderBuilder : MonoBehaviour {
 	private float scrollOffset;
 	
 	private Vector2 scrollOffset2;
+
+	private int columns;
 	
 	private float mouseStart;
 	private float startpointX;
@@ -75,19 +77,18 @@ public class FolderBuilder : MonoBehaviour {
 				{
 					Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
 					RaycastHit hit;
-					if(Physics.Raycast(ray, out hit, Mathf.Infinity))
-					{
-						startpointX = Input.mousePosition.x;
-						startpointY = Input.mousePosition.y;
-						for (int i = 0; i < boxesDirectoryBox.Count; i++) {
-							boxesDirectoryBox[i].StartY = boxesDirectoryBox[i].Y;
-						}
+						Debug.Log("Test");
+					startpointX = Input.mousePosition.x;
+					startpointY = Input.mousePosition.y;
+					for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+						boxesDirectoryBox[i].StartY = boxesDirectoryBox[i].BoxY;
 						
+						boxesDirectoryBox[i].NewStartY = boxesDirectoryBox[i].TestY;
 					}
 				}
 				if(Input.GetMouseButton(0))
 				{
-					if(boxesDirectoryBox[0].Y > (finalDirectoryHight/2) && (startpointY - Input.mousePosition.y) > 0)
+					/*if(boxesDirectoryBox[0].Y > (finalDirectoryHight/2) && (startpointY - Input.mousePosition.y) > 0)
 					{
 						
 					}else if(boxesDirectoryBox[boxesDirectoryBox.Count - 1].Y < Screen.height - (finalDirectoryHight/2) && (startpointY - Input.mousePosition.y) < 0) {
@@ -96,8 +97,13 @@ public class FolderBuilder : MonoBehaviour {
 					}else{
 						//print(boxesDirectoryBox[boxesDirectoryBox.Count - 1].Y);
 						for (int i = 0; i < boxesDirectoryBox.Count; i++) {
-							boxesDirectoryBox[i].Y = boxesDirectoryBox[i].StartY + (startpointY - Input.mousePosition.y);
+							boxesDirectoryBox[i].BoxY = boxesDirectoryBox[i].StartY - (startpointY - Input.mousePosition.y);
+							boxesDirectoryBox[i].TestY = boxesDirectoryBox[i].NewStartY + (startpointY - Input.mousePosition.y);
 						}
+					}*/
+					for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+						boxesDirectoryBox[i].BoxY = boxesDirectoryBox[i].StartY - (startpointY - Input.mousePosition.y);
+						boxesDirectoryBox[i].TestY = boxesDirectoryBox[i].NewStartY + (startpointY - Input.mousePosition.y);
 					}
 				}
 			}
@@ -141,12 +147,24 @@ public class FolderBuilder : MonoBehaviour {
 		rebuildGUI ();
 		return false;
 	}
+
+	void OnGUI() {
+		if(boxesDirectoryBox != null)
+		{
+			GUI.Box(scrollPanel, "");
+			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+				//GUI.Box(boxesDirectoryBox[i].BoxCollider, boxesDirectoryBox[i].DirectoryName);
+			}
+		}
+	}
 	
 	bool rebuildGUI () {
 		
 		Destroy(Folders.gameObject);
 		Folders = new GameObject();
 		Folders.name = "Folders";
+
+
 		
 		boxesDirectoryBox = new List<DirectoryBox> ();
 		
@@ -160,7 +178,7 @@ public class FolderBuilder : MonoBehaviour {
 		finalDirectoryWidth = 200 * finalScale; //* menuScript.getXScale();
 		finalDirectoryHight = 200 * finalScale; //* menuScript.getYScale();
 
-		int columns = 3;
+		columns = 3;
 		
 		if (!folderOpen) {
 			for (int j = 0; j < exampleProjects.Count; j++) {
@@ -259,6 +277,7 @@ public class FolderBuilder : MonoBehaviour {
 				boxesDirectoryBox.Add (directoryBox);
 			}
 		}
+		scrollPanel = new Rect(Screen.width - ((Screen.width / 4) * columns), 0, ((Screen.width / 4) * columns), boxesDirectoryBox.Count * ((Screen.height / 4)));
 		return false;
 		
 	}
@@ -290,7 +309,16 @@ public class FolderBuilder : MonoBehaviour {
 	
 	public bool CloseLoading()
 	{
+		if(boxesDirectoryBox != null)
+		{
+			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+				boxesDirectoryBox[i].Remove();
+				boxesDirectoryBox[i] = null;
+			}
+		}
+		boxesDirectoryBox = null;
 		Destroy(Folders);
+
 		return false;
 	}
 	
