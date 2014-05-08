@@ -151,7 +151,7 @@ public class FolderBuilder : MonoBehaviour {
 	void OnGUI() {
 		if(boxesDirectoryBox != null)
 		{
-			GUI.Box(scrollPanel, "");
+			//GUI.Box(scrollPanel, "");
 			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
 				//GUI.Box(boxesDirectoryBox[i].BoxCollider, boxesDirectoryBox[i].DirectoryName);
 			}
