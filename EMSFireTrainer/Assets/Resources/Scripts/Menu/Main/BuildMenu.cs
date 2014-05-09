@@ -40,12 +40,38 @@ public class BuildMenu : MonoBehaviour {
 	private static GameObject companylogo;
 	private static GUITexture companyTexture;
 	private static Texture2D companyIcon;
-
 	
 	private static GameObject homeButton;
 	private static GUITexture homeTexture;
 	private static Texture2D homeIcon;
 	private static Rect homeIconRect;
+
+	#region Create buttons
+	private static int createButtonWidth = 76;
+	private static int createButtonHeight = 86;
+
+	private static GameObject settingsIcon;
+	private static GUITexture settingsTexture;
+	private static Texture2D settingsImage;
+    
+	private static GameObject fireIcon;
+	private static GUITexture fireTexture;
+	private static Texture2D fireImage;
+    
+	private static GameObject plusIcon;
+	private static GUITexture plusTexture;
+	private static Texture2D plusImage;
+
+	private static GameObject saveIcon;
+	private static GUITexture saveTexture;
+	private static Texture2D saveImage;
+
+	private static GameObject backIcon;
+	private static GUITexture backTexture;
+	private static Texture2D backImage;
+
+
+	#endregion
 
 	public Vector3 test1;
 	public Rect test2;
@@ -61,6 +87,11 @@ public class BuildMenu : MonoBehaviour {
 		homeIcon = Resources.Load("Icons/previous-36") as Texture2D;
 		companyIcon = Resources.Load("Icons/ISCRisk-36") as Texture2D;
 		backgroundImage = Resources.Load("Backgrounds/Orange") as Texture2D;
+		settingsImage = Resources.Load("Icons/SettingsIcon") as Texture2D;
+		fireImage = Resources.Load("Icons/FireIcon") as Texture2D;
+		plusImage = Resources.Load("Icons/PlusIcon") as Texture2D;
+		saveImage = Resources.Load("Icons/SaveIcon") as Texture2D;
+		backImage = Resources.Load("Icons/CrossIcon") as Texture2D;
 
 		background = new GameObject();
 		background.isStatic = true;
@@ -77,6 +108,13 @@ public class BuildMenu : MonoBehaviour {
 
 		homeButton = new GameObject();
 
+		//Creating Scene Buttons
+		settingsIcon = new GameObject();
+		fireIcon = new GameObject();
+		plusIcon = new GameObject();
+		saveIcon = new GameObject();
+		backIcon = new GameObject();
+
 		//Give Buttons a Name
 		background.name = "Background";
 		connectButton.name = "Connect_Button";
@@ -87,8 +125,13 @@ public class BuildMenu : MonoBehaviour {
 		company.name = "Company_Name";
 		homeButton.name = "Home_Button";
 		companylogo.name = "Company_Logo";
+		settingsIcon.name = "Settings_Icon";
+		fireIcon.name = "Fire_Icon";
+		plusIcon.name = "Plus_Icon";
+		saveIcon.name = "Save_Icon";
+		backIcon.name = "Back_Icon";
 
-		//Give Buttons the right components
+        //Give Buttons the right components
 		background.AddComponent<GUITexture>();
 		connectButton.AddComponent<GUIText>();
 		createButton.AddComponent<GUIText>();
@@ -98,6 +141,11 @@ public class BuildMenu : MonoBehaviour {
 		company.AddComponent<GUIText>();
 		homeButton.AddComponent<GUITexture>();
 		companylogo.AddComponent<GUITexture>();
+		settingsIcon.AddComponent<GUITexture>();
+		fireIcon.AddComponent<GUITexture>();
+		plusIcon.AddComponent<GUITexture>();
+		saveIcon.AddComponent<GUITexture>();
+		backIcon.AddComponent<GUITexture>();
 
 		//Select the Components a variable
 		backgroundTexture = background.GetComponent<GUITexture>();
@@ -109,10 +157,21 @@ public class BuildMenu : MonoBehaviour {
 		companyName = company.GetComponent<GUIText>();
 		homeTexture = homeButton.GetComponent<GUITexture>();
 		companyTexture = companylogo.GetComponent<GUITexture>();
+		settingsTexture = settingsIcon.GetComponent<GUITexture>();
+		fireTexture = fireIcon.GetComponent<GUITexture>();
+		plusTexture = plusIcon.GetComponent<GUITexture>();
+		saveTexture = saveIcon.GetComponent<GUITexture>();
+		backTexture = backIcon.GetComponent<GUITexture>();
 		
 		backgroundTexture.texture = backgroundImage;
 		homeTexture.texture = homeIcon;
 		companyTexture.texture = companyIcon;
+
+		settingsTexture.texture = settingsImage;
+		fireTexture.texture = fireImage;
+		plusTexture.texture = plusImage;
+		saveTexture.texture = saveImage;
+		backTexture.texture = backImage;
 
 
 		backgroundTexture.pixelInset = new Rect(0,0,Screen.width,Screen.height);
@@ -125,6 +184,11 @@ public class BuildMenu : MonoBehaviour {
 		company.SetActive(false);
 		homeButton.SetActive(false);
 		companylogo.SetActive(false);
+		settingsIcon.SetActive(false);
+		fireIcon.SetActive(false);
+		plusIcon.SetActive(false);
+		saveIcon.SetActive(false);
+		backIcon.SetActive(false);
 
 	}
 
@@ -255,9 +319,9 @@ public class BuildMenu : MonoBehaviour {
 		createButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 330));
 		playButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 262));
 		smokeButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 195));
-		productName.pixelOffset = new Vector2 (Screen.width - 250,-50);
-		companyName.pixelOffset = new Vector2 (Screen.width - 250,-70);
-		companyTexture.pixelInset = new Rect(Screen.width - 300,Screen.height - 90,36,36);
+		productName.pixelOffset = new Vector2 (Screen.width - 175,-50);
+		companyName.pixelOffset = new Vector2 (Screen.width - 175,-70);
+		companyTexture.pixelInset = new Rect(Screen.width - 220,Screen.height - 90,36,36);
 
 		//scale
 		companylogo.transform.localScale = new Vector3(0,0,1);
@@ -363,22 +427,45 @@ public class BuildMenu : MonoBehaviour {
 	public static void BuildCreateMenu() {
 		Deconstruct();
 
-		homeButton.SetActive(true);
-		
+		settingsIcon.SetActive(true);
+		fireIcon.SetActive(true);
+		plusIcon.SetActive(true);
+		saveIcon.SetActive(true);
+		backIcon.SetActive(true);
+
+		//Background
+		backgroundImage = Resources.Load("Backgrounds/Yellow") as Texture2D;
+		backgroundTexture.texture = backgroundImage;
+
 		//position
-		homeButton.transform.position = new Vector3(0,0,0);
-		
-		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 50,19,36);
-		
-		//scale
-		homeButton.transform.localScale = new Vector3(0,0,1);
+		settingsIcon.transform.position = new Vector3(0,0,0);
+		fireIcon.transform.position = new Vector3(0,0,0);
+		plusIcon.transform.position = new Vector3(0,0,0);
+		saveIcon.transform.position = new Vector3(0,0,0);
+		backIcon.transform.position = new Vector3(0,0,0);
+
+		//settingsTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) - (2 * createButtonWidth + (10 * 2)), 50, createButtonWidth, createButtonHeight);
+		plusTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) - (2 * createButtonWidth + (10 * 2)), 50, createButtonWidth, createButtonHeight);
+		settingsTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) - ( 1 * createButtonWidth + (10 * 1)), 50, createButtonWidth,createButtonHeight);
+		//plusTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2), 50, createButtonWidth, createButtonHeight);
+		fireTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2), 50, createButtonWidth, createButtonHeight);
+		saveTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) + ( 1 * createButtonWidth + (10 * 1)), 50, createButtonWidth, createButtonHeight);
+		backTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) + ( 2 * createButtonWidth + (10 * 2)), 50, createButtonWidth, createButtonHeight);
         
-		homeIconRect = new Rect(50,50, 19, 36);
+        //scale
+		settingsIcon.transform.localScale = new Vector3(0,0,1);
+		fireIcon.transform.localScale = new Vector3(0,0,1);
+		plusIcon.transform.localScale = new Vector3(0,0,1);
+		saveIcon.transform.localScale = new Vector3(0,0,1);
+		backIcon.transform.localScale = new Vector3(0,0,1);
 	}
 	
 	private static void DeconstructCreateMenu() {
-		homeIconRect = new Rect();
-		homeButton.SetActive(false);
+		settingsIcon.SetActive(false);
+		fireIcon.SetActive(false);
+		plusIcon.SetActive(false);
+		saveIcon.SetActive(false);
+		backIcon.SetActive(false);
 
 	}
 	public static void BuildConnectMenu() {
