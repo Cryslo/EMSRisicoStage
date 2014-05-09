@@ -19,8 +19,9 @@ public class DirectoryBox {
 	private bool editActive;
 	private bool fileMode = false;
 	private bool Protected = false;
-	
+	#if UNITY_ANDROID
 	TouchScreenKeyboard keyboard;
+#endif
 	string newName;
 	
 	private float x;
@@ -126,8 +127,8 @@ public class DirectoryBox {
 	public void Setup () {
 		backgroundImage = Resources.Load("Sprites/Folder") as Texture2D;
 		columns = 3;
-		width = Screen.width / 4;
-		height = Screen.height / 4;
+		width = Screen.width / 5;
+		height = Screen.height / 5;
 
 		boxX = (Screen.width - ((width * columns) - width * x));
 		boxY = (Screen.height - (height + (height * y)));
@@ -154,6 +155,7 @@ public class DirectoryBox {
 		backgroundTexture.pixelInset = new Rect(boxX,boxY,width,height);
 		boxCollider = new Rect(boxX, TestY ,width,height);
 		if (editActive) {
+			#if UNITY_ANDROID
 			if (!Input.GetMouseButton(0)) {
 				if (keyboard.done && !keyboard.wasCanceled) {
 					DirectoryClickEdit (keyboard.text);
@@ -162,6 +164,7 @@ public class DirectoryBox {
 					newName = keyboard.text;
 				}
 			}
+#endif
 		}
 	}
 	
@@ -198,7 +201,9 @@ public class DirectoryBox {
 	
 	public void buildEdit(){
 		editActive = true;
+		#if UNITY_ANDROID
 		keyboard = (TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, false));
+#endif
 	}
 	
 	void DirectoryClickEdit (string newName)

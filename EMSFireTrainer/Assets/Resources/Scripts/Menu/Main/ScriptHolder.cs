@@ -4,7 +4,7 @@ using System.IO;
 
 public class ScriptHolder : MonoBehaviour
 {
-
+	#if UNITY_ANDROID
     private AndroidJavaClass jc;
     private AndroidJavaObject jo;
     private string Url;
@@ -76,4 +76,5 @@ public class ScriptHolder : MonoBehaviour
 
         //Call function from MyPlugin
     }
+#endif
 }

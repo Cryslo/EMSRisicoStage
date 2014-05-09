@@ -12,6 +12,8 @@ public class BuildMenu : MonoBehaviour {
 	private static Font menuFont;
 	private static int fontSize;
 
+	private static List<GameObject> Objects;
+
 	private static GameObject background;
 	private static GUITexture backgroundTexture;
 	public static Texture2D backgroundImage;
@@ -53,25 +55,34 @@ public class BuildMenu : MonoBehaviour {
 	private static GameObject settingsIcon;
 	private static GUITexture settingsTexture;
 	private static Texture2D settingsImage;
+	private static GUIText settingsTitle;
     
 	private static GameObject fireIcon;
 	private static GUITexture fireTexture;
 	private static Texture2D fireImage;
+	private static GUIText fireTitle;
     
 	private static GameObject plusIcon;
 	private static GUITexture plusTexture;
 	private static Texture2D plusImage;
+	private static GUIText plusTitle;
 
 	private static GameObject saveIcon;
 	private static GUITexture saveTexture;
 	private static Texture2D saveImage;
+	private static GUIText saveTitle;
 
 	private static GameObject backIcon;
 	private static GUITexture backTexture;
 	private static Texture2D backImage;
+	private static GUIText backTitle;
 
 
 	#endregion
+
+	private static float nativeWidth = 1280;
+	private static float nativeHeight = 720;
+	private static Matrix4x4 test;
 
 	public Vector3 test1;
 	public Rect test2;
@@ -79,10 +90,13 @@ public class BuildMenu : MonoBehaviour {
 	void Awake() {
 		folderBuilder = gameObject.GetComponent<FolderBuilder>();
 
+		Objects = new List<GameObject>();
+
 		//Init Font
 		menuFont = Resources.Load("Fonts/HelveticaNeue") as Font;
 		//set standard font size
 		fontSize = 90;
+
 		//Init Textures
 		homeIcon = Resources.Load("Icons/previous-36") as Texture2D;
 		companyIcon = Resources.Load("Icons/ISCRisk-36") as Texture2D;
@@ -93,166 +107,90 @@ public class BuildMenu : MonoBehaviour {
 		saveImage = Resources.Load("Icons/SaveIcon") as Texture2D;
 		backImage = Resources.Load("Icons/CrossIcon") as Texture2D;
 
+
 		background = new GameObject();
 		background.isStatic = true;
 		background.layer = 8;
-		//Init MainMenu Buttons
-		connectButton = new GameObject();
-		createButton = new GameObject();
-		playButton = new GameObject();
-		smokeButton = new GameObject();
-
-		product = new GameObject();
-		company = new GameObject();
-		companylogo = new GameObject();
-
-		homeButton = new GameObject();
-
-		//Creating Scene Buttons
-		settingsIcon = new GameObject();
-		fireIcon = new GameObject();
-		plusIcon = new GameObject();
-		saveIcon = new GameObject();
-		backIcon = new GameObject();
-
-		//Give Buttons a Name
 		background.name = "Background";
-		connectButton.name = "Connect_Button";
-		createButton.name = "Create_Button";
-		playButton.name = "Play_Button";
-		smokeButton.name = "Smoke_Button";
-		product.name = "Product_Name";
-		company.name = "Company_Name";
-		homeButton.name = "Home_Button";
-		companylogo.name = "Company_Logo";
-		settingsIcon.name = "Settings_Icon";
-		fireIcon.name = "Fire_Icon";
-		plusIcon.name = "Plus_Icon";
-		saveIcon.name = "Save_Icon";
-		backIcon.name = "Back_Icon";
-
-        //Give Buttons the right components
 		background.AddComponent<GUITexture>();
-		connectButton.AddComponent<GUIText>();
-		createButton.AddComponent<GUIText>();
-		playButton.AddComponent<GUIText>();
-		smokeButton.AddComponent<GUIText>();
-		product.AddComponent<GUIText>();
-		company.AddComponent<GUIText>();
-		homeButton.AddComponent<GUITexture>();
-		companylogo.AddComponent<GUITexture>();
-		settingsIcon.AddComponent<GUITexture>();
-		fireIcon.AddComponent<GUITexture>();
-		plusIcon.AddComponent<GUITexture>();
-		saveIcon.AddComponent<GUITexture>();
-		backIcon.AddComponent<GUITexture>();
-
-		//Select the Components a variable
-		backgroundTexture = background.GetComponent<GUITexture>();
-		connectButtonText = connectButton.GetComponent<GUIText>();
-		createButtonText = createButton.GetComponent<GUIText>();
-		playButtonText = playButton.GetComponent<GUIText>();
-		smokeButtonText = smokeButton.GetComponent<GUIText>();
-		productName = product.GetComponent<GUIText>();
-		companyName = company.GetComponent<GUIText>();
-		homeTexture = homeButton.GetComponent<GUITexture>();
-		companyTexture = companylogo.GetComponent<GUITexture>();
-		settingsTexture = settingsIcon.GetComponent<GUITexture>();
-		fireTexture = fireIcon.GetComponent<GUITexture>();
-		plusTexture = plusIcon.GetComponent<GUITexture>();
-		saveTexture = saveIcon.GetComponent<GUITexture>();
-		backTexture = backIcon.GetComponent<GUITexture>();
-		
-		backgroundTexture.texture = backgroundImage;
-		homeTexture.texture = homeIcon;
-		companyTexture.texture = companyIcon;
-
-		settingsTexture.texture = settingsImage;
-		fireTexture.texture = fireImage;
-		plusTexture.texture = plusImage;
-		saveTexture.texture = saveImage;
-		backTexture.texture = backImage;
-
-
+		backgroundTexture = background.GetComponent<GUITexture>();		
 		backgroundTexture.pixelInset = new Rect(0,0,Screen.width,Screen.height);
-
-		connectButton.SetActive(false);
-		createButton.SetActive(false);
-		playButton.SetActive(false);
-		smokeButton.SetActive(false);
-		product.SetActive(false);
-		company.SetActive(false);
-		homeButton.SetActive(false);
-		companylogo.SetActive(false);
-		settingsIcon.SetActive(false);
-		fireIcon.SetActive(false);
-		plusIcon.SetActive(false);
-		saveIcon.SetActive(false);
-		backIcon.SetActive(false);
+		backgroundTexture.texture = backgroundImage;
 
 	}
 
 	void Start() {
 		mainCamera = GameObject.Find("Main Camera").camera;
+		//Screen.SetResolution(1280,720,true);
+		Vector3 scale = new Vector3(nativeWidth,nativeHeight, 1.0f);
+       // test = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
 	}
 
 	void Update() {
 		Vector2 mousePos = new Vector2(Input.mousePosition.x,Screen.height - Input.mousePosition.y); 
-
-		if(connectButtonRect.Contains(mousePos))
+		if(GameManager.getGameState == GameState.MainMenu)
 		{
-			connectButtonText.color = Color.black;
-			if (Input.GetMouseButtonUp(0)) {
-				GameManager.SetGameState(GameState.ConnectMenu);
+			if(connectButtonRect.Contains(mousePos))
+			{
+				connectButtonText.color = Color.black;
+				if (Input.GetMouseButtonUp(0)) {
+					GameManager.SetGameState(GameState.ConnectMenu);
+				}
+			} else if (GameManager.getGameState != GameState.ConnectMenu){
+				connectButtonText.color = Color.white;
 			}
-		} else if (GameManager.getGameState != GameState.ConnectMenu){
-			connectButtonText.color = Color.white;
-		}
 
-		if(createButtonRect.Contains(mousePos))
-		{
-			createButtonText.color = Color.black;
-			if (Input.GetMouseButtonUp(0)) {
-				GameManager.SetGameState(GameState.CreateMenu);
+			if(createButtonRect.Contains(mousePos))
+			{
+				createButtonText.color = Color.black;
+				if (Input.GetMouseButtonUp(0)) {
+					GameManager.SetGameState(GameState.CreateMenu);
+				}
+			} else if (GameManager.getGameState != GameState.CreateMenu) {
+				createButtonText.color = Color.white;
 			}
-		} else if (GameManager.getGameState != GameState.CreateMenu) {
-			createButtonText.color = Color.white;
-		}
 
-		if(playButtonRect.Contains(mousePos))
-		{
-			playButtonText.color = Color.black;
-			if (Input.GetMouseButtonUp(0)) {
-				GameManager.SetGameState(GameState.PlayMenu);
+			if(playButtonRect.Contains(mousePos))
+			{
+				playButtonText.color = Color.black;
+				if (Input.GetMouseButtonUp(0)) {
+					GameManager.SetGameState(GameState.PlayMenu);
+				}
+			} else if (GameManager.getGameState != GameState.PlayMenu) {
+				playButtonText.color = Color.white;
 			}
-		} else if (GameManager.getGameState != GameState.PlayMenu) {
-			playButtonText.color = Color.white;
-		}
 
-		if(smokeButtonRect.Contains(mousePos))
-		{
-			smokeButtonText.color = Color.black;
-			//TODO: give smoke a gamestate
-			if (Input.GetMouseButtonUp(0)) {
-				GameManager.SetGameState(GameState.PlayMenu);
+			if(smokeButtonRect.Contains(mousePos))
+			{
+				smokeButtonText.color = Color.black;
+				//TODO: give smoke a gamestate
+				if (Input.GetMouseButtonUp(0)) {
+					GameManager.SetGameState(GameState.PlayMenu);
+				}
+			} else {
+				smokeButtonText.color = Color.white;
 			}
-		} else {
-			smokeButtonText.color = Color.white;
-		}
 
-		if(homeIconRect.Contains(mousePos))
-		{
-			homeTexture.color = Color.black;
-			if (Input.GetMouseButtonUp(0)) {
-				GameManager.SetGameState(GameState.MainMenu);
-			}
-		} else if (GameManager.getGameState != GameState.MainMenu)  {
-			homeTexture.color = Color.white;
-		}
 
+		}
+		if (GameManager.getGameState != GameState.MainMenu || GameManager.getGameState != GameState.CreateMenu) {
+			if(homeIconRect.Contains(mousePos))
+			{
+				homeTexture.color = Color.black;
+				if (Input.GetMouseButtonUp(0)) {
+					GameManager.SetGameState(GameState.MainMenu);
+				}
+			} else if (GameManager.getGameState != GameState.MainMenu && GameManager.getGameState != GameState.CreateMenu)  {
+                homeTexture.color = Color.white;
+            }
+		}
 	}
 
 	void OnGUI() {
+		//GUI.matrix = test;
+		if(playButtonText != null)
+		{
+		}
 		//GUI.Box(connectButtonRect, "Connect");
 		//GUI.Box(createButtonRect, "Create");
 		//GUI.Box(playButtonRect, "Play");
@@ -262,6 +200,7 @@ public class BuildMenu : MonoBehaviour {
 
 	private static void Deconstruct() {
 		//Check the PreviousGameState and decide from that which he has to deconstuct
+
 		switch(GameManager.PreviousGameState)
 		{
 		case GameState.MainMenu:
@@ -277,6 +216,7 @@ public class BuildMenu : MonoBehaviour {
 			DeconstructConnectMenu();
 			break;
 		}
+		Objects = new List<GameObject>();
 	}
 
 	public static void BuildStartMenu() {
@@ -289,13 +229,46 @@ public class BuildMenu : MonoBehaviour {
 		
 		fontSize = 90;
 
-		connectButton.SetActive(true);
-		createButton.SetActive(true);
-		playButton.SetActive(true);
-		smokeButton.SetActive(true);
-		product.SetActive(true);
-		company.SetActive(true);
-		companylogo.SetActive(true);
+		connectButton = new GameObject();
+		createButton = new GameObject();
+		playButton = new GameObject();
+		smokeButton = new GameObject();
+		
+		product = new GameObject();
+		company = new GameObject();
+        companylogo = new GameObject();
+
+		Objects.AddMany(connectButton, createButton, playButton, smokeButton, product, company, companylogo);
+
+		//Give Buttons a Name
+		connectButton.name = "Connect_Button";
+		createButton.name = "Create_Button";
+		playButton.name = "Play_Button";
+		smokeButton.name = "Smoke_Button";
+		product.name = "Product_Name";
+		company.name = "Company_Name";
+        companylogo.name = "Company_Logo";
+
+
+		connectButton.AddComponent<GUIText>();
+		createButton.AddComponent<GUIText>();
+		playButton.AddComponent<GUIText>();
+		smokeButton.AddComponent<GUIText>();
+		product.AddComponent<GUIText>();
+		company.AddComponent<GUIText>();
+		companylogo.AddComponent<GUITexture>();
+        
+      
+		connectButtonText = connectButton.GetComponent<GUIText>();
+		createButtonText = createButton.GetComponent<GUIText>();
+		playButtonText = playButton.GetComponent<GUIText>();
+		smokeButtonText = smokeButton.GetComponent<GUIText>();
+		productName = product.GetComponent<GUIText>();
+		companyName = company.GetComponent<GUIText>();
+		
+		companyTexture = companylogo.GetComponent<GUITexture>();
+		
+		companyTexture.texture = companyIcon;
 
 		//Give Components right values
 		//Text
@@ -319,9 +292,9 @@ public class BuildMenu : MonoBehaviour {
 		createButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 330));
 		playButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 262));
 		smokeButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 195));
-		productName.pixelOffset = new Vector2 (Screen.width - 175,-50);
-		companyName.pixelOffset = new Vector2 (Screen.width - 175,-70);
-		companyTexture.pixelInset = new Rect(Screen.width - 220,Screen.height - 90,36,36);
+		productName.pixelOffset = new Vector2 (Screen.width - 200,-50);
+		companyName.pixelOffset = new Vector2 (Screen.width - 200,-70);
+		companyTexture.pixelInset = new Rect(Screen.width - 250,Screen.height - 90,36,36);
 
 		//scale
 		companylogo.transform.localScale = new Vector3(0,0,1);
@@ -341,7 +314,9 @@ public class BuildMenu : MonoBehaviour {
 		smokeButtonText.color = Color.white;
 		productName.color = Color.white;
 		companyName.color = Color.white;
-		
+
+
+
 		//Font
 		connectButtonText.font = menuFont;	
 		createButtonText.font = menuFont;	
@@ -350,11 +325,11 @@ public class BuildMenu : MonoBehaviour {
 		productName.font = menuFont;
 		
 		//Font Style
-		connectButtonText.fontStyle = FontStyle.Bold;
-		createButtonText.fontStyle = FontStyle.Bold;
-		playButtonText.fontStyle = FontStyle.Bold;
-		smokeButtonText.fontStyle = FontStyle.Bold;
-		productName.fontStyle = FontStyle.Bold;
+		connectButtonText.fontStyle = FontStyle.Normal;
+		createButtonText.fontStyle = FontStyle.Normal;
+		playButtonText.fontStyle = FontStyle.Normal;
+		smokeButtonText.fontStyle = FontStyle.Normal;
+		productName.fontStyle = FontStyle.Normal;
 		companyName.fontStyle = FontStyle.Normal;
 		
 		//Font Size
@@ -387,13 +362,9 @@ public class BuildMenu : MonoBehaviour {
 		playButtonRect = new Rect();
 		smokeButtonRect = new Rect();
 
-		connectButton.SetActive(false);
-		createButton.SetActive(false);
-		playButton.SetActive(false);
-		smokeButton.SetActive(false);
-		product.SetActive(false);
-		company.SetActive(false);
-		companylogo.SetActive(false);
+		for (int i = 0; i < Objects.Count; i++) {
+			Destroy(Objects[i]);	
+		}
 	}
 
 	public static void BuildPlayMenu() {
@@ -404,9 +375,21 @@ public class BuildMenu : MonoBehaviour {
 		backgroundImage = Resources.Load("Backgrounds/Green") as Texture2D;
 		backgroundTexture.texture = backgroundImage;
 
-		homeButton.SetActive(true);
+		homeButton = new GameObject();
 
-		//position
+		Objects.AddMany(homeButton);
+		//Give Buttons a Name
+		homeButton.name = "Home_Button";
+		
+		//Give Buttons the right components
+		homeButton.AddComponent<GUITexture>();
+		
+		//Select the Components a variable
+		homeTexture = homeButton.GetComponent<GUITexture>();
+
+		homeTexture.texture = homeIcon;
+        
+        //position
 		homeButton.transform.position = new Vector3(0,0,0);
 
 		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 50,19,36);
@@ -419,7 +402,10 @@ public class BuildMenu : MonoBehaviour {
 	
 	private static void DeconstructPlayMenu() {
 		homeIconRect = new Rect();
-		homeButton.SetActive(false);
+
+		for (int i = 0; i < Objects.Count; i++) {
+			Destroy(Objects[i]);	
+        }
 		
 		FolderBuilder.instance.CloseLoading();
 	}
@@ -427,11 +413,56 @@ public class BuildMenu : MonoBehaviour {
 	public static void BuildCreateMenu() {
 		Deconstruct();
 
-		settingsIcon.SetActive(true);
-		fireIcon.SetActive(true);
-		plusIcon.SetActive(true);
-		saveIcon.SetActive(true);
-		backIcon.SetActive(true);
+		//Creating Scene Buttons
+		settingsIcon = new GameObject();
+		fireIcon = new GameObject();
+		plusIcon = new GameObject();
+		saveIcon = new GameObject();
+		backIcon = new GameObject();
+
+		Objects.AddMany(settingsIcon, fireIcon, plusIcon, saveIcon, backIcon);
+            
+        settingsIcon.name = "Settings_Icon";
+		fireIcon.name = "Fire_Icon";
+		plusIcon.name = "Plus_Icon";
+		saveIcon.name = "Save_Icon";
+		backIcon.name = "Back_Icon";
+
+		settingsIcon.AddComponent<GUITexture>();
+		fireIcon.AddComponent<GUITexture>();
+		plusIcon.AddComponent<GUITexture>();
+		saveIcon.AddComponent<GUITexture>();
+		backIcon.AddComponent<GUITexture>();
+		
+		settingsIcon.AddComponent<GUIText>();
+		fireIcon.AddComponent<GUIText>();
+		plusIcon.AddComponent<GUIText>();
+		saveIcon.AddComponent<GUIText>();
+        backIcon.AddComponent<GUIText>();
+
+		settingsTexture = settingsIcon.GetComponent<GUITexture>();
+		fireTexture = fireIcon.GetComponent<GUITexture>();
+		plusTexture = plusIcon.GetComponent<GUITexture>();
+		saveTexture = saveIcon.GetComponent<GUITexture>();
+		backTexture = backIcon.GetComponent<GUITexture>();
+
+		settingsTitle = settingsIcon.GetComponent<GUIText>();
+		fireTitle = fireIcon.GetComponent<GUIText>();
+		plusTitle = plusIcon.GetComponent<GUIText>();
+		saveTitle = saveIcon.GetComponent<GUIText>();
+		backTitle = backIcon.GetComponent<GUIText>();
+
+		settingsTexture.texture = settingsImage;
+		fireTexture.texture = fireImage;
+		plusTexture.texture = plusImage;
+		saveTexture.texture = saveImage;
+		backTexture.texture = backImage;
+
+		settingsTitle.text = "SETTINGS";
+	    fireTitle.text = "FIRE";
+		plusTitle.text = "BACKGROUND";
+        saveTitle.text = "SAVE";
+	    backTitle.text = "BACK";
 
 		//Background
 		backgroundImage = Resources.Load("Backgrounds/Yellow") as Texture2D;
@@ -451,6 +482,43 @@ public class BuildMenu : MonoBehaviour {
 		fireTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2), 50, createButtonWidth, createButtonHeight);
 		saveTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) + ( 1 * createButtonWidth + (10 * 1)), 50, createButtonWidth, createButtonHeight);
 		backTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) + ( 2 * createButtonWidth + (10 * 2)), 50, createButtonWidth, createButtonHeight);
+
+		plusTitle.pixelOffset = new Vector2 (50,(Screen.height - 95));
+		settingsTitle.pixelOffset = new Vector2 (50,(Screen.height - 162));
+		fireTitle.pixelOffset = new Vector2 (50,(Screen.height - 230));
+		saveTitle.pixelOffset = new Vector2 (50,(Screen.height - 300)); 
+
+		//anchor
+		settingsTitle.anchor = TextAnchor.UpperLeft;
+		fireTitle.anchor = TextAnchor.UpperLeft;
+		plusTitle.anchor = TextAnchor.UpperLeft;
+		saveTitle.anchor = TextAnchor.UpperLeft;
+		
+		//Color
+		settingsTitle.color = Color.black;
+		fireTitle.color = Color.black;
+		plusTitle.color = Color.black;
+		saveTitle.color = Color.black;
+		backTitle.color = Color.black;
+
+		//Font
+		settingsTitle.font = menuFont;	
+		fireTitle.font = menuFont;	
+		plusTitle.font = menuFont;	
+		saveTitle.font = menuFont;	
+		
+		//Font Style
+		settingsTitle.fontStyle = FontStyle.Normal;
+		fireTitle.fontStyle = FontStyle.Normal;
+		plusTitle.fontStyle = FontStyle.Normal;
+		saveTitle.fontStyle = FontStyle.Normal;
+        
+        //Font Size
+		settingsTitle.fontSize = fontSize;
+		fireTitle.fontSize = fontSize;
+		plusTitle.fontSize = fontSize;
+		saveTitle.fontSize = fontSize;
+        
         
         //scale
 		settingsIcon.transform.localScale = new Vector3(0,0,1);
@@ -461,32 +529,44 @@ public class BuildMenu : MonoBehaviour {
 	}
 	
 	private static void DeconstructCreateMenu() {
-		settingsIcon.SetActive(false);
-		fireIcon.SetActive(false);
-		plusIcon.SetActive(false);
-		saveIcon.SetActive(false);
-		backIcon.SetActive(false);
+		for (int i = 0; i < Objects.Count; i++) {
+			Destroy(Objects[i]);	
+		}
+    }
 
-	}
-	public static void BuildConnectMenu() {
+    public static void BuildConnectMenu() {
 		Deconstruct();
 
-		homeButton.SetActive(true);
+		homeButton = new GameObject();
+
+		Objects.AddMany(homeButton);
+		//Give Buttons a Name
+		homeButton.name = "Home_Button";
+		
+		//Give Buttons the right components
+		homeButton.AddComponent<GUITexture>();
+		
+		//Select the Components a variable
+		homeTexture = homeButton.GetComponent<GUITexture>();
+		
+		homeTexture.texture = homeIcon;
 		
 		//position
 		homeButton.transform.position = new Vector3(0,0,0);
 		
-		homeTexture.pixelInset = new Rect(50,Screen.height - 36 - 50,19,36);
+		homeTexture.pixelInset = new Rect( 50,Screen.height - 36 - 50,19,36);
 		
 		//scale
-		homeButton.transform.localScale = new Vector3(0,0,1);
+        homeButton.transform.localScale = new Vector3(0,0,1);
         
-		homeIconRect = new Rect(50,50, 19, 36);
-	}
-	
-	private static void DeconstructConnectMenu() {
+        homeIconRect = new Rect(50,50, 19, 36);
+    }
+    
+    private static void DeconstructConnectMenu() {
 		homeIconRect = new Rect();
-		homeButton.SetActive(false);
-		
+
+		for (int i = 0; i < Objects.Count; i++) {
+			Destroy(Objects[i]);	
+        }
 	}
 }

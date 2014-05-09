@@ -25,7 +25,7 @@ public class FolderBuilder : MonoBehaviour {
 	private DirectoryInfo CreateFolder = new DirectoryInfo("/");
 	private List<FileInfo> buildedFileArray;
 	
-	private int boxesX = 5;
+	private int boxesX = 3;
 	private int maxBoxesX;
 	
 	private int scaling;
@@ -48,6 +48,9 @@ public class FolderBuilder : MonoBehaviour {
 	private float startpointY;
 	private float finalDirectoryWidth;
 	private float finalDirectoryHight;
+
+	public GUIStyle testStyle;
+	public GUISkin testSkin;
 	
 	// Use this for initialization
 	void Start () {
@@ -153,7 +156,8 @@ public class FolderBuilder : MonoBehaviour {
 		{
 			//GUI.Box(scrollPanel, "");
 			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
-				//GUI.Box(boxesDirectoryBox[i].BoxCollider, boxesDirectoryBox[i].DirectoryName);
+				if(boxesDirectoryBox[i].BoxNumber != 0)
+					GUI.Box(boxesDirectoryBox[i].BoxCollider, boxesDirectoryBox[i].DirectoryName, testStyle);
 			}
 		}
 	}

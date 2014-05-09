@@ -33,7 +33,7 @@ public class LoadScreen : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (folderCreator.Finised && done) {
-			Application.LoadLevel ("Main");
+			Application.LoadLevel ("Jippe");
 		}
 
 		if (status == Status.DOWNLOADING) {
