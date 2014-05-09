@@ -21,8 +21,11 @@ public class DirectoryBox {
 	private bool Protected = false;
 	#if UNITY_ANDROID
 	TouchScreenKeyboard keyboard;
-#endif
+	#endif
 	string newName;
+
+	private float timer;
+	private float timerPoint = 3f;
 	
 	private float x;
 	private float y;
@@ -39,6 +42,11 @@ public class DirectoryBox {
 	private float testY;
 
 	private float newStartY;
+
+	private GameObject deleteIcon;
+	private GUITexture deleteTexture;
+	private Texture2D deleteImage;
+	private Rect deleteRect;
 	#endregion
 	
 	#region Porperties
@@ -121,11 +129,17 @@ public class DirectoryBox {
 	public Rect BoxCollider{
 		get{return this.boxCollider;}
 	}
+	public Rect DeleteRect{
+		get{return this.deleteRect;}
+	}
 	#endregion
 	
 	// Use this for initialization
 	public void Setup () {
 		backgroundImage = Resources.Load("Sprites/Folder") as Texture2D;
+		
+		deleteImage = Resources.Load("Icons/Delete") as Texture2D;
+
 		columns = 3;
 		width = Screen.width / 5;
 		height = Screen.height / 5;
@@ -142,7 +156,10 @@ public class DirectoryBox {
 		backgroundTexture = folderBox.GetComponent<GUITexture>();
 		backgroundTexture.texture = backgroundImage;
 		backgroundTexture.pixelInset = new Rect(boxX,boxY,width,height);
-		
+		//homeIconRect = new Rect(50,50, 19, 36);
+
+
+
 		boxCollider = new Rect(boxX, TestY,width,height);
 		Debug.Log("Backgrounds/" + BoxNumber);
 			backgroundImage = Resources.Load("Backgrounds/" + BoxNumber) as Texture2D;
@@ -152,8 +169,68 @@ public class DirectoryBox {
 	
 	public void Update()
 	{
+		Vector2 mousePos = new Vector2(Input.mousePosition.x,Screen.height - Input.mousePosition.y); 
+
 		backgroundTexture.pixelInset = new Rect(boxX,boxY,width,height);
 		boxCollider = new Rect(boxX, TestY ,width,height);
+
+		if(deleteIcon != null)
+		{
+			if(deleteIcon.name == "Delete_Icon") 
+			{
+				deleteTexture.pixelInset = new Rect(boxX + ((width / 2) - (76 / 2)),boxY + ((height / 2) - (86 / 2)),76,86);
+				deleteRect = new Rect(boxX + ((width / 2) - (76 / 2)),TestY + ((height / 2) - (86 / 2)),76,86);
+
+				if(Input.GetMouseButtonDown(0) && !boxCollider.Contains(mousePos))
+				{
+					deleteRect = new Rect();
+					folderBuilder.DeleteObject(deleteIcon);
+
+				}
+				if(Input.GetMouseButtonDown(0) && deleteRect.Contains(mousePos))
+				{
+					Debug.Log("Delete: " + directoryName);
+				}
+			}
+		}
+
+		if(boxCollider.Contains(mousePos))
+		{
+			if (Input.GetMouseButtonDown(0)) {
+				timer = 0;
+				Debug.Log(folderBox.name);
+			}
+
+			if (Input.GetMouseButton(0)) {
+				timer += 1* Time.deltaTime;
+				if(timer > timerPoint)
+				{
+					if(GameObject.Find("Delete_Icon") == null)
+					{
+						Debug.Log(folderBox.name);
+						deleteIcon = new GameObject();
+						
+						deleteIcon.name = "Delete_Icon";
+						
+						//Give Buttons the right components
+						deleteIcon.AddComponent<GUITexture>();
+						
+						deleteIcon.transform.localScale = new Vector3(0,0,1);
+						
+						//Select the Components a variable
+						deleteTexture = deleteIcon.GetComponent<GUITexture>();
+						
+						deleteTexture.texture = deleteImage;
+						
+						deleteTexture.pixelInset = new Rect(boxX + ((width / 2) - (76 / 2)),boxY + ((height / 2) - (86 / 2)),76,86);
+						deleteRect = new Rect(boxX + ((width / 2) - (76 / 2)),TestY + ((height / 2) - (86 / 2)),76,86);
+					}
+				}
+			}
+			if (Input.GetMouseButtonUp(0)) {
+
+			}
+		} 
 		if (editActive) {
 			#if UNITY_ANDROID
 			if (!Input.GetMouseButton(0)) {
@@ -165,6 +242,7 @@ public class DirectoryBox {
 				}
 			}
 #endif
+
 		}
 	}
 	

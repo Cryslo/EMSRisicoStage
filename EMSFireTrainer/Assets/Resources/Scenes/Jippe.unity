@@ -83,6 +83,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 30367719}
   - 114: {fileID: 30367718}
+  - 114: {fileID: 30367720}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -112,6 +113,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &30367720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 30367717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d930c6160a04ffd8abbd6f1876d497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &517940441
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,7 +136,6 @@ GameObject:
   - 92: {fileID: 517940444}
   - 124: {fileID: 517940443}
   - 81: {fileID: 517940442}
-  - 114: {fileID: 517940447}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -193,17 +204,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &517940447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 517940441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eccab33a470044db38ed8460fa491f87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &635298433
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1592779495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4af453f1a1344046b89696cbf5f308b, type: 3}
+  m_Script: {fileID: 11500000, guid: 881b2222c686b4a54b3bec5fb813f32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   test1: {x: 0, y: 0, z: 0}
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1592779495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fc6266d7dc4e4b63be57a6be0291a02, type: 3}
+  m_Script: {fileID: 11500000, guid: f7a7d07cbeffb4679aa19daf215fd8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1592779499
@@ -334,7 +334,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1592779495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 408d7f57aab614f5f92b0afc234e1800, type: 3}
+  m_Script: {fileID: 11500000, guid: 73c216120101540329f973eb976931f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   testStyle:

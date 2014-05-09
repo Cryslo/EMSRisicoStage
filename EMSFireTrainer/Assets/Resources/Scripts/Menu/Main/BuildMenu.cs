@@ -133,42 +133,51 @@ public class BuildMenu : MonoBehaviour {
 			if(connectButtonRect.Contains(mousePos))
 			{
 				connectButtonText.color = Color.black;
+				connectButtonText.fontSize = 70;
 				if (Input.GetMouseButtonUp(0)) {
 					GameManager.SetGameState(GameState.ConnectMenu);
 				}
 			} else if (GameManager.getGameState != GameState.ConnectMenu){
 				connectButtonText.color = Color.white;
+				connectButtonText.fontSize = fontSize;
 			}
 
 			if(createButtonRect.Contains(mousePos))
 			{
 				createButtonText.color = Color.black;
+				createButtonText.fontSize = 70;
 				if (Input.GetMouseButtonUp(0)) {
 					GameManager.SetGameState(GameState.CreateMenu);
 				}
 			} else if (GameManager.getGameState != GameState.CreateMenu) {
 				createButtonText.color = Color.white;
+				createButtonText.fontSize = fontSize;
 			}
 
 			if(playButtonRect.Contains(mousePos))
 			{
 				playButtonText.color = Color.black;
+				playButtonText.fontSize = 70;
+				playButtonText.anchor = TextAnchor.MiddleLeft;
 				if (Input.GetMouseButtonUp(0)) {
 					GameManager.SetGameState(GameState.PlayMenu);
 				}
 			} else if (GameManager.getGameState != GameState.PlayMenu) {
 				playButtonText.color = Color.white;
+				playButtonText.fontSize = fontSize;
 			}
 
 			if(smokeButtonRect.Contains(mousePos))
 			{
 				smokeButtonText.color = Color.black;
+				smokeButtonText.fontSize = 70;
 				//TODO: give smoke a gamestate
 				if (Input.GetMouseButtonUp(0)) {
 					GameManager.SetGameState(GameState.PlayMenu);
 				}
 			} else {
 				smokeButtonText.color = Color.white;
+				smokeButtonText.fontSize = fontSize;
 			}
 
 
@@ -288,10 +297,10 @@ public class BuildMenu : MonoBehaviour {
 
 
 		//Posistion
-		connectButtonText.pixelOffset = new Vector2 (50, - (Screen.height - 400));
-		createButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 330));
-		playButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 262));
-		smokeButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 195));
+		connectButtonText.pixelOffset = new Vector2 (50, - (Screen.height - 340));
+		createButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 270));
+		playButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 202));
+		smokeButtonText.pixelOffset = new Vector2 (50,- (Screen.height - 135));
 		productName.pixelOffset = new Vector2 (Screen.width - 200,-50);
 		companyName.pixelOffset = new Vector2 (Screen.width - 200,-70);
 		companyTexture.pixelInset = new Rect(Screen.width - 250,Screen.height - 90,36,36);
@@ -300,12 +309,12 @@ public class BuildMenu : MonoBehaviour {
 		companylogo.transform.localScale = new Vector3(0,0,1);
 		
 		//anchor
-		connectButtonText.anchor = TextAnchor.UpperLeft;
-		createButtonText.anchor = TextAnchor.UpperLeft;
-		playButtonText.anchor = TextAnchor.UpperLeft;
-		smokeButtonText.anchor = TextAnchor.UpperLeft;
-		productName.anchor = TextAnchor.UpperLeft;
-		companyName.anchor = TextAnchor.UpperLeft;
+		connectButtonText.anchor = TextAnchor.MiddleLeft;
+		createButtonText.anchor = TextAnchor.MiddleLeft;
+		playButtonText.anchor = TextAnchor.MiddleLeft;
+		smokeButtonText.anchor = TextAnchor.MiddleLeft;
+		productName.anchor = TextAnchor.MiddleLeft;
+		companyName.anchor = TextAnchor.MiddleLeft;
 		
 		//Color
 		connectButtonText.color = Color.white;
@@ -483,16 +492,16 @@ public class BuildMenu : MonoBehaviour {
 		saveTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) + ( 1 * createButtonWidth + (10 * 1)), 50, createButtonWidth, createButtonHeight);
 		backTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) + ( 2 * createButtonWidth + (10 * 2)), 50, createButtonWidth, createButtonHeight);
 
-		plusTitle.pixelOffset = new Vector2 (50,(Screen.height - 95));
-		settingsTitle.pixelOffset = new Vector2 (50,(Screen.height - 162));
-		fireTitle.pixelOffset = new Vector2 (50,(Screen.height - 230));
-		saveTitle.pixelOffset = new Vector2 (50,(Screen.height - 300)); 
+		plusTitle.pixelOffset = new Vector2 (50,(Screen.height - 65));
+		settingsTitle.pixelOffset = new Vector2 (50,(Screen.height - 132));
+		fireTitle.pixelOffset = new Vector2 (50,(Screen.height - 200));
+		saveTitle.pixelOffset = new Vector2 (50,(Screen.height - 265)); 
 
 		//anchor
-		settingsTitle.anchor = TextAnchor.UpperLeft;
-		fireTitle.anchor = TextAnchor.UpperLeft;
-		plusTitle.anchor = TextAnchor.UpperLeft;
-		saveTitle.anchor = TextAnchor.UpperLeft;
+		settingsTitle.anchor = TextAnchor.MiddleLeft;
+		fireTitle.anchor = TextAnchor.MiddleLeft;
+		plusTitle.anchor = TextAnchor.MiddleLeft;
+		saveTitle.anchor = TextAnchor.MiddleLeft;
 		
 		//Color
 		settingsTitle.color = Color.black;

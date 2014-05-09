@@ -157,7 +157,11 @@ public class FolderBuilder : MonoBehaviour {
 			//GUI.Box(scrollPanel, "");
 			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
 				if(boxesDirectoryBox[i].BoxNumber != 0)
-					GUI.Box(boxesDirectoryBox[i].BoxCollider, boxesDirectoryBox[i].DirectoryName, testStyle);
+					GUI.Box(boxesDirectoryBox[i].BoxCollider, boxesDirectoryBox[i].DirectoryName);
+				if(boxesDirectoryBox[i].DeleteRect != null)
+				{
+					GUI.Box(boxesDirectoryBox[i].DeleteRect, "Deleted");
+				}
 			}
 		}
 	}
@@ -325,7 +329,12 @@ public class FolderBuilder : MonoBehaviour {
 
 		return false;
 	}
-	
+
+	public void DeleteObject(GameObject obj)
+	{
+		Destroy(obj);
+	}
+
 	public int RandomNumber(int max, int min)
 	{
 		int result;
