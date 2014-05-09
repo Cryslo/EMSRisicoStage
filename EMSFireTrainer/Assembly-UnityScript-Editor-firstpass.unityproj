@@ -54,6 +54,9 @@
      <None Include="Assets\uniSWF\Readme.txt" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Masked-Colour-Diffuse.shader" />
      <None Include="Assets\uniSWF\Resources\Shaders\uniSWF-Double-Alpha-Diffuse.shader" />
+ <Reference Include="Assets\Resources\Scripts\ICSharpCode.SharpZipLib">
+ <HintPath>Assets\Resources\Scripts\ICSharpCode.SharpZipLib.dll</HintPath>
+ </Reference>
  <Reference Include="Assets\uniSWF\DLLs\LibUniSWF">
  <HintPath>Assets\uniSWF\DLLs\LibUniSWF.dll</HintPath>
  </Reference>
@@ -71,9 +74,6 @@
  </Reference>
  <Reference Include="\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions">
  <HintPath>\Applications\Unity\Unity.app\Contents\PlaybackEngines\AndroidPlayer\EditorExtensions\UnityEditor.Android.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="Assets\Resources\Scripts\ICSharpCode.SharpZipLib">
- <HintPath>Assets\Resources\Scripts\ICSharpCode.SharpZipLib.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
