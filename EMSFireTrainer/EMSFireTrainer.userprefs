@@ -1,12 +1,27 @@
 ﻿<Properties>
+<<<<<<< HEAD
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../Documents/EMSBrandBlusSim/Assets/Resources/Scripts/FileSystem/DirectoryBox.cs">
+    <Files>
+      <File FileName="../../../Documents/EMSBrandBlusSim/Assets/Resources/Scripts/FileSystem/DirectoryBox.cs" Line="190" Column="5" />
+      <File FileName="../../../Documents/EMSBrandBlusSim/Assets/Resources/Scripts/FileSystem/FolderBuilder.cs" Line="1" Column="1" />
+=======
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/Menu/Play/DirectoryBox.cs">
     <Files>
+<<<<<<< HEAD
       <File FileName="Assets/Resources/Scripts/Main/GameManager.cs" Line="14" Column="43" />
       <File FileName="Assets/Resources/Scripts/Menu/Play/FolderBuilder.cs" Line="181" Column="13" />
       <File FileName="Assets/Resources/Scripts/Menu/Play/DirectoryBox.cs" Line="146" Column="41" />
       <File FileName="Assets/Resources/Scripts/Menu/Main/BuildMenu.cs" Line="360" Column="38" />
       <File FileName="Assets/Resources/Scripts/Menu/Play/FolderManager.cs" Line="8" Column="1" />
+=======
+      <File FileName="Assets/Resources/Scripts/Menu/Play/FolderBuilder.cs" Line="217" Column="42" />
+      <File FileName="Assets/Resources/Scripts/Menu/Play/DirectoryBox.cs" Line="83" Column="34" />
+      <File FileName="Assets/Resources/Scripts/Menu/Play/FolderManager.cs" Line="39" Column="18" />
+      <File FileName="Assets/Resources/Scripts/Menu/Play/FolderCreator.cs" Line="1" Column="1" />
+>>>>>>> FETCH_HEAD
+>>>>>>> FETCH_HEAD
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
