@@ -12,6 +12,7 @@ public enum GameState{
 }
 
 public class GameManager : MonoBehaviour {
+
 	private static GameState gameState;
 	private static GameState previousGameState;
 
