@@ -52,6 +52,7 @@
      <Compile Include="Assets\Resources\Scripts\Main\ListExtenstions.cs" />
      <Compile Include="Assets\Resources\Scripts\Main\User.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Create\Create_Object_Drag_Script.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Create\Fire_Property_Menu.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Create\FlameScript.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Create\GameHandler.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Create\IconScript.cs" />
