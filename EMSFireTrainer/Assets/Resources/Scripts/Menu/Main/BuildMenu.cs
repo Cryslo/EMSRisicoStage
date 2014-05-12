@@ -83,10 +83,14 @@ public class BuildMenu : MonoBehaviour {
 	private static GameObject backIcon;
 	private static GUITexture backTexture;
 	private static Texture2D backImage;
+<<<<<<< HEAD
+	private static GUIText backTitle;
+=======
     private static GUIText backTitle;
     private static Rect backIconRect;
 
 
+>>>>>>> FETCH_HEAD
 	#endregion
 
 	private static float nativeWidth = 1280;
@@ -363,6 +367,7 @@ public class BuildMenu : MonoBehaviour {
 		companyName = company.GetComponent<GUIText>();
 		
 		companyTexture = companylogo.GetComponent<GUITexture>();
+
 		
 		companyTexture.texture = companyIcon;
 

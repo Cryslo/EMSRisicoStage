@@ -5,9 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+<<<<<<< HEAD
   - enabled: 0
     path: Assets/Resources/Scenes/Loading.unity
   - enabled: 0
+=======
+  - enabled: 1
+>>>>>>> 6e3438beaa6f78e1d95bbef30c011f4a98e5b5fc
     path: Assets/Resources/Scenes/Jippe.unity
   - enabled: 1
     path: Assets/Resources/Scenes/Remi.unity
