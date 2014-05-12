@@ -56,26 +56,41 @@ public class BuildMenu : MonoBehaviour {
 	private static GUITexture settingsTexture;
 	private static Texture2D settingsImage;
 	private static GUIText settingsTitle;
+    private static Rect settingsRect;
+    private static Rect settingsTextRect;
     
 	private static GameObject fireIcon;
 	private static GUITexture fireTexture;
 	private static Texture2D fireImage;
-	private static GUIText fireTitle;
+    private static GUIText fireTitle;
+    private static Rect fireIconRect;
+    private static Rect fireTextRect;
     
 	private static GameObject plusIcon;
 	private static GUITexture plusTexture;
 	private static Texture2D plusImage;
-	private static GUIText plusTitle;
+    private static GUIText plusTitle;
+    private static Rect plusIconRect;
+    private static Rect plusTextRect;
 
 	private static GameObject saveIcon;
 	private static GUITexture saveTexture;
 	private static Texture2D saveImage;
-	private static GUIText saveTitle;
+    private static GUIText saveTitle;
+    private static Rect saveIconRect;
+    private static Rect saveTextRect;
 
 	private static GameObject backIcon;
 	private static GUITexture backTexture;
 	private static Texture2D backImage;
+<<<<<<< HEAD
 	private static GUIText backTitle;
+=======
+    private static GUIText backTitle;
+    private static Rect backIconRect;
+
+
+>>>>>>> FETCH_HEAD
 	#endregion
 
 	private static float nativeWidth = 1280;
@@ -126,6 +141,7 @@ public class BuildMenu : MonoBehaviour {
 
 	void Update() {
 		Vector2 mousePos = new Vector2(Input.mousePosition.x,Screen.height - Input.mousePosition.y); 
+#region MainMenu
 		if(GameManager.getGameState == GameState.MainMenu)
 		{
 			if(connectButtonRect.Contains(mousePos))
@@ -176,10 +192,75 @@ public class BuildMenu : MonoBehaviour {
 			} else {
 				smokeButtonText.color = Color.white;
 				smokeButtonText.fontSize = fontSize;
-			}
+            }
+        }
+#endregion
 
+        if (GameManager.getGameState == GameState.CreateMenu)
+        {
+//Plus
+            if (plusTextRect.Contains(mousePos))
+            {
+                plusTitle.fontSize = 70;
+                if (Input.GetMouseButtonUp(0))
+                {
+                }
+            }
 
-		}
+            else if (GameManager.getGameState == GameState.CreateMenu)
+            {
+                plusTitle.fontSize = fontSize;
+            }
+//Fire
+            if (fireTextRect.Contains(mousePos))
+            {
+                fireTitle.fontSize = 70;
+                if (Input.GetMouseButtonUp(0))
+                {
+                }
+            }
+            else if (GameManager.getGameState == GameState.CreateMenu)
+            {
+                fireTitle.fontSize = fontSize;
+            }
+//Settings
+            if (settingsTextRect.Contains(mousePos))
+            {
+                settingsTitle.fontSize = 70;
+                if (Input.GetMouseButtonUp(0))
+                {
+                }
+            }
+            else if (GameManager.getGameState == GameState.CreateMenu)
+            {
+                settingsTitle.fontSize = fontSize;
+            }
+//Save
+            if (saveTextRect.Contains(mousePos))
+            {
+                saveTitle.fontSize = 70;
+                if (Input.GetMouseButtonUp(0))
+                {
+                }
+            }
+            else if (GameManager.getGameState == GameState.CreateMenu)
+            {
+                saveTitle.fontSize = fontSize;
+            }
+//Quit
+
+            if (backIconRect.Contains(mousePos))
+            {
+                if (Input.GetMouseButtonUp(0))
+                {
+                    GameManager.SetGameState(GameState.MainMenu);
+                }
+            }
+            else if (GameManager.getGameState == GameState.CreateMenu)
+            {
+            }
+        }
+
 		if (GameManager.getGameState != GameState.MainMenu || GameManager.getGameState != GameState.CreateMenu) {
 			if(homeIconRect.Contains(mousePos))
 			{
@@ -203,6 +284,18 @@ public class BuildMenu : MonoBehaviour {
 		//GUI.Box(playButtonRect, "Play");
 		//GUI.Box(smokeButtonRect, "Smoke");
 		//GUI.Box(homeIconRect, "Home");
+        /*GUI.Box(plusIconRect, "PlusIcon");
+        GUI.Box(plusTextRect, "Plus");
+
+        GUI.Box(settingsRect, "settingsIcon");
+        GUI.Box(settingsTextRect, "settingsText");
+
+        GUI.Box(fireIconRect, "fireIcon");
+        GUI.Box(fireTextRect, "fireText");
+
+        GUI.Box(saveIconRect, "saveIcon");
+        GUI.Box(saveTextRect, "saveText");
+        GUI.Box(backIconRect, "saveText");*/
 	}
 
 	private static void Deconstruct() {
@@ -420,8 +513,8 @@ public class BuildMenu : MonoBehaviour {
 
 	public static void BuildCreateMenu() {
 		Deconstruct();
-
-		//Creating Scene Buttons
+        #region createmenu onnodig voor nu
+        //Creating Scene Buttons
 		settingsIcon = new GameObject();
 		fireIcon = new GameObject();
 		plusIcon = new GameObject();
@@ -534,12 +627,79 @@ public class BuildMenu : MonoBehaviour {
 		plusIcon.transform.localScale = new Vector3(0,0,1);
 		saveIcon.transform.localScale = new Vector3(0,0,1);
 		backIcon.transform.localScale = new Vector3(0,0,1);
+        #endregion
+
+        //Rect
+        //PlusIcon
+        plusTextRect = new Rect(50,
+            (Screen.height - plusTitle.GetScreenRect().yMax + 14),
+            plusTitle.GetScreenRect().width,
+            fontSize - 20);
+
+        plusIconRect = new Rect(plusTexture.GetScreenRect().xMin,
+            Screen.height - plusTexture.GetScreenRect().yMax,
+            plusTexture.GetScreenRect().width,
+            plusTexture.GetScreenRect().height);
+
+        //FireIcon
+        fireTextRect = new Rect(50, 
+            (Screen.height - fireTitle.GetScreenRect().yMax + 14),
+            fireTitle.GetScreenRect().width, 
+            fontSize - 20);
+        
+        fireIconRect = new Rect(fireTexture.GetScreenRect().xMin,
+            Screen.height - fireTexture.GetScreenRect().yMax,
+            fireTexture.GetScreenRect().width,
+            fireTexture.GetScreenRect().height);
+
+        //SettingsIcon
+        settingsTextRect = new Rect(50,
+            (Screen.height - settingsTitle.GetScreenRect().yMax + 14),
+            settingsTitle.GetScreenRect().width,
+            fontSize - 20);
+
+        settingsRect = new Rect(settingsTexture.GetScreenRect().xMin,
+            Screen.height - settingsTexture.GetScreenRect().yMax,
+            settingsTexture.GetScreenRect().width,
+            settingsTexture.GetScreenRect().height);
+
+        //SaveIcon
+        saveTextRect = new Rect(50,
+            (Screen.height - saveTitle.GetScreenRect().yMax + 14),
+            saveTitle.GetScreenRect().width,
+            fontSize - 20);
+
+        saveIconRect = new Rect(saveTexture.GetScreenRect().xMin,
+            Screen.height - saveTexture.GetScreenRect().yMax,
+            saveTexture.GetScreenRect().width,
+            saveTexture.GetScreenRect().height);
+
+        //Backicon
+        backIconRect = new Rect(backTexture.GetScreenRect().xMin,
+            Screen.height - backTexture.GetScreenRect().yMax,
+            backTexture.GetScreenRect().width,
+            backTexture.GetScreenRect().height);
+        //Left Top Width Height
+        
 	}
 	
 	private static void DeconstructCreateMenu() {
 		for (int i = 0; i < Objects.Count; i++) {
 			Destroy(Objects[i]);	
 		}
+
+        backIconRect = new Rect();
+        saveIconRect = new Rect();
+        fireIconRect = new Rect();
+        settingsRect = new Rect();
+        plusIconRect = new Rect();
+
+        saveTextRect = new Rect();
+        fireTextRect = new Rect();
+        settingsTextRect = new Rect();
+        plusTextRect = new Rect();
+
+        
     }
 
     public static void BuildConnectMenu() {
