@@ -76,8 +76,6 @@ public class BuildMenu : MonoBehaviour {
 	private static GUITexture backTexture;
 	private static Texture2D backImage;
 	private static GUIText backTitle;
-
-
 	#endregion
 
 	private static float nativeWidth = 1280;
@@ -276,6 +274,7 @@ public class BuildMenu : MonoBehaviour {
 		companyName = company.GetComponent<GUIText>();
 		
 		companyTexture = companylogo.GetComponent<GUITexture>();
+
 		
 		companyTexture.texture = companyIcon;
 
