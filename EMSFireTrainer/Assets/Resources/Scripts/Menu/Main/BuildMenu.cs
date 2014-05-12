@@ -83,14 +83,10 @@ public class BuildMenu : MonoBehaviour {
 	private static GameObject backIcon;
 	private static GUITexture backTexture;
 	private static Texture2D backImage;
-<<<<<<< HEAD
 	private static GUIText backTitle;
-=======
-    private static GUIText backTitle;
     private static Rect backIconRect;
 
 
->>>>>>> FETCH_HEAD
 	#endregion
 
 	private static float nativeWidth = 1280;
@@ -198,7 +194,8 @@ public class BuildMenu : MonoBehaviour {
 
         if (GameManager.getGameState == GameState.CreateMenu)
         {
-//Plus
+//Plus      
+            GameObject FPM = GameObject.Find("Settings_Icon");
             if (plusTextRect.Contains(mousePos))
             {
                 plusTitle.fontSize = 70;
@@ -217,11 +214,23 @@ public class BuildMenu : MonoBehaviour {
                 fireTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
+                    FPM.GetComponent<Fire_Property_Menu>().createTopBar() ;
                 }
             }
             else if (GameManager.getGameState == GameState.CreateMenu)
             {
                 fireTitle.fontSize = fontSize;
+            }
+
+            if (fireIconRect.Contains(mousePos))
+            {
+                if (Input.GetMouseButtonUp(0))
+                {
+                    FPM.GetComponent<Fire_Property_Menu>().createTopBar();
+                }
+            }
+            else if (GameManager.getGameState == GameState.CreateMenu)
+            {
             }
 //Settings
             if (settingsTextRect.Contains(mousePos))
@@ -520,6 +529,8 @@ public class BuildMenu : MonoBehaviour {
 		plusIcon = new GameObject();
 		saveIcon = new GameObject();
 		backIcon = new GameObject();
+
+        settingsIcon.AddComponent<Fire_Property_Menu>();
 
 		Objects.AddMany(settingsIcon, fireIcon, plusIcon, saveIcon, backIcon);
             
