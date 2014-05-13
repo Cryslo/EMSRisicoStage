@@ -157,10 +157,10 @@ public class FolderBuilder : MonoBehaviour {
 			//GUI.Box(scrollPanel, "");
 			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
 				if(boxesDirectoryBox[i].BoxNumber != 0)
-					GUI.Box(boxesDirectoryBox[i].BoxCollider, boxesDirectoryBox[i].DirectoryName);
+					//GUI.Box(boxesDirectoryBox[i].BoxCollider, boxesDirectoryBox[i].DirectoryName);
 				if(boxesDirectoryBox[i].DeleteRect != null)
 				{
-					GUI.Box(boxesDirectoryBox[i].DeleteRect, "Deleted");
+					//GUI.Box(boxesDirectoryBox[i].DeleteRect, "Deleted");
 				}
 			}
 		}

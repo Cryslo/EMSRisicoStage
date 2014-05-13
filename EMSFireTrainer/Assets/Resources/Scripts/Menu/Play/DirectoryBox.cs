@@ -7,16 +7,18 @@ public class DirectoryBox {
 	#region Variables
 	private FolderBuilder folderBuilder;
 	private FolderManager folderManager;
+	private Camera mainCamera;
+
+	private GameObject parent;
 
 	private GameObject folderBox;
-	private GameObject parent;
-	private GUITexture backgroundTexture;
-	public Texture2D backgroundImage;
+	private Texture2D backgroundImage;
+	private Sprite backgroundSprite;
+	private SpriteRenderer backgroundRenderer;
+	private BoxCollider2D folderBoxCollider;
 
+	private Material folderMaterial;
 
-
-
-	
 	private string directoryName;
 	private string directorNumber;
 	
@@ -139,44 +141,50 @@ public class DirectoryBox {
 	#endregion
 	
 	// Use this for initialization
-	public void Setup () {		
-		deleteImage = Resources.Load("Icons/Play_Icons/Delete") as Texture2D;
-
+	public void Setup () {	
+		mainCamera = GameObject.Find("Main Camera").camera;
 		columns = 3;
-
+		
 		width = Screen.width / 5;
 		height = Screen.height / 5;
-
+		
 		boxX = (Screen.width - ((width * columns) - width * x));
 		boxY = (Screen.height - (height + (height * y)));
 		TestY = (height * y);
 
+		deleteImage = Resources.Load("Icons/Play_Icons/Delete") as Texture2D;
+		folderMaterial = Resources.Load("Materials/BackgroundGrayscale") as Material;
+
+		backgroundSprite = new Sprite();
+		backgroundImage = folderManager.GetBackgroundsByName("1");
+		backgroundSprite = Sprite.Create(backgroundImage, new Rect(0,0,backgroundImage.width, backgroundImage.height), new Vector2(0, 0),100.0f);
+
 		folderBox = new GameObject(directoryName);
 		folderBox.transform.parent = parent.transform;
+		backgroundRenderer = folderBox.AddComponent<SpriteRenderer>();
+		backgroundRenderer.sprite = backgroundSprite;
+		backgroundRenderer.material = folderMaterial;
+		folderBoxCollider = folderBox.AddComponent<BoxCollider2D>();
 
+		float swidth = backgroundRenderer.sprite.bounds.size.x;
+		float sheight = backgroundRenderer.sprite.bounds.size.y;
+		
+		float worldScreenHeight = Camera.main.orthographicSize * 2.0f / 5;
+		float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
+		
+		folderBox.transform.localScale = new Vector3(worldScreenWidth / swidth,worldScreenHeight / sheight,1);
 
-		//folderBox.transform.localScale = new Vector3(0,0,1);
-		//folderBox.AddComponent<GUITexture>();
-		//backgroundTexture = folderBox.GetComponent<GUITexture>();
-		//backgroundTexture.texture = backgroundImage;
-		//backgroundTexture.pixelInset = new Rect(boxX,boxY,width,height);
-		//homeIconRect = new Rect(50,50, 19, 36);
-
-
+		folderBox.transform.position = mainCamera.ScreenToWorldPoint(new Vector3((mainCamera.pixelWidth) - ((width * columns) - width * x), (mainCamera.pixelHeight - height) - (height * y), 1));
 
 		boxCollider = new Rect(boxX, TestY,width,height);
 		Debug.Log("Backgrounds/" + BoxNumber);
-			backgroundImage = Resources.Load("Backgrounds/" + BoxNumber) as Texture2D;
-			backgroundTexture.texture = backgroundImage;
 
 	}
 	
 	public void Update()
 	{
-		Vector2 mousePos = new Vector2(Input.mousePosition.x,Screen.height - Input.mousePosition.y); 
-
-		backgroundTexture.pixelInset = new Rect(boxX,boxY,width,height);
-		boxCollider = new Rect(boxX, TestY ,width,height);
+		Vector2 mousePos = new Vector2(Input.mousePosition.x,Screen.height - Input.mousePosition.y);
+		RaycastHit2D = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
 		if(deleteIcon != null)
 		{
