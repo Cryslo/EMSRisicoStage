@@ -12,6 +12,10 @@ public class DirectoryBox {
 	private GameObject parent;
 	private GUITexture backgroundTexture;
 	public Texture2D backgroundImage;
+
+
+
+
 	
 	private string directoryName;
 	private string directorNumber;
@@ -135,12 +139,11 @@ public class DirectoryBox {
 	#endregion
 	
 	// Use this for initialization
-	public void Setup () {
-		backgroundImage = Resources.Load("Sprites/Folder") as Texture2D;
-		
-		deleteImage = Resources.Load("Icons/Delete") as Texture2D;
+	public void Setup () {		
+		deleteImage = Resources.Load("Icons/Play_Icons/Delete") as Texture2D;
 
 		columns = 3;
+
 		width = Screen.width / 5;
 		height = Screen.height / 5;
 
@@ -148,14 +151,15 @@ public class DirectoryBox {
 		boxY = (Screen.height - (height + (height * y)));
 		TestY = (height * y);
 
-		folderBox = new GameObject();
-		folderBox.name = directoryName;
+		folderBox = new GameObject(directoryName);
 		folderBox.transform.parent = parent.transform;
-		folderBox.transform.localScale = new Vector3(0,0,1);
-		folderBox.AddComponent<GUITexture>();
-		backgroundTexture = folderBox.GetComponent<GUITexture>();
-		backgroundTexture.texture = backgroundImage;
-		backgroundTexture.pixelInset = new Rect(boxX,boxY,width,height);
+
+
+		//folderBox.transform.localScale = new Vector3(0,0,1);
+		//folderBox.AddComponent<GUITexture>();
+		//backgroundTexture = folderBox.GetComponent<GUITexture>();
+		//backgroundTexture.texture = backgroundImage;
+		//backgroundTexture.pixelInset = new Rect(boxX,boxY,width,height);
 		//homeIconRect = new Rect(50,50, 19, 36);
 
 

@@ -102,14 +102,14 @@ public class BuildMenu : MonoBehaviour {
 		fontSize = 90;
 
 		//Init Textures
-		homeIcon = Resources.Load("Icons/previous-36") as Texture2D;
-		companyIcon = Resources.Load("Icons/ISCRisk-36") as Texture2D;
-		backgroundImage = Resources.Load("Backgrounds/Orange") as Texture2D;
-		settingsImage = Resources.Load("Icons/SettingsIcon") as Texture2D;
-		fireImage = Resources.Load("Icons/FireIcon") as Texture2D;
-		plusImage = Resources.Load("Icons/PlusIcon") as Texture2D;
-		saveImage = Resources.Load("Icons/SaveIcon") as Texture2D;
-		backImage = Resources.Load("Icons/CrossIcon") as Texture2D;
+		homeIcon = Resources.Load("Icons/Play_Icons/previous-36") as Texture2D;
+		companyIcon = Resources.Load("Icons/Company_Icons/ISCRisk-36") as Texture2D;
+		backgroundImage = Resources.Load("Backgrounds/MenuBackgrounds/Orange") as Texture2D;
+		settingsImage = Resources.Load("Icons/Create_Icons/SettingsIcon") as Texture2D;
+		fireImage = Resources.Load("Icons/Create_Icons/FireIcon") as Texture2D;
+		plusImage = Resources.Load("Icons/Create_Icons/PlusIcon") as Texture2D;
+		saveImage = Resources.Load("Icons/Create_Icons/SaveIcon") as Texture2D;
+		backImage = Resources.Load("Icons/Create_Icons/CrossIcon") as Texture2D;
 
 
 		background = new GameObject();
@@ -315,7 +315,7 @@ public class BuildMenu : MonoBehaviour {
 
 		#region BuildMenu
 		
-		backgroundImage = Resources.Load("Backgrounds/Orange") as Texture2D;
+		backgroundImage = Resources.Load("Backgrounds/MenuBackgrounds/Orange") as Texture2D;
 		backgroundTexture.texture = backgroundImage;
 		
 		fontSize = 90;
@@ -464,7 +464,7 @@ public class BuildMenu : MonoBehaviour {
 
 		FolderBuilder.instance.OpenLoading();
 
-		backgroundImage = Resources.Load("Backgrounds/Green") as Texture2D;
+		backgroundImage = Resources.Load("Backgrounds/MenuBackgrounds/Green") as Texture2D;
 		backgroundTexture.texture = backgroundImage;
 
 		homeButton = new GameObject();
@@ -557,7 +557,7 @@ public class BuildMenu : MonoBehaviour {
 	    backTitle.text = "BACK";
 
 		//Background
-		backgroundImage = Resources.Load("Backgrounds/Yellow") as Texture2D;
+		backgroundImage = Resources.Load("Backgrounds/MenuBackgrounds/Yellow") as Texture2D;
 		backgroundTexture.texture = backgroundImage;
 
 		//position
