@@ -80,7 +80,6 @@ public class FolderBuilder : MonoBehaviour {
 				{
 					Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
 					RaycastHit hit;
-						Debug.Log("Test");
 					startpointX = Input.mousePosition.x;
 					startpointY = Input.mousePosition.y;
 					for (int i = 0; i < boxesDirectoryBox.Count; i++) {
@@ -301,11 +300,6 @@ public class FolderBuilder : MonoBehaviour {
 		folderOpen = false;
 		rebuildFolderArray ();
 		return true;
-	}
-	public void unselect() {
-		for (int i = 0; i < boxesDirectoryBox.Count; i++) {
-			boxesDirectoryBox[i].Unselect();
-		}
 	}
 	
 	public bool OpenLoading()

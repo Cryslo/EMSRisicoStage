@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Background Grayscale
-  m_Shader: {fileID: 4800000, guid: 0cf11049473ec46e6bdaf85550ac40f1, type: 3}
+  m_Name: BackgroundGrayscale
+  m_Shader: {fileID: 4800000, guid: b746afb24be90490992cbd6bf6379653, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
