@@ -83,22 +83,14 @@ public class BuildMenu : MonoBehaviour {
 	private static GameObject backIcon;
 	private static GUITexture backTexture;
 	private static Texture2D backImage;
-<<<<<<< HEAD
 	private static GUIText backTitle;
-=======
-    private static GUIText backTitle;
     private static Rect backIconRect;
-
-
->>>>>>> FETCH_HEAD
 	#endregion
 
 	private static float nativeWidth = 1280;
 	private static float nativeHeight = 720;
 	private static Matrix4x4 test;
-
-	public Vector3 test1;
-	public Rect test2;
+	
 
 	void Awake() {
 		folderBuilder = gameObject.GetComponent<FolderBuilder>();
