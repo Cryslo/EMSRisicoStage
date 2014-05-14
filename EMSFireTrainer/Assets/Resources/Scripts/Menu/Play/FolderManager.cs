@@ -134,7 +134,7 @@ public class FolderManager : MonoBehaviour
 		FileInfo[] directoryItems = SelectedFolder.GetFiles();
 		foreach(FileInfo Item in directoryItems)
 		{
-			if(Item.Name != ".DS_Store")
+			if(Item.Name != ".DS_Store")	
 			{
 				TempScenes.Add(Item);
 			}
