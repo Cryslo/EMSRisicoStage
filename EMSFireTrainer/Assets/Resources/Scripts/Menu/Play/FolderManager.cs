@@ -133,7 +133,12 @@ public class FolderManager : MonoBehaviour
 		
 		FileInfo[] directoryItems = SelectedFolder.GetFiles();
 		foreach(FileInfo Item in directoryItems)
-			TempScenes.Add(Item);
+		{
+			if(Item.Name != ".DS_Store")
+			{
+				TempScenes.Add(Item);
+			}
+		}
 		
 		return TempScenes;
 	}
@@ -142,6 +147,7 @@ public class FolderManager : MonoBehaviour
 	{
 		List<FileInfo> TempScenes = new List<FileInfo>();
 		TempScenes = GetScenesByName(FolderName);
+
 		if(TempScenes.Count != 0)
 		{
 			return TempScenes[0].Name;
@@ -300,9 +306,10 @@ public class FolderManager : MonoBehaviour
 	public Texture2D GetBackgroundsByName(string name)
 	{
 		Texture2D tempTexture = new Texture2D(0, 0);
+
+		Debug.Log(name.Remove(name.Length - 4));
 		
-		
-		tempTexture.LoadImage(File.ReadAllBytes(savedBackgroundsPath + "/" + name + ".jpg"));
+		tempTexture.LoadImage(File.ReadAllBytes(savedBackgroundsPath + "/" + name.Remove(name.Length - 4) + ".jpg"));
 		
 		return tempTexture;
 	}

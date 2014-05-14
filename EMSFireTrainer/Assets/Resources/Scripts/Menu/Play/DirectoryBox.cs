@@ -18,6 +18,7 @@ public class DirectoryBox
     private GameObject folderIcon;
     private Texture2D folderIconImage;
     private SpriteRenderer folderIconRenderer;
+	private BoxCollider2D folderIconCollider;
     private Material folderMaterial;
     private string directoryName;
     private string directorNumber;
@@ -29,7 +30,7 @@ public class DirectoryBox
   #endif
     string newName;
     private float timer;
-    private float timerPoint = 3f;
+    private float timerPoint = 2f;
     private float x;
     private float y;
     private float boxX;
@@ -182,7 +183,8 @@ public class DirectoryBox
         
         if(boxNumber != 0 && !fileMode)
         {
-			string test = "";
+			Debug.Log(folderManager.GetFirstSceneByFolderName(directoryName));
+
 			if(folderManager.GetFirstSceneByFolderName(directoryName) == "" || folderManager.GetFirstSceneByFolderName(directoryName) == ".DS_Store")
 			{
 				emptyFolder = true;
@@ -193,7 +195,7 @@ public class DirectoryBox
 			}else{
 				Debug.Log(folderManager.GetFirstSceneByFolderName(directoryName));
 				backgroundImage = folderManager.GetBackgroundsByName(folderManager.GetFirstSceneByFolderName(directoryName));
-				backgroundRenderer.material = folderMaterial;
+				//backgroundRenderer.material = folderMaterial;
 				backgroundSprite = Sprite.Create(backgroundImage, new Rect(0, 0, backgroundImage.width, backgroundImage.height), new Vector2(0.5f, 0.5f), 100.0f);
 				backgroundRenderer.sprite = backgroundSprite;
 			}
@@ -283,6 +285,9 @@ public class DirectoryBox
 							folderIconImage = Resources.Load<Texture2D>("Icons/Play_Icons/FolderCross");
 							folderIconRenderer.sprite = Sprite.Create(folderIconImage, new Rect(0, 0, folderIconImage.width, folderIconImage.height), new Vector2(0.5f, 0.5f), 100.0f);
 							folderIcon.transform.localPosition = new Vector3();
+							if(folderIconCollider == null)
+								folderIconCollider = folderIcon.AddComponent<BoxCollider2D>();
+
 						}
                     }
                 }
@@ -319,8 +324,15 @@ public class DirectoryBox
 							folderIconImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolder");
 							folderIconRenderer.sprite = Sprite.Create(folderIconImage, new Rect(0, 0, folderIconImage.width, folderIconImage.height), new Vector2(0.5f, 0.5f), 100.0f);
 							folderIcon.transform.localPosition = new Vector3();
+						}else{
+							folderIconRenderer.sprite = null;
 						}
+
 						backgroundRenderer.sprite = backgroundSprite;
+						if(folderIconCollider != null)
+						{
+							Component.Destroy(folderIconCollider);
+						}
 					}
 				}
 			}
