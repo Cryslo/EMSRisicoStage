@@ -40,18 +40,18 @@ public class Fire_Property_Menu : MonoBehaviour
             }
             if (Input.GetMouseButton(0))
             {
-                if (hP.x <= absoluteMinX && Input.GetAxis("Mouse X") > 0)
+                Vector3 v = new Vector3(startX - (startpointX - ray.origin.x), topBar_Holder.transform.position.y, topBar_Holder.transform.position.z);
+                if(v.x >= absoluteMinX && v.x <= absoluteMaxX)
                 {
-                    topBar_Holder.transform.position = new Vector3(absoluteMinX, hP.y, hP.z);
-                }
-                if (hP.x >= absoluteMaxX && Input.GetAxis("Mouse X") < 0)
-                {
-                    topBar_Holder.transform.position = new Vector3(absoluteMaxX, hP.y, hP.z);
-                }
-                else if(hP.x >= absoluteMinX && hP.x <= absoluteMaxX)
-                {
-                    Vector3 v = new Vector3(startX - (startpointX - ray.origin.x), topBar_Holder.transform.position.y, topBar_Holder.transform.position.z);
                     topBar_Holder.transform.position = v;
+                }
+                else if (v.x <= absoluteMinX && Input.GetAxis("Mouse X") < 0)
+                {
+                    v = new Vector3(absoluteMinX, hP.y, hP.z);
+                }
+                else if (v.x >= absoluteMaxX && Input.GetAxis("Mouse X") > 0)
+                {
+                    v = new Vector3(absoluteMaxX, hP.y, hP.z);
                 }
             }
             if (Input.GetMouseButtonUp(0))
@@ -77,7 +77,7 @@ public class Fire_Property_Menu : MonoBehaviour
             for (int i = 0; i < number; i++)
             {
                 topBar_Script = new TopBar_Script();
-                topBar_Script.AddBar(camera.ScreenToWorldPoint(new Vector3(i * Screen.width / 4, camera.pixelHeight, 10)), i, topBar_Holder);
+                topBar_Script.AddBar(camera.ScreenToWorldPoint(new Vector3(i * Screen.width / 4, camera.pixelHeight, 10)), i, topBar_Holder, "NEIN");
             }
             float pixelRatio = (camera.orthographicSize * 2) / camera.pixelHeight;
             BoxCollider2D a = GameObject.Find("TopBar_0").GetComponent<BoxCollider2D>();
@@ -98,7 +98,7 @@ public class Fire_Property_Menu : MonoBehaviour
     {
         if (topBar_Script != null)
         {
-            GUI.Box(scrollArea, "Collider");
+                //GUI.Box(scrollArea, "Collider");
         }
     }
 
