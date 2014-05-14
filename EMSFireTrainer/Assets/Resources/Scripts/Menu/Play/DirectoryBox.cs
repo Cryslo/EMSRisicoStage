@@ -46,6 +46,9 @@ public class DirectoryBox
     private GUITexture deleteTexture;
     private Texture2D deleteImage;
     private Rect deleteRect;
+	private bool moveMode;
+	private bool emptyFolder;
+	private int exampleFolders;
   #endregion
   
   #region Porperties
@@ -156,8 +159,10 @@ public class DirectoryBox
   
     // Use this for initialization
     public void Setup()
-    { 
+    {
         mainCamera = GameObject.Find("Main Camera").camera;
+		exampleFolders = 
+
         columns = 3;
     
         width = Screen.width / 5;
@@ -175,11 +180,12 @@ public class DirectoryBox
         folderBox.transform.parent = parent.transform;
         backgroundRenderer = folderBox.AddComponent<SpriteRenderer>();
         
-        if(boxNumber != 0)
+        if(boxNumber != 0 && !fileMode)
         {
 			string test = "";
 			if(folderManager.GetFirstSceneByFolderName(directoryName) == "" || folderManager.GetFirstSceneByFolderName(directoryName) == ".DS_Store")
 			{
+				emptyFolder = true;
 				backgroundImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolderBg");
 				folderIconImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolder");
 				backgroundSprite = Sprite.Create(backgroundImage, new Rect(0, 0, backgroundImage.width, backgroundImage.height), new Vector2(0.5f, 0.5f), 100.0f);
@@ -192,8 +198,20 @@ public class DirectoryBox
 				backgroundRenderer.sprite = backgroundSprite;
 			}
            
-        } else
+		}else if(boxNumber != 0 && fileMode)
 		{
+			if(directoryName != ".DS_Store")
+			{
+				backgroundImage = folderManager.GetBackgroundsByName(directoryName);
+				//backgroundRenderer.material = folderMaterial;
+				backgroundSprite = Sprite.Create(backgroundImage, new Rect(0, 0, backgroundImage.width, backgroundImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+				backgroundRenderer.sprite = backgroundSprite;
+			} else {
+				backgroundImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolderBg");
+				backgroundSprite = Sprite.Create(backgroundImage, new Rect(0, 0, backgroundImage.width, backgroundImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+				backgroundRenderer.sprite = backgroundSprite;
+			}
+		} else {
 			backgroundImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolderBg");
             backgroundSprite = Sprite.Create(backgroundImage, new Rect(0, 0, backgroundImage.width, backgroundImage.height), new Vector2(0.5f, 0.5f), 100.0f);
             backgroundRenderer.sprite = backgroundSprite;
@@ -259,56 +277,61 @@ public class DirectoryBox
                     timer += 1 * Time.deltaTime;
                     if(timer > timerPoint)
                     {
-                        if(GameObject.Find("Delete_Icon") == null)
-                        {
-                            Debug.Log(folderBox.name);
-                            deleteIcon = new GameObject();
-              
-                            deleteIcon.name = "Delete_Icon";
-              
-                            //Give Buttons the right components
-                            deleteIcon.AddComponent<GUITexture>();
-              
-                            deleteIcon.transform.localScale = new Vector3(0, 0, 1);
-              
-                            //Select the Components a variable
-                            deleteTexture = deleteIcon.GetComponent<GUITexture>();
-              
-                            deleteTexture.texture = deleteImage;
-              
-                            deleteTexture.pixelInset = new Rect(boxX + ((width / 2) - (76 / 2)), boxY + ((height / 2) - (86 / 2)), 76, 86);
-                            deleteRect = new Rect(boxX + ((width / 2) - (76 / 2)), TestY + ((height / 2) - (86 / 2)), 76, 86);
-                        }
+						if(boxNumber != 0)
+						{
+							moveMode = true;
+							folderIconImage = Resources.Load<Texture2D>("Icons/Play_Icons/FolderCross");
+							folderIconRenderer.sprite = Sprite.Create(folderIconImage, new Rect(0, 0, folderIconImage.width, folderIconImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+							folderIcon.transform.localPosition = new Vector3();
+						}
                     }
                 }
                 #endregion
             }
             if(Input.GetMouseButtonUp(0))
             {
-                if(boxNumber == 0)
-                {
-                    if(!fileMode)
-                        DirectoryCreate();
-                    else
-                        DirectoryBack();
-                } else
-                {
-                    DirectoryClick();
-                }
+				if(!moveMode)
+				{
+					if(boxNumber == 0 )
+	                {
+	                    if(!fileMode)
+	                        DirectoryCreate();
+	                    else
+	                        DirectoryBack();
+	                } else
+	                {
+	                    DirectoryClick();
+	                }
+				} else {
+
+				}
             }
-        }
+        } else {
+			if(moveMode)
+			{
+
+				if(Input.GetMouseButtonUp(0))
+				{
+					if(boxNumber != 0)
+					{
+						if(emptyFolder)
+						{
+							folderIconImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolder");
+							folderIconRenderer.sprite = Sprite.Create(folderIconImage, new Rect(0, 0, folderIconImage.width, folderIconImage.height), new Vector2(0.5f, 0.5f), 100.0f);
+							folderIcon.transform.localPosition = new Vector3();
+						}
+						backgroundRenderer.sprite = backgroundSprite;
+					}
+				}
+			}
+		}
 
         if(deleteIcon != null)
         {
             if(deleteIcon.name == "Delete_Icon")
             {
-                deleteTexture.pixelInset = new Rect(boxX + ((width / 2) - (76 / 2)), boxY + ((height / 2) - (86 / 2)), 76, 86);
-                deleteRect = new Rect(boxX + ((width / 2) - (76 / 2)), TestY + ((height / 2) - (86 / 2)), 76, 86);
-
                 if(Input.GetMouseButtonDown(0) && !boxCollider.Contains(mousePos))
                 {
-                    deleteRect = new Rect();
-                    folderBuilder.DeleteObject(deleteIcon);
 
                 }
                 if(Input.GetMouseButtonDown(0) && deleteRect.Contains(mousePos))

@@ -129,7 +129,7 @@ public class FolderManager : MonoBehaviour
 		} else {
 			SelectedFolder = new DirectoryInfo(exampleDirectoryFolder.FullName + "/" + FolderName);
 		}
-		
+		//print(FolderName);
 		
 		FileInfo[] directoryItems = SelectedFolder.GetFiles();
 		foreach(FileInfo Item in directoryItems)
