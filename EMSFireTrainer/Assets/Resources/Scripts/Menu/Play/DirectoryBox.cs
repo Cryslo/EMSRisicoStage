@@ -188,7 +188,10 @@ public class DirectoryBox
 		folderIconRenderer.sortingOrder = 1;
 		if(boxNumber == 0)
 		{
-			folderIconImage = Resources.Load<Texture2D>("Icons/Create_Icons/PlusIcon");
+			if(fileMode)
+				folderIconImage = Resources.Load<Texture2D>("Icons/Create_Icons/Folderback");
+			else
+				folderIconImage = Resources.Load<Texture2D>("Icons/Create_Icons/PlusIcon");
 			folderIconRenderer.sprite = Sprite.Create(folderIconImage, new Rect(0, 0, folderIconImage.width, folderIconImage.height), new Vector2(0.5f, 0.5f), 100.0f);
 		}
 		folderIcon.transform.localPosition = new Vector3();//mainCamera.ScreenToWorldPoint(new Vector3((mainCamera.pixelWidth) - ((width * columns) - width * x), (mainCamera.pixelHeight - height) - (height * y), 1));
