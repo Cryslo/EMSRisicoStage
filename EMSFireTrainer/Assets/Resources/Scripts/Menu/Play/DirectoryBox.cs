@@ -188,10 +188,11 @@ public class DirectoryBox
 			if(folderManager.GetFirstSceneByFolderName(directoryName) == "" || folderManager.GetFirstSceneByFolderName(directoryName) == ".DS_Store")
 			{
 				emptyFolder = true;
-				backgroundImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolderBg");
+				//backgroundImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolderBg");
 				folderIconImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolder");
 				backgroundSprite = Sprite.Create(backgroundImage, new Rect(0, 0, backgroundImage.width, backgroundImage.height), new Vector2(0.5f, 0.5f), 100.0f);
 				backgroundRenderer.sprite = backgroundSprite;
+				backgroundRenderer.color = new Color(0,0,0,0);
 			}else{
 				Debug.Log(folderManager.GetFirstSceneByFolderName(directoryName));
 				backgroundImage = folderManager.GetBackgroundsByName(folderManager.GetFirstSceneByFolderName(directoryName));
@@ -231,7 +232,7 @@ public class DirectoryBox
         folderBox.transform.localScale = new Vector3(worldScreenWidth / swidth, worldScreenHeight / sheight, 1);
 
         folderBox.transform.position = mainCamera.ScreenToWorldPoint(new Vector3((mainCamera.pixelWidth + (width / 2)) - ((width * columns) - width * x ), (mainCamera.pixelHeight - (height / 2)) - (height * y) - 1, 1));
-		folderBox.transform.position = folderBox.transform.position + new Vector3(0.02f, 0.02f,0);
+		//folderBox.transform.position = folderBox.transform.position + new Vector3(0.02f, 0.02f,0);
 
         //Folder icon
         folderIcon = new GameObject("FolderIcon");
