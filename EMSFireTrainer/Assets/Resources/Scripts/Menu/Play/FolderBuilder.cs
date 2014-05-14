@@ -143,7 +143,10 @@ public class FolderBuilder : MonoBehaviour {
 		//buildedFileArray.Add (CreateFolder);
 		
 		foreach (FileInfo file in folderManager.GetScenesByName(FolderName))
-			buildedFileArray.Add (file);
+		{
+			if(file.Name != ".DS_Store")
+			   buildedFileArray.Add (file);
+		}
 		
 		Debug.Log("Build Files: " + buildedFileArray.Count);
 		rebuildGUI ();
@@ -270,12 +273,12 @@ public class FolderBuilder : MonoBehaviour {
 				directoryBox.Parent = Folders;
 				
 				directoryBox.DirectorNumber = number.ToString ();
-				directoryBox.DirectoryName = buildedFileArray [i].Name;
-				
+				directoryBox.DirectoryName = buildedFileArray[i].Name;
+				print( buildedFileArray[i].Name);
 				directoryBox.FileMode = true;
 				
-				directoryBox.X = directoryBox.X = (i - (i / columns) * columns);   
-				directoryBox.Y = directoryBox.Y = (i / columns);
+				directoryBox.X = directoryBox.X = (number - (number / columns) * columns);   
+				directoryBox.Y = directoryBox.Y = (number / columns);
 				//directoryBox.X = (((Mathf.Round((number)/2))) * finalDirectoryWidth) + (finalDirectoryWidth / 2);
 				//directoryBox.Y = ((Screen.height - (finalDirectoryWidth * 2)) - ((2 - ((int)(((number)%2)) + 1f) * finalDirectoryWidth ) + (finalDirectoryHight /2)));
 				directoryBox.BoxNumber = number;
