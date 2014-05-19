@@ -32,7 +32,7 @@ public class TopBar_Script {
 
         Topbar.transform.localScale = new Vector3(worldScreenWidth / width, 1, 1);
         AddFire(i, Topbar);
-        Topbar.AddComponent<BoxCollider2D>();
+        //Topbar.AddComponent<BoxCollider2D>();
     }
 
     private void AddFire(int i, GameObject parent)
