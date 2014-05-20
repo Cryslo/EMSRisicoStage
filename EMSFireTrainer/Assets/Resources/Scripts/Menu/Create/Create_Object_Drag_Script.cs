@@ -25,12 +25,15 @@ namespace BlusSimulator
 
         public void Create_ObjectMenu()
         {
-            //camera = GameObject.Find("Main Camera").camera;
+            
         }
-
+        void Start()
+        {
+            camera = GameObject.Find("Main Camera").camera;
+        }
         private void Update()
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePos = camera.ScreenToWorldPoint(Input.mousePosition);
             if (Input.GetMouseButtonDown(0))
             {
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
@@ -48,7 +51,7 @@ namespace BlusSimulator
             {
                 if (obj)
                 {
-                    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    Ray ray = camera.ScreenPointToRay(Input.mousePosition);
                     obj.position = new Vector3(ray.origin.x - offset.x, ray.origin.y - offset.y, obj.position.z);
                 }
             }

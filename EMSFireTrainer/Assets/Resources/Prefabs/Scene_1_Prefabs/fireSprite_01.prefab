@@ -27,7 +27,11 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -20.3567238, y: 3.1913619, z: 0}
+<<<<<<< HEAD
   m_LocalScale: {x: .925733626, y: .617155731, z: 1}
+=======
+  m_LocalScale: {x: .92592591, y: .61728394, z: 1}
+>>>>>>> FETCH_HEAD
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!61 &6100000
@@ -50,7 +54,7 @@ Animator:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ce0ddd53b89d90e43848c902d5bb7321, type: 2}
+  m_Controller: {fileID: 9100000, guid: 938b03f7c2a679c41828028d6a51f75e, type: 2}
   m_CullingMode: 0
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
@@ -63,7 +67,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cfc4eb9beb51d244abb860da195c7d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d3ae2b44af43d24aa4d5f946aad4629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &21200000
@@ -87,7 +91,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: 457a4f16c606dab4db5c992826047dbb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e2ddc497191d2d47a830003f2deb9ab, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
