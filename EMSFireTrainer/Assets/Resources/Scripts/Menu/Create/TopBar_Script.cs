@@ -9,10 +9,12 @@ public class TopBar_Script {
     private SpriteRenderer topBar_Renderer;
     private GameObject naamText;
     private float scale;
+    private Camera camera;
 
     
     public void AddBar(Vector3 position, int i, GameObject parent, string text)
     {
+        camera = GameObject.Find("Main Camera").camera;
         Topbar = new GameObject("TopBar_" + i);
         Topbar.transform.parent = parent.transform;
         topBar_Sprite = Resources.LoadAll<Sprite>("BackGrounds/TopBar/TopBar");
@@ -27,12 +29,11 @@ public class TopBar_Script {
         float width = topBar_Renderer.sprite.bounds.size.x;
         float height = topBar_Renderer.sprite.bounds.size.y;
 
-        float worldScreenHeight = Camera.main.orthographicSize * 1.0f / 2;
+        float worldScreenHeight = camera.orthographicSize * 1.0f / 2;
         float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
 
         Topbar.transform.localScale = new Vector3(worldScreenWidth / width, 1, 1);
         AddFire(i, Topbar);
-        //Topbar.AddComponent<BoxCollider2D>();
     }
 
     private void AddFire(int i, GameObject parent)

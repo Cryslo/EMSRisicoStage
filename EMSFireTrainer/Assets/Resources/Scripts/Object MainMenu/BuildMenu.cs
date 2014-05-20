@@ -49,6 +49,8 @@ public class BuildMenu : MonoBehaviour
     private static Texture2D homeIcon;
     private static Rect homeIconRect;
 
+    private static GameObject createMenuScriptHolder;
+
     #region Create buttons
     private static int createButtonWidth = 76;
     private static int createButtonHeight = 86;
@@ -214,7 +216,7 @@ public class BuildMenu : MonoBehaviour
         {
             //Plus      
             //Find an object to attach the script to
-            GameObject FPM = GameObject.Find("Settings_Icon");
+            GameObject FPM = GameObject.Find("CreateMenuScriptHolder");
 
 
             if (plusTextRect.Contains(mousePos) && !textClicked)
@@ -629,9 +631,9 @@ public class BuildMenu : MonoBehaviour
         plusIcon = new GameObject();
         saveIcon = new GameObject();
         backIcon = new GameObject();
-
-        settingsIcon.AddComponent<Fire_Select_Bar>();
-
+        createMenuScriptHolder = new GameObject("CreateMenuScriptHolder");
+        createMenuScriptHolder.AddComponent<Fire_Select_Bar>();
+        
         Objects.AddMany(settingsIcon, fireIcon, plusIcon, saveIcon, backIcon);
 
         settingsIcon.name = "Settings_Icon";
@@ -800,6 +802,7 @@ public class BuildMenu : MonoBehaviour
         {
             Destroy(Objects[i]);
         }
+        Destroy(createMenuScriptHolder);
 
         backIconRect = new Rect();
         saveIconRect = new Rect();
