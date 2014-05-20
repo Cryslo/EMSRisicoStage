@@ -8,7 +8,7 @@ using System.IO;
 
 namespace BlusSimulator
 {
-    public class Create_Object_Drag_Script : MonoBehaviour
+    public class Drag_Fire_Script : MonoBehaviour
     {
         Camera camera;
         Transform obj;
@@ -22,6 +22,7 @@ namespace BlusSimulator
         float tempy;
 
         Vector2 mPos;
+        GameObject fireHolder;
 
         public void Create_ObjectMenu()
         {
@@ -30,6 +31,7 @@ namespace BlusSimulator
         void Start()
         {
             camera = GameObject.Find("Main Camera").camera;
+            fireHolder = GameObject.Find("createdSceneObjectHolder");
         }
         private void Update()
         {
@@ -42,7 +44,8 @@ namespace BlusSimulator
                     print(hit.transform.name);
                     FireIcon = Resources.Load("Prefabs/Scene_1_Prefabs/fireSprite_03") as GameObject;
                     IconHolder = (GameObject)Instantiate(FireIcon, new Vector3(0, 0, 0), Quaternion.identity);
-                    IconHolder.name = "FireIcon";
+                    IconHolder.transform.parent = fireHolder.transform;
+                    IconHolder.name = "FireIcon_" + IconHolder.transform.parent.childCount;
                     obj = IconHolder.transform;
                     offset = new Vector3(mousePos.x - hit.transform.position.x, mousePos.y - hit.transform.position.y, obj.position.z);
                 }

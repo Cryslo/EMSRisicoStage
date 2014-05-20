@@ -50,6 +50,7 @@ public class BuildMenu : MonoBehaviour
     private static Rect homeIconRect;
 
     private static GameObject createMenuScriptHolder;
+    private static GameObject createdSceneObjectHolder;
 
     #region Create buttons
     private static int createButtonWidth = 76;
@@ -224,7 +225,7 @@ public class BuildMenu : MonoBehaviour
                 plusTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
+                    FPM.GetComponent<TopBar_Script>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -238,7 +239,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
+                    FPM.GetComponent<TopBar_Script>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -253,7 +254,7 @@ public class BuildMenu : MonoBehaviour
                 fireTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Select_Bar>().createTopBar();
+                    FPM.GetComponent<TopBar_Script>().createTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -267,7 +268,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Select_Bar>().createTopBar();
+                    FPM.GetComponent<TopBar_Script>().createTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -281,7 +282,7 @@ public class BuildMenu : MonoBehaviour
                 settingsTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
+                    FPM.GetComponent<TopBar_Script>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -295,7 +296,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
+                    FPM.GetComponent<TopBar_Script>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -309,7 +310,7 @@ public class BuildMenu : MonoBehaviour
                 saveTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
+                    FPM.GetComponent<TopBar_Script>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -323,7 +324,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
+                    FPM.GetComponent<TopBar_Script>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -336,7 +337,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
+                    FPM.GetComponent<TopBar_Script>().deleteTopBar();
                     textClicked = false;
                     GameManager.SetGameState(GameState.MainMenu);
                 }
@@ -631,8 +632,9 @@ public class BuildMenu : MonoBehaviour
         plusIcon = new GameObject();
         saveIcon = new GameObject();
         backIcon = new GameObject();
+        createdSceneObjectHolder = new GameObject("createdSceneObjectHolder");
         createMenuScriptHolder = new GameObject("CreateMenuScriptHolder");
-        createMenuScriptHolder.AddComponent<Fire_Select_Bar>();
+        createMenuScriptHolder.AddComponent<TopBar_Script>();
         
         Objects.AddMany(settingsIcon, fireIcon, plusIcon, saveIcon, backIcon);
 
@@ -803,6 +805,7 @@ public class BuildMenu : MonoBehaviour
             Destroy(Objects[i]);
         }
         Destroy(createMenuScriptHolder);
+        Destroy(createdSceneObjectHolder);
 
         backIconRect = new Rect();
         saveIconRect = new Rect();

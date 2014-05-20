@@ -50,8 +50,9 @@
      <Compile Include="Assets\Resources\Scripts\Main\DisplayMetricsUtil.cs" />
      <Compile Include="Assets\Resources\Scripts\Main\ListExtenstions.cs" />
      <Compile Include="Assets\Resources\Scripts\Main\User.cs" />
-     <Compile Include="Assets\Resources\Scripts\Menu\Create\Create_Object_Drag_Script.cs" />
-     <Compile Include="Assets\Resources\Scripts\Menu\Create\Fire_Select_Bar.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Create\Create_Bars_fire_Script.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Create\Drag_Fire_Script.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\Create\Fire_Propertie_Menu_Script.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Create\FlameScript.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Create\GameHandler.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\Create\IconScript.cs" />
