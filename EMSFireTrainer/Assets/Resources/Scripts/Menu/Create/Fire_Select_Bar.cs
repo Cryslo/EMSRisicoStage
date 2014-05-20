@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fire_Property_Menu : MonoBehaviour
+public class Fire_Select_Bar : MonoBehaviour
 {
     private GameObject topBar_Holder;
     private TopBar_Script topBar_Script;
@@ -16,7 +16,7 @@ public class Fire_Property_Menu : MonoBehaviour
 
     private float absoluteMinX;
     private float absoluteMaxX;
-        // Use this for initialization
+    // Use this for initialization
     void Start()
     {
         camera = GameObject.Find("Main Camera").camera;
@@ -24,6 +24,7 @@ public class Fire_Property_Menu : MonoBehaviour
 
     void Update()
     {
+        //Topbar raycast to check if you're clicking it
         if (topBar_Script != null)
         {
             Vector3 hP = topBar_Holder.transform.position;
@@ -31,14 +32,14 @@ public class Fire_Property_Menu : MonoBehaviour
             RaycastHit hit;
             if (scrollArea.Contains(ray.origin))
             {
-            if (Input.GetMouseButtonDown(0))
-            {
-                startpointX = ray.origin.x;
-                startX = topBar_Holder.transform.position.x;
-                offset = startX - startpointX;
-            }
-            if (Input.GetMouseButton(0))
-            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    startpointX = ray.origin.x;
+                    startX = topBar_Holder.transform.position.x;
+                    offset = startX - startpointX;
+                }
+                if (Input.GetMouseButton(0))
+                {
                     Vector3 v = new Vector3(startX - (startpointX - ray.origin.x), topBar_Holder.transform.position.y, topBar_Holder.transform.position.z);
                     if (v.x >= absoluteMinX && v.x <= absoluteMaxX)
                     {
@@ -52,18 +53,18 @@ public class Fire_Property_Menu : MonoBehaviour
                     {
                         v = new Vector3(absoluteMaxX, hP.y, hP.z);
                     }
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (hP.x < absoluteMinX)
-                {
-                    topBar_Holder.transform.position = new Vector3(absoluteMinX, hP.y, hP.z);
                 }
-                else if (hP.x > absoluteMaxX)
+                if (Input.GetMouseButtonUp(0))
                 {
-                    topBar_Holder.transform.position = new Vector3(absoluteMaxX, hP.y, hP.z);
+                    if (hP.x < absoluteMinX)
+                    {
+                        topBar_Holder.transform.position = new Vector3(absoluteMinX, hP.y, hP.z);
+                    }
+                    else if (hP.x > absoluteMaxX)
+                    {
+                        topBar_Holder.transform.position = new Vector3(absoluteMaxX, hP.y, hP.z);
+                    }
                 }
-            }
             }
         }
     }
@@ -98,7 +99,7 @@ public class Fire_Property_Menu : MonoBehaviour
     {
         if (topBar_Script != null)
         {
-                GUI.Box(scrollArea, "Collider");
+            GUI.Box(scrollArea, "Collider");
         }
     }
 

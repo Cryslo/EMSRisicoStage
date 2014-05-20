@@ -222,7 +222,7 @@ public class BuildMenu : MonoBehaviour
                 plusTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Property_Menu>().deleteTopBar();
+                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -236,7 +236,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Property_Menu>().deleteTopBar();
+                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -251,7 +251,7 @@ public class BuildMenu : MonoBehaviour
                 fireTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Property_Menu>().createTopBar();
+                    FPM.GetComponent<Fire_Select_Bar>().createTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -265,7 +265,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Property_Menu>().createTopBar();
+                    FPM.GetComponent<Fire_Select_Bar>().createTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -279,7 +279,7 @@ public class BuildMenu : MonoBehaviour
                 settingsTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Property_Menu>().deleteTopBar();
+                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -293,7 +293,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Property_Menu>().deleteTopBar();
+                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -307,7 +307,7 @@ public class BuildMenu : MonoBehaviour
                 saveTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Property_Menu>().deleteTopBar();
+                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -321,7 +321,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Property_Menu>().deleteTopBar();
+                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
                     DeleteText();
                     textClicked = true;
                 }
@@ -334,7 +334,7 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    FPM.GetComponent<Fire_Property_Menu>().deleteTopBar();
+                    FPM.GetComponent<Fire_Select_Bar>().deleteTopBar();
                     textClicked = false;
                     GameManager.SetGameState(GameState.MainMenu);
                 }
@@ -630,7 +630,7 @@ public class BuildMenu : MonoBehaviour
         saveIcon = new GameObject();
         backIcon = new GameObject();
 
-        settingsIcon.AddComponent<Fire_Property_Menu>();
+        settingsIcon.AddComponent<Fire_Select_Bar>();
 
         Objects.AddMany(settingsIcon, fireIcon, plusIcon, saveIcon, backIcon);
 

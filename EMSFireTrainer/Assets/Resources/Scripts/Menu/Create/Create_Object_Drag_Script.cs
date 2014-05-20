@@ -58,5 +58,6 @@ namespace BlusSimulator
                 IconHolder = null;
             }
         }
+
     }
 }
