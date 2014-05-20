@@ -49,6 +49,9 @@ public class FolderManager : MonoBehaviour
 	
 	public List<DirectoryInfo> GetExamples()
 	{
+		this.exampleDirectoryPath = directoryPath + "/" + exampleDirectoryName + "/" + savedDirectoryName;
+		this.exampleBackgroundsPath = directoryPath + "/" + exampleDirectoryName + "/" + savedBackgroundsName;
+
 		List<DirectoryInfo> exampleList = new List<DirectoryInfo>();
 		exampleDirectoryFolder = new DirectoryInfo(exampleDirectoryPath);
 		

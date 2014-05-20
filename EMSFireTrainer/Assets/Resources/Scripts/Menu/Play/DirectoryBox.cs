@@ -188,7 +188,7 @@ public class DirectoryBox
 			if(folderManager.GetFirstSceneByFolderName(directoryName) == "" || folderManager.GetFirstSceneByFolderName(directoryName) == ".DS_Store")
 			{
 				emptyFolder = true;
-				//backgroundImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolderBg");
+				backgroundImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolderBg");
 				folderIconImage = Resources.Load<Texture2D>("Icons/Play_Icons/emptyFolder");
 				backgroundSprite = Sprite.Create(backgroundImage, new Rect(0, 0, backgroundImage.width, backgroundImage.height), new Vector2(0.5f, 0.5f), 100.0f);
 				backgroundRenderer.sprite = backgroundSprite;
