@@ -33,7 +33,6 @@ public class PasswordGui {
 		for (int i = 0; i < Password.Length; i++)
 		{
 			string number = Password[i].ToString();
-			Debug.Log(number);
 			numberBox = new NumberBox(number, i, backgroundBox);
 		}
 	}

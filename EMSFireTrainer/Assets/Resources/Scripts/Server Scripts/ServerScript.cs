@@ -39,12 +39,20 @@ public class ServerScript : MonoBehaviour
 	{
 		Debug.Log ("Server initialized and ready");
 		passGui = new PasswordGui(password);
+		StartCoroutine("waitAndDestroy");
 	}
 
 	void OnPlayerConnected (NetworkPlayer player)
 	{
 		passGui.DeleteGui();
 	}
+
+    IEnumerator waitAndDestroy() {
+        float waitForSeconds = 5.0f;
+        Debug.Log("Wait for " + waitForSeconds + " Seconds");
+        yield return new WaitForSeconds(waitForSeconds);
+        passGui.DeleteGui();
+    }
 
 
 }
