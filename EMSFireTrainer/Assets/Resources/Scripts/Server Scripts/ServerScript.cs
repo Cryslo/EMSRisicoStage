@@ -51,7 +51,6 @@ public class ServerScript : MonoBehaviour
         float waitForSeconds = 5.0f;
         Debug.Log("Wait for " + waitForSeconds + " Seconds");
         yield return new WaitForSeconds(waitForSeconds);
-        Debug.Log("Destory");
         passGui.DeleteGui();
     }
 
