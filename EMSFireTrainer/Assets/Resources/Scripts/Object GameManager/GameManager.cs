@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
 	public static string sceneName;
 
 	public static bool inFirst;
+	private static bool created = false;
 
     public static GameState getGameState{
 		get{return gameState;}
@@ -35,8 +36,15 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (!created) {
+			// this is the first instance - make it persist
+			DontDestroyOnLoad(this.gameObject);
+			created = true;
+		} else {
+			// this must be a duplicate from a scene reload - DESTROY!
+			Destroy(this.gameObject);
+		}
 		instance = this;
-		DontDestroyOnLoad(this.gameObject);
 		SetGameState(GameState.MainMenu);
 	}
 

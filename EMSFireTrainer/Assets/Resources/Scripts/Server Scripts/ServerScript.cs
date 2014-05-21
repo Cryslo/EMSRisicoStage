@@ -14,11 +14,19 @@ public class ServerScript : MonoBehaviour
 
 	private int number;
 	private int lengthOfPassword = 4;
+	private static bool created = false;
 
 	// Use this for initialization
 	void Start ()
 	{
-		DontDestroyOnLoad(this.gameObject);
+		if (!created) {
+			// this is the first instance - make it persist
+			DontDestroyOnLoad(this.gameObject);
+			created = true;
+		} else {
+			// this must be a duplicate from a scene reload - DESTROY!
+			Destroy(this.gameObject);
+		}
 		broadcastSever = this.GetComponent<LANBroadcastService> ();
 
 		for (int i = 0; i < lengthOfPassword; i++) {
