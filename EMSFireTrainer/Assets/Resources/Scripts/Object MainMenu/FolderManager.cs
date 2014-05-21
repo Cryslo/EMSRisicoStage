@@ -43,8 +43,10 @@ public class FolderManager : MonoBehaviour
 		this.savedBackgroundsPath = directoryPath + "/" + savedBackgroundsName;
 		// Setting the Directory folder to an variable
 		this.DirectoryFolder = new DirectoryInfo(savedDirectoryPath);
+		this.exampleDirectoryFolder = new DirectoryInfo(exampleDirectoryPath);
 		Debug.Log(DirectoryFolder.FullName);
 		BuildFolderArray();
+
 	}
 	
 	public List<DirectoryInfo> GetExamples()
@@ -127,18 +129,16 @@ public class FolderManager : MonoBehaviour
 	{
 		List<FileInfo> TempScenes = new List<FileInfo>();
 		DirectoryInfo SelectedFolder;
+
 		if(Directory.Exists(DirectoryFolder.FullName + "/" + FolderName)) {
 			SelectedFolder = new DirectoryInfo(DirectoryFolder.FullName + "/" + FolderName);
 		} else {
 			SelectedFolder = new DirectoryInfo(exampleDirectoryFolder.FullName + "/" + FolderName);
 		}
-		//print(FolderName);
 		
 		FileInfo[] directoryItems = SelectedFolder.GetFiles();
-		foreach(FileInfo Item in directoryItems)
-		{
-			if(Item.Name != ".DS_Store")	
-			{
+		foreach(FileInfo Item in directoryItems) {
+			if(Item.Name != ".DS_Store") {
 				TempScenes.Add(Item);
 			}
 		}
@@ -151,10 +151,9 @@ public class FolderManager : MonoBehaviour
 		List<FileInfo> TempScenes = new List<FileInfo>();
 		TempScenes = GetScenesByName(FolderName);
 
-		if(TempScenes.Count != 0)
-		{
+		if(TempScenes.Count != 0) {
 			return TempScenes[0].Name;
-		}else{
+		} else {
 			return "";
 		}
 	}
@@ -164,8 +163,6 @@ public class FolderManager : MonoBehaviour
 	public List<FileInfo> GetScenesByNumber(int FolderNumber)
 	{
 		List<FileInfo> TempScenes = new List<FileInfo>();
-		
-		
 		
 		return TempScenes;
 	}
@@ -228,14 +225,7 @@ public class FolderManager : MonoBehaviour
 		RebuildFolderArray();	
 		return false;
 	}
-	
-	// Use this for Edit a file by Path
-	public bool RenameFolderWithPath(string path)
-	{
-		
-		return false;
-	}
-	
+
 	// Use this for Edit a file by Name
 	public bool RenameFolderWithID(int id, string newName, int idOffset)
 	{

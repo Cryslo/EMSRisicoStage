@@ -18,6 +18,7 @@ public class ServerScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		DontDestroyOnLoad(this.gameObject);
 		broadcastSever = this.GetComponent<LANBroadcastService> ();
 
 		for (int i = 0; i < lengthOfPassword; i++) {
@@ -45,6 +46,7 @@ public class ServerScript : MonoBehaviour
 	void OnPlayerConnected (NetworkPlayer player)
 	{
 		passGui.DeleteGui();
+		print("Player Connected");
 	}
 
     IEnumerator waitAndDestroy() {

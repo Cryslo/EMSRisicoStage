@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class TopBar_Script : MonoBehaviour
 {
@@ -16,7 +16,6 @@ public class TopBar_Script : MonoBehaviour
 
     private float absoluteMinX;
     private float absoluteMaxX;
-    // Use this for initialization
     void Start()
     {
         camera = GameObject.Find("Main Camera").camera;

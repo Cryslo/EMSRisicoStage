@@ -3,93 +3,81 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
-public class FolderBuilder : MonoBehaviour {
+public class FolderBuilder : MonoBehaviour
+{
 	static public FolderBuilder instance;
-
 	private bool guestmode = false;
 	private bool loggedin;
-
 	private GameObject Folders;
-	
 	private Camera MainCamera;
 	private FolderManager folderManager;
 	private bool FolderLoaded = false;
-	
 	private List<DirectoryInfo> exampleProjects;
 	
 	public List<DirectoryInfo> ExampleProjects {
-		get{return this.exampleProjects;}
+		get{ return this.exampleProjects;}
 	}
 	
 	private List<DirectoryInfo> buildedFolderArray;
 	private DirectoryInfo CreateFolder = new DirectoryInfo("/");
 	private List<FileInfo> buildedFileArray;
-	
 	private int boxesX = 3;
 	private int maxBoxesX;
-	
 	private int scaling;
-	
-	private List<DirectoryBox> boxesDirectoryBox; 	
+	private List<DirectoryBox> boxesDirectoryBox;
 	private DirectoryBox directoryBox;
-	
 	private int openFolder;
+	private string openFolderName;
 	private bool folderOpen;
-	
 	private Rect scrollPanel;
 	private float scrollOffset;
-	
 	private Vector2 scrollOffset2;
-
 	private int columns;
-	
 	private float mouseStart;
 	private float startpointX;
 	private float startpointY;
 	private float finalDirectoryWidth;
 	private float finalDirectoryHight;
-
 	public GUIStyle testStyle;
 	public GUISkin testSkin;
 	
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 		instance = this;
-		folderManager = this.GetComponent<FolderManager> ();
-		MainCamera = GameObject.Find ("Main Camera").camera;
-		exampleProjects = new List<DirectoryInfo> ();
+		folderManager = this.GetComponent<FolderManager>();
+		MainCamera = GameObject.Find("Main Camera").camera;
+		exampleProjects = new List<DirectoryInfo>();
 		
-		exampleProjects.Add (CreateFolder);
+		exampleProjects.Add(CreateFolder);
 		
-		foreach (DirectoryInfo folder in folderManager.GetExamples())
-			exampleProjects.Add (folder);
+		foreach(DirectoryInfo folder in folderManager.GetExamples())
+			exampleProjects.Add(folder);
 	}
 	
-	void Update() {
+	void Update()
+	{
 		//TODO als hij vast komt kan hij niet meer naar beneden meteen
-		if (boxesDirectoryBox != null) {
-			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+		if(boxesDirectoryBox != null) {
+			for(int i = 0; i < boxesDirectoryBox.Count; i++) {
 				boxesDirectoryBox[i].Update();
 			}
 		}
 		
-		if (scrollPanel != null) {
-			if(boxesDirectoryBox != null)
-			{
-				if(Input.GetMouseButtonDown(0))
-				{
+		if(scrollPanel != null) {
+			if(boxesDirectoryBox != null) {
+				if(Input.GetMouseButtonDown(0)) {
 					Ray ray = MainCamera.ScreenPointToRay(Input.mousePosition);
 					RaycastHit hit;
 					startpointX = Input.mousePosition.x;
 					startpointY = Input.mousePosition.y;
-					for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+					for(int i = 0; i < boxesDirectoryBox.Count; i++) {
 						boxesDirectoryBox[i].StartY = boxesDirectoryBox[i].BoxY;
 						
 						boxesDirectoryBox[i].NewStartY = boxesDirectoryBox[i].TestY;
 					}
 				}
-				if(Input.GetMouseButton(0))
-				{
+				if(Input.GetMouseButton(0)) {
 					/*if(boxesDirectoryBox[0].Y > (finalDirectoryHight/2) && (startpointY - Input.mousePosition.y) > 0)
 					{
 						
@@ -103,7 +91,7 @@ public class FolderBuilder : MonoBehaviour {
 							boxesDirectoryBox[i].TestY = boxesDirectoryBox[i].NewStartY + (startpointY - Input.mousePosition.y);
 						}
 					}*/
-					for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+					for(int i = 0; i < boxesDirectoryBox.Count; i++) {
 						boxesDirectoryBox[i].BoxY = boxesDirectoryBox[i].StartY - (startpointY - Input.mousePosition.y);
 						boxesDirectoryBox[i].TestY = boxesDirectoryBox[i].NewStartY + (startpointY - Input.mousePosition.y);
 					}
@@ -113,62 +101,61 @@ public class FolderBuilder : MonoBehaviour {
 	}
 	
 	// Use this for rebuilding the array
-	public bool rebuildFolderArray () {
+	public bool rebuildFolderArray()
+	{
 
-		if(boxesDirectoryBox != null)
-		{
-			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+		if(boxesDirectoryBox != null) {
+			for(int i = 0; i < boxesDirectoryBox.Count; i++) {
 				boxesDirectoryBox[i].Remove();
 				
 			}
 		}
-		buildedFolderArray = new List<DirectoryInfo> ();
+		buildedFolderArray = new List<DirectoryInfo>();
 		
-		foreach (DirectoryInfo folder in folderManager.GetFolders())
-			buildedFolderArray.Add (folder);
+		foreach(DirectoryInfo folder in folderManager.GetFolders())
+			buildedFolderArray.Add(folder);
 		//buildedFolderArray += folderManager.GetFolders();
-		rebuildGUI ();
+		rebuildGUI();
 		return false;
 	}
 	
-	public bool rebuildSceneArray (string FolderName) {
-		if(boxesDirectoryBox != null)
-		{
-			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+	public bool rebuildSceneArray(string FolderName)
+	{
+		if(boxesDirectoryBox != null) {
+			for(int i = 0; i < boxesDirectoryBox.Count; i++) {
 				boxesDirectoryBox[i].Remove();
 			}
 		}
 		
-		buildedFileArray = new List<FileInfo> ();
+		buildedFileArray = new List<FileInfo>();
 		//buildedFileArray.Add (CreateFolder);
 		
-		foreach (FileInfo file in folderManager.GetScenesByName(FolderName))
-		{
+		foreach(FileInfo file in folderManager.GetScenesByName(FolderName)) {
 			if(file.Name != ".DS_Store")
-			   buildedFileArray.Add (file);
+				buildedFileArray.Add(file);
 		}
 		
-		Debug.Log("Build Files: " + buildedFileArray.Count);
-		rebuildGUI ();
+//		Debug.Log("Build Files: " + buildedFileArray.Count);
+		rebuildGUI();
 		return false;
 	}
 
-	void OnGUI() {
-		if(boxesDirectoryBox != null)
-		{
+	void OnGUI()
+	{
+		if(boxesDirectoryBox != null) {
 			//GUI.Box(scrollPanel, "");
-			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+			for(int i = 0; i < boxesDirectoryBox.Count; i++) {
 				if(boxesDirectoryBox[i].BoxNumber != 0)
 					//GUI.Box(boxesDirectoryBox[i].BoxCollider, boxesDirectoryBox[i].DirectoryName);
-				if(boxesDirectoryBox[i].DeleteRect != null)
-				{
+				if(boxesDirectoryBox[i].DeleteRect != null) {
 					//GUI.Box(boxesDirectoryBox[i].DeleteRect, "Deleted");
 				}
 			}
 		}
 	}
 	
-	bool rebuildGUI () {
+	bool rebuildGUI()
+	{
 		
 		Destroy(Folders.gameObject);
 		Folders = new GameObject();
@@ -176,11 +163,11 @@ public class FolderBuilder : MonoBehaviour {
 
 
 		
-		boxesDirectoryBox = new List<DirectoryBox> ();
+		boxesDirectoryBox = new List<DirectoryBox>();
 		
 		float finalScale = 1;//checkScale();
 		
-		while (finalScale > 1.5f) {
+		while(finalScale > 1.5f) {
 			boxesX++;
 			finalScale = 1;//checkScale();
 		}
@@ -190,15 +177,15 @@ public class FolderBuilder : MonoBehaviour {
 
 		columns = 3;
 		
-		if (!folderOpen) {
-			for (int j = 0; j < exampleProjects.Count; j++) {
-				Debug.Log("Test" + exampleProjects.Count);
-				directoryBox = new DirectoryBox ();
+		if(!folderOpen) {
+			for(int j = 0; j < exampleProjects.Count; j++) {
+//				Debug.Log("Test" + exampleProjects.Count);
+				directoryBox = new DirectoryBox();
 				directoryBox.folderBuilderScript = this;
 				directoryBox.FolderManagerScript = this.folderManager;
 				directoryBox.Parent = Folders;
 
-				directoryBox.DirectorNumber = j.ToString ();
+				directoryBox.DirectorNumber = j.ToString();
 				directoryBox.DirectoryName = exampleProjects[j].Name;
 				
 				directoryBox.ProtectedBox = true;
@@ -210,23 +197,22 @@ public class FolderBuilder : MonoBehaviour {
 				//directoryBox.Y = ((Screen.height - (finalDirectoryWidth * 2)) - ((2 - ((int)(((j)%2)) + 1f) * finalDirectoryWidth ) + (finalDirectoryHight /2)));
 				directoryBox.BoxNumber = j;
 				
-				directoryBox.Setup ();
-				boxesDirectoryBox.Add (directoryBox);
+				directoryBox.Setup();
+				boxesDirectoryBox.Add(directoryBox);
 			}
 			
-			for (int i = 0; i < buildedFolderArray.Count; i++) {
+			for(int i = 0; i < buildedFolderArray.Count; i++) {
 				int number = exampleProjects.Count + i;
 				
-				directoryBox = new DirectoryBox ();
+				directoryBox = new DirectoryBox();
 				directoryBox.folderBuilderScript = this;
 				directoryBox.FolderManagerScript = this.folderManager;
 				directoryBox.Parent = Folders;
 				
-				directoryBox.DirectorNumber = number.ToString ();
-				directoryBox.DirectoryName = buildedFolderArray [i].Name;
+				directoryBox.DirectorNumber = number.ToString();
+				directoryBox.DirectoryName = buildedFolderArray[i].Name;
 				
-				if(guestmode)
-				{
+				if(guestmode) {
 					directoryBox.ProtectedBox = true;
 				}
 				directoryBox.X = directoryBox.X = (number - (number / columns) * columns);   
@@ -235,12 +221,12 @@ public class FolderBuilder : MonoBehaviour {
 				//directoryBox.Y = ((Screen.height - (finalDirectoryWidth * 2)) - ((2 - ((int)(((number)%2)) + 1f) * finalDirectoryWidth ) + (finalDirectoryHight /2)));
 				directoryBox.BoxNumber = number;
 				
-				directoryBox.Setup ();
-				boxesDirectoryBox.Add (directoryBox);
+				directoryBox.Setup();
+				boxesDirectoryBox.Add(directoryBox);
 			}
 		} else {
 			//box 0
-			directoryBox = new DirectoryBox ();
+			directoryBox = new DirectoryBox();
 			directoryBox.folderBuilderScript = this;
 			directoryBox.FolderManagerScript = this.folderManager;
 			directoryBox.Parent = Folders;
@@ -249,9 +235,9 @@ public class FolderBuilder : MonoBehaviour {
 			directoryBox.DirectoryName = "Back";
 			
 			directoryBox.FileMode = true;
+			directoryBox.ParentDirectoryName = openFolderName;
 			
-			if(guestmode)
-			{
+			if(guestmode) {
 				directoryBox.ProtectedBox = true;
 			}
 			
@@ -261,21 +247,22 @@ public class FolderBuilder : MonoBehaviour {
 			//directoryBox.Y = ((Screen.height - (finalDirectoryWidth * 2)) - ((2 - ((int)(((0)%2)) + 1f) * finalDirectoryWidth ) + (finalDirectoryHight /2)));
 			directoryBox.BoxNumber = 0;
 			
-			directoryBox.Setup ();
-			boxesDirectoryBox.Add (directoryBox);
+			directoryBox.Setup();
+			boxesDirectoryBox.Add(directoryBox);
 			
-			for (int i = 0; i < buildedFileArray.Count; i++) {
+			for(int i = 0; i < buildedFileArray.Count; i++) {
 				
 				int number = i + 1;
 				
-				directoryBox = new DirectoryBox ();
+				directoryBox = new DirectoryBox();
 				directoryBox.folderBuilderScript = this;
 				directoryBox.FolderManagerScript = this.folderManager;
 				directoryBox.Parent = Folders;
 				
-				directoryBox.DirectorNumber = number.ToString ();
+				directoryBox.DirectorNumber = number.ToString();
 				directoryBox.DirectoryName = buildedFileArray[i].Name;
 				directoryBox.FileMode = true;
+				directoryBox.ParentDirectoryName = openFolderName;
 				
 				directoryBox.X = directoryBox.X = (number - (number / columns) * columns);   
 				directoryBox.Y = directoryBox.Y = (number / columns);
@@ -283,8 +270,8 @@ public class FolderBuilder : MonoBehaviour {
 				//directoryBox.Y = ((Screen.height - (finalDirectoryWidth * 2)) - ((2 - ((int)(((number)%2)) + 1f) * finalDirectoryWidth ) + (finalDirectoryHight /2)));
 				directoryBox.BoxNumber = number;
 				
-				directoryBox.Setup ();
-				boxesDirectoryBox.Add (directoryBox);
+				directoryBox.Setup();
+				boxesDirectoryBox.Add(directoryBox);
 			}
 		}
 		scrollPanel = new Rect(Screen.width - ((Screen.width / 4) * columns), 0, ((Screen.width / 4) * columns), boxesDirectoryBox.Count * ((Screen.height / 4)));
@@ -292,31 +279,33 @@ public class FolderBuilder : MonoBehaviour {
 		
 	}
 	
-	public bool OpenFolder(int FolderNumber, string FolderName) {
+	public bool OpenFolder(int FolderNumber, string FolderName)
+	{
 		openFolder = FolderNumber;
+		openFolderName = FolderName;
 		folderOpen = true;
-		rebuildSceneArray (FolderName);
+		rebuildSceneArray(FolderName);
 		return true;
 	}
 	
-	public  bool CloseFolder () {
+	public  bool CloseFolder()
+	{
 		folderOpen = false;
-		rebuildFolderArray ();
+		rebuildFolderArray();
 		return true;
 	}
 	
 	public bool OpenLoading()
 	{
-		rebuildFolderArray ();
+		rebuildFolderArray();
 		
 		return false;
 	}
 	
 	public bool CloseLoading()
 	{
-		if(boxesDirectoryBox != null)
-		{
-			for (int i = 0; i < boxesDirectoryBox.Count; i++) {
+		if(boxesDirectoryBox != null) {
+			for(int i = 0; i < boxesDirectoryBox.Count; i++) {
 				boxesDirectoryBox[i].Remove();
 				boxesDirectoryBox[i] = null;
 			}
