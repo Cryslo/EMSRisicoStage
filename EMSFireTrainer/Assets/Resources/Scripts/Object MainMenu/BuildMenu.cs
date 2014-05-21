@@ -226,6 +226,10 @@ public class BuildMenu : MonoBehaviour
                 if (Input.GetMouseButtonUp(0))
                 {
                     FPM.GetComponent<TopBar_Script>().deleteTopBar();
+                    if (!FPM.GetComponent<BackGround_Image_Load_Script>())
+                    {
+                        FPM.AddComponent<BackGround_Image_Load_Script>();
+                    }
                     DeleteText();
                     textClicked = true;
                 }
@@ -240,6 +244,10 @@ public class BuildMenu : MonoBehaviour
                 if (Input.GetMouseButtonUp(0))
                 {
                     FPM.GetComponent<TopBar_Script>().deleteTopBar();
+                    if (!FPM.GetComponent<BackGround_Image_Load_Script>())
+                    {
+                        FPM.AddComponent<BackGround_Image_Load_Script>();
+                    }
                     DeleteText();
                     textClicked = true;
                 }
@@ -254,7 +262,15 @@ public class BuildMenu : MonoBehaviour
                 fireTitle.fontSize = 70;
                 if (Input.GetMouseButtonUp(0))
                 {
+                    //Create the Top Bar for fire selection
                     FPM.GetComponent<TopBar_Script>().createTopBar();
+
+                    //Remove the Image Selector if the user is coming from the ImageBrowse Window
+                    if (FPM.GetComponent<BackGround_Image_Load_Script>())
+                    {
+                        FPM.GetComponent<BackGround_Image_Load_Script>().DestroyMe();
+                        Destroy(FPM.GetComponent<BackGround_Image_Load_Script>());
+                    }
                     DeleteText();
                     textClicked = true;
                 }
@@ -268,7 +284,15 @@ public class BuildMenu : MonoBehaviour
             {
                 if (Input.GetMouseButtonUp(0))
                 {
+                    //Create the Top Bar for fire selection
                     FPM.GetComponent<TopBar_Script>().createTopBar();
+
+                    //Remove the Image Selector if the user is coming from the ImageBrowse Window
+                    if (FPM.GetComponent<BackGround_Image_Load_Script>())
+                    {
+                        FPM.GetComponent<BackGround_Image_Load_Script>().DestroyMe();
+                        Destroy(FPM.GetComponent<BackGround_Image_Load_Script>());
+                    }
                     DeleteText();
                     textClicked = true;
                 }
@@ -283,6 +307,13 @@ public class BuildMenu : MonoBehaviour
                 if (Input.GetMouseButtonUp(0))
                 {
                     FPM.GetComponent<TopBar_Script>().deleteTopBar();
+
+                    //Remove the Image Selector if the user is coming from the ImageBrowse Window
+                    if (FPM.GetComponent<BackGround_Image_Load_Script>())
+                    {
+                        FPM.GetComponent<BackGround_Image_Load_Script>().DestroyMe();
+                        Destroy(FPM.GetComponent<BackGround_Image_Load_Script>());
+                    }
                     DeleteText();
                     textClicked = true;
                 }
@@ -297,6 +328,13 @@ public class BuildMenu : MonoBehaviour
                 if (Input.GetMouseButtonUp(0))
                 {
                     FPM.GetComponent<TopBar_Script>().deleteTopBar();
+
+                    //Remove the Image Selector if the user is coming from the ImageBrowse Window
+                    if (FPM.GetComponent<BackGround_Image_Load_Script>())
+                    {
+                        FPM.GetComponent<BackGround_Image_Load_Script>().DestroyMe();
+                        Destroy(FPM.GetComponent<BackGround_Image_Load_Script>());
+                    }
                     DeleteText();
                     textClicked = true;
                 }
@@ -311,6 +349,13 @@ public class BuildMenu : MonoBehaviour
                 if (Input.GetMouseButtonUp(0))
                 {
                     FPM.GetComponent<TopBar_Script>().deleteTopBar();
+
+                    //Remove the Image Selector if the user is coming from the ImageBrowse Window
+                    if (FPM.GetComponent<BackGround_Image_Load_Script>())
+                    {
+                        FPM.GetComponent<BackGround_Image_Load_Script>().DestroyMe();
+                        Destroy(FPM.GetComponent<BackGround_Image_Load_Script>());
+                    }
                     DeleteText();
                     textClicked = true;
                 }
@@ -325,6 +370,13 @@ public class BuildMenu : MonoBehaviour
                 if (Input.GetMouseButtonUp(0))
                 {
                     FPM.GetComponent<TopBar_Script>().deleteTopBar();
+
+                    //Remove the Image Selector if the user is coming from the ImageBrowse Window
+                    if (FPM.GetComponent<BackGround_Image_Load_Script>())
+                    {
+                        FPM.GetComponent<BackGround_Image_Load_Script>().DestroyMe();
+                        Destroy(FPM.GetComponent<BackGround_Image_Load_Script>());
+                    }
                     DeleteText();
                     textClicked = true;
                 }
@@ -338,6 +390,13 @@ public class BuildMenu : MonoBehaviour
                 if (Input.GetMouseButtonUp(0))
                 {
                     FPM.GetComponent<TopBar_Script>().deleteTopBar();
+
+                    //Remove the Image Selector if the user is coming from the ImageBrowse Window
+                    if (FPM.GetComponent<BackGround_Image_Load_Script>())
+                    {
+                        FPM.GetComponent<BackGround_Image_Load_Script>().DestroyMe();
+                        Destroy(FPM.GetComponent<BackGround_Image_Load_Script>());
+                    }
                     textClicked = false;
                     GameManager.SetGameState(GameState.MainMenu);
                 }

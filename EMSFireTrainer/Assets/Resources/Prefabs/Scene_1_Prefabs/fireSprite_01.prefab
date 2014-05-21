@@ -16,8 +16,12 @@ GameObject:
 <<<<<<< HEAD
   m_Name: fireSprite_01
 =======
+<<<<<<< HEAD
+  m_Name: fireSprite_01
+=======
   m_Name: fireSprite_02
 >>>>>>> FETCH_HEAD
+>>>>>>> 88b1f1c0a8adf898b43526e0cd13f56800a69d67
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +35,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -20.3567238, y: 3.1913619, z: 0}
-  m_LocalScale: {x: .926008761, y: .617339194, z: 1}
+  m_LocalScale: {x: 1.11111116, y: .740740776, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!61 &6100000

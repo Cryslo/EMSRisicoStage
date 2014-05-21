@@ -238,3 +238,5 @@ EMSFireTrainer/ProjectSettings/EditorBuildSettings.asset
 EMSFireTrainer/Assembly-UnityScript-Editor-firstpass-vs.unityproj
 EMSFireTrainer/Assembly-UnityScript-Editor-firstpass.unityproj
 EMSFireTrainer/Assembly-UnityScript-Editor-firstpass.unityproj
+EMSFireTrainer/ProjectSettings/Physics2DSettings.asset
+EMSFireTrainer/ProjectSettings/QualitySettings.asset

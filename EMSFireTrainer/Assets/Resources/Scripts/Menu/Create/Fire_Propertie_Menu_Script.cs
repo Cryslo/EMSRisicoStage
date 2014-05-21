@@ -9,13 +9,16 @@ public class Fire_Propertie_Menu_Script : MonoBehaviour
     SpriteRenderer propertyMenuRenderer;
 
     GameObject option_Object;
-    GameObject bottom_Bar_Object;
+    GameObject bottom_Bar_Object_Left;
+    GameObject bottom_Bar_Object_Right;
 
     Sprite option_Sprite;
-    Sprite bottom_Bar;
+    Sprite[] bottom_Bar_Left;
+    Sprite[] bottom_Bar_Right;
 
     SpriteRenderer option_Renderer;
-    SpriteRenderer bottom_Bar_Renderer;
+    SpriteRenderer bottom_Bar_Renderer_Left;
+    SpriteRenderer bottom_Bar_Renderer_Right;
 
     private List<string> spawnList = new List<string>();
 
@@ -64,8 +67,12 @@ public class Fire_Propertie_Menu_Script : MonoBehaviour
                 menuRec = new Rect(propertyMenuObject.transform.position.x, propertyMenuObject.transform.position.y, propertyMenuRenderer.sprite.bounds.size.x, propertyMenuRenderer.sprite.bounds.size.y);
                 if (!menuRec.Contains(Input.mousePosition))
                 {
-                    menuOn = false;
-                    removeMenu();
+                RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+                    if (!hit.transform == propertyMenuObject.transform)
+                    {
+                        menuOn = false;
+                        removeMenu();
+                    }
                 }
             }
         }
@@ -134,14 +141,25 @@ public class Fire_Propertie_Menu_Script : MonoBehaviour
         propertyMenuRenderer = propertyMenuObject.AddComponent<SpriteRenderer>();
         propertyMenuRenderer.sprite = propertyMenu;
         propertyMenuObject.transform.position = position;
+        propertyMenuObject.AddComponent<BoxCollider2D>();
 
-        bottom_Bar_Object = new GameObject("propertyMenuObject");
-        bottom_Bar = Resources.Load<Sprite>("Sprites/Create_Menu/Property_Menu/Button_Bottom");
-        bottom_Bar_Renderer = bottom_Bar_Object.AddComponent<SpriteRenderer>();
-        bottom_Bar_Renderer.sprite = bottom_Bar;
-        bottom_Bar_Object.transform.position = new Vector3(position.x, position.y - propertyMenuRenderer.sprite.bounds.size.y, position.z);
-        bottom_Bar_Renderer.sortingOrder = 1;
-        bottom_Bar_Object.transform.parent = propertyMenuObject.transform;
+        bottom_Bar_Object_Left = new GameObject("bottom_Bar_Object_Left");
+        bottom_Bar_Left = Resources.LoadAll<Sprite>("Sprites/Create_Menu/Property_Menu/Button_Bottom");
+        bottom_Bar_Renderer_Left = bottom_Bar_Object_Left.AddComponent<SpriteRenderer>();
+        bottom_Bar_Renderer_Left.sprite = bottom_Bar_Left[0];
+        bottom_Bar_Object_Left.transform.position = new Vector3(position.x, position.y - propertyMenuRenderer.sprite.bounds.size.y, position.z);
+        bottom_Bar_Renderer_Left.sortingOrder = 1;
+        bottom_Bar_Object_Left.transform.parent = propertyMenuObject.transform;
+        bottom_Bar_Object_Left.AddComponent<BoxCollider2D>();
+
+        bottom_Bar_Object_Right = new GameObject("bottom_Bar_Object_Right");
+        bottom_Bar_Right = Resources.LoadAll<Sprite>("Sprites/Create_Menu/Property_Menu/Button_Bottom");
+        bottom_Bar_Renderer_Right = bottom_Bar_Object_Right.AddComponent<SpriteRenderer>();
+        bottom_Bar_Renderer_Right.sprite = bottom_Bar_Right[1];
+        bottom_Bar_Object_Right.transform.position = new Vector3(position.x + bottom_Bar_Renderer_Right.sprite.bounds.size.x, position.y - propertyMenuRenderer.sprite.bounds.size.y, position.z);
+        bottom_Bar_Renderer_Right.sortingOrder = 1;
+        bottom_Bar_Object_Right.transform.parent = propertyMenuObject.transform;
+        bottom_Bar_Object_Right.AddComponent<BoxCollider2D>();
 
         for (int i = 0; i < 6; i++)
         {
