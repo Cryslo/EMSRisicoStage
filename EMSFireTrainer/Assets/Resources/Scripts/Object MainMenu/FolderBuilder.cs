@@ -192,6 +192,7 @@ public class FolderBuilder : MonoBehaviour {
 		
 		if (!folderOpen) {
 			for (int j = 0; j < exampleProjects.Count; j++) {
+				Debug.Log("Test" + exampleProjects.Count);
 				directoryBox = new DirectoryBox ();
 				directoryBox.folderBuilderScript = this;
 				directoryBox.FolderManagerScript = this.folderManager;
@@ -274,7 +275,6 @@ public class FolderBuilder : MonoBehaviour {
 				
 				directoryBox.DirectorNumber = number.ToString ();
 				directoryBox.DirectoryName = buildedFileArray[i].Name;
-				print( buildedFileArray[i].Name);
 				directoryBox.FileMode = true;
 				
 				directoryBox.X = directoryBox.X = (number - (number / columns) * columns);   

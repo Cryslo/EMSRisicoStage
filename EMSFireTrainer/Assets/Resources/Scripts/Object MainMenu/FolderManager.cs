@@ -309,8 +309,6 @@ public class FolderManager : MonoBehaviour
 	public Texture2D GetBackgroundsByName(string name)
 	{
 		Texture2D tempTexture = new Texture2D(0, 0);
-
-		Debug.Log(name.Remove(name.Length - 4));
 		
 		tempTexture.LoadImage(File.ReadAllBytes(savedBackgroundsPath + "/" + name.Remove(name.Length - 4) + ".jpg"));
 		
