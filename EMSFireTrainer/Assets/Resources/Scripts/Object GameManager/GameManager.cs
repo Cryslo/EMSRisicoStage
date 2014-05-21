@@ -8,7 +8,8 @@ public enum GameState{
 	MainMenu,
 	CreateMenu,
 	PlayMenu,
-	ConnectMenu
+	ConnectMenu,
+	Play
 }
 
 public class GameManager : MonoBehaviour {
@@ -54,6 +55,28 @@ public class GameManager : MonoBehaviour {
 			BuildMenu.BuildConnectMenu();
 		break;
 
+		case GameState.Play:
+			Debug.LogError("please use second SetGameState function witch need a path");
+			break;
+
+		default:
+			Debug.LogError("State not exist please change: " + state.ToString());
+			break;
+		}
+		return;
+	}
+
+	public static void SetGameState(GameState state, string path)
+	{
+		previousGameState = gameState;
+		switch(state)
+		{
+
+		case GameState.Play:
+			gameState = GameState.Play;
+			XmlBehaviour.LoadScene(path);
+			break;
+			
 		default:
 			Debug.LogError("State not exist please change: " + state.ToString());
 			break;

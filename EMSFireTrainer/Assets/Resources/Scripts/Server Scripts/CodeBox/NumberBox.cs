@@ -40,7 +40,7 @@ public class NumberBox {
 		numberTextText.alignment = TextAlignment.Center;
 		numberTextText.anchor = TextAnchor.MiddleCenter;
 		numberTextText.font = Resources.Load<Font>("Fonts/HelveticaNeue");
-		numberTextText.fontSize = 500;
+		numberTextText.fontSize = 200;
 		numberTextText.color = Color.black;
 
 		numberText.transform.localScale = new Vector3(0.1f,0.1f,1);
@@ -53,7 +53,7 @@ public class NumberBox {
 		worldScreenHeight = Camera.main.orthographicSize * 1.0f;
 		worldScreenWidth = Camera.main.orthographicSize * 1.0f / Screen.height * Screen.width;
 		
-		numberBox.transform.localScale = new Vector3(worldScreenWidth / width / 2.25f, worldScreenHeight / height , 1);
+		numberBox.transform.localScale = new Vector3(worldScreenWidth / width / 5f, worldScreenHeight / height / 2, 1);
 
 		numberBox.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2,Screen.height / 2,10));
 		numberBox.transform.position = numberBox.transform.position + new Vector3(((width / 2) * boxNumber) - ((width / 2) * 1.5f),0,0);

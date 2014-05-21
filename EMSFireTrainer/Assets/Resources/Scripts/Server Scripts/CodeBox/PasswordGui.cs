@@ -27,7 +27,7 @@ public class PasswordGui {
 		worldScreenHeight = Camera.main.orthographicSize * 1.0f;
 		worldScreenWidth = Camera.main.orthographicSize * 1.0f / Screen.height * Screen.width;
 
-		backgroundBox.transform.localScale = new Vector3(worldScreenWidth / width / 1f, worldScreenHeight / height / 2, 1);
+		backgroundBox.transform.localScale = new Vector3(worldScreenWidth / width, worldScreenHeight / height / 2, 1);
 
 
 		for (int i = 0; i < Password.Length; i++)
