@@ -39,9 +39,6 @@ public class Notify : MonoBehaviour {
 		worldScreenWidth = Camera.main.orthographicSize * 1.0f / Screen.height * Screen.width;
 
 		notifyGuiScale = new Vector3(worldScreenWidth / width , worldScreenHeight / height / 4 , 1);
-		notifyGuiPos = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight - height * 11, 10));
-
-
 	}
 	
 	// Update is called once per frame
@@ -53,14 +50,17 @@ public class Notify : MonoBehaviour {
 		notifyGui = new GameObject("Notify");
 		notifyGuiRenderer = notifyGui.AddComponent<SpriteRenderer>();
 		notifyGuiRenderer.sprite = notifyGuiImage;
-		notifyGui.transform.position = notifyGuiPos;
 		notifyGui.transform.localScale = notifyGuiScale;
+		notifyGuiPos = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight , 10));
+
+		notifyGui.transform.position = notifyGuiPos - new Vector3(0,notifyGuiRenderer.sprite.bounds.size.x / 10,0);;
 
 		text = new GameObject("Notify Text");
 		text.transform.parent = notifyGui.transform;
 
 		text.transform.localScale = new Vector3(0.1f,0.1f,1);
 		text.transform.localPosition = new Vector3(0,0,-1);
+
 
 		textRender = text.AddComponent<MeshRenderer>();
 		textRender.material = textMaterial;
@@ -69,7 +69,7 @@ public class Notify : MonoBehaviour {
 		textMesh.anchor = TextAnchor.MiddleCenter;
 		textMesh.text = Message;
 		textMesh.font = textFont;
-		textMesh.fontSize = 200;
+		textMesh.fontSize = 50;
 		textMesh.color = Color.black;
 
 		instance.StartCoroutine("waitAndDestroy");

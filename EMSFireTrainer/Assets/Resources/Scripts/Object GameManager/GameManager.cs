@@ -9,13 +9,22 @@ public enum GameState{
 	CreateMenu,
 	PlayMenu,
 	ConnectMenu,
-	Play
+	Play,
+	none
 }
 
 public class GameManager : MonoBehaviour {
+	public static GameManager instance;
 
 	private static GameState gameState;
 	private static GameState previousGameState;
+	
+	public static GameState queGameState;
+
+	public static string directoryName;
+	public static string sceneName;
+
+	public static bool inFirst;
 
     public static GameState getGameState{
 		get{return gameState;}
@@ -26,12 +35,19 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		instance = this;
 		DontDestroyOnLoad(this.gameObject);
 		SetGameState(GameState.MainMenu);
 	}
 
 	public static void SetGameState(GameState state)
 	{
+		if(previousGameState == GameState.Play)
+		{
+			instance.StartCoroutine("FinishFirst",5.0f);
+			instance.StartCoroutine("DoLast");
+		}
+
 		previousGameState = gameState;
 		switch(state)
 		{
@@ -66,7 +82,24 @@ public class GameManager : MonoBehaviour {
 		return;
 	}
 
-	public static void SetGameState(GameState state, string path)
+	public IEnumerator FinishFirst(float waitTime) {
+		inFirst = true;
+		Application.LoadLevel("Jippe");
+		yield return new WaitForSeconds(waitTime);
+		print("leave FinishFirst");
+		inFirst = false;
+	}
+	
+	public IEnumerator DoLast() {
+		
+		while(inFirst)       
+			yield return new WaitForSeconds(0.1f);
+		print("Do stuff.");
+		previousGameState = GameState.none;
+		SetGameState(queGameState);
+	}
+
+	public static void SetGameState(GameState state, string DirectoryName, string SceneName )
 	{
 		previousGameState = gameState;
 		switch(state)
@@ -74,7 +107,10 @@ public class GameManager : MonoBehaviour {
 
 		case GameState.Play:
 			gameState = GameState.Play;
-			XmlBehaviour.LoadScene(path);
+			directoryName = DirectoryName;
+			sceneName = SceneName;
+
+			Application.LoadLevel("Play_Scene");
 			break;
 			
 		default:

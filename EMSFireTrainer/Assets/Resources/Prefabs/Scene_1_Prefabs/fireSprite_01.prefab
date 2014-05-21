@@ -13,7 +13,15 @@ GameObject:
   - 61: {fileID: 6100000}
   - 114: {fileID: 11400000}
   m_Layer: 0
+<<<<<<< HEAD
   m_Name: fireSprite_01
+=======
+<<<<<<< HEAD
+  m_Name: fireSprite_01
+=======
+  m_Name: fireSprite_02
+>>>>>>> FETCH_HEAD
+>>>>>>> 88b1f1c0a8adf898b43526e0cd13f56800a69d67
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

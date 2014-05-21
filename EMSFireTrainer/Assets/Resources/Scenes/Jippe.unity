@@ -268,6 +268,7 @@ GameObject:
   - 114: {fileID: 1267075342}
   - 114: {fileID: 1267075341}
   - 114: {fileID: 1267075340}
+  - 148: {fileID: 1267075345}
   m_Layer: 0
   m_Name: Server
   m_TagString: Untagged
@@ -330,6 +331,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!148 &1267075345
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1267075339}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 1267075344}
+  m_ViewID:
+    m_ID: 1
+    m_Type: 1
 --- !u!1 &1592779495
 GameObject:
   m_ObjectHideFlags: 0
