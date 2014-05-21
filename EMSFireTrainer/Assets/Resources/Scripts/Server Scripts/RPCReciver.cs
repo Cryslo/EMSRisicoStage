@@ -14,6 +14,13 @@ public class RPCReciver : MonoBehaviour
 		}
 	}
 
+	public void SendControllerOn() {
+		networkView.RPC("Controller", RPCMode.Others);
+	}
+	public void SendControllerOff() {
+		networkView.RPC("ControllerOut", RPCMode.Others);
+	}
+
 	[RPC]
 	void ConnectionSucces(string Username)
 	{
@@ -24,6 +31,21 @@ public class RPCReciver : MonoBehaviour
 
 		}
 	}
+
+	[RPC]
+	void Controller()
+	{
+		//Client only
+	}
+
+	
+	
+	[RPC]
+	void ControllerOut()
+	{
+		//Client only
+		//PlayController.controller = false;	
+	}
     
 	[RPC]
 	void NextScene()
@@ -31,6 +53,7 @@ public class RPCReciver : MonoBehaviour
 		//severScript.DeviceName = DeviceName;
 		if(GameManager.getGameState == GameState.Play) {
 			print("Next Scene");
+			PlayManager.NextScene();
 		}
 	}
     
@@ -40,6 +63,7 @@ public class RPCReciver : MonoBehaviour
 		//severScript.DeviceName = DeviceName;
 		if(GameManager.getGameState == GameState.Play) {
 			print("Previous Scene");
+			PlayManager.PreviousScene();
 		}
 	}
     
@@ -58,6 +82,7 @@ public class RPCReciver : MonoBehaviour
 		//severScript.DeviceName = DeviceName;
 		if(GameManager.getGameState == GameState.Play) {
 			GameManager.queGameState = GameState.PlayMenu;
+			GameManager.SetGameStateBack();
 		}
 	}
 }

@@ -42,11 +42,6 @@ public class GameManager : MonoBehaviour {
 
 	public static void SetGameState(GameState state)
 	{
-		if(previousGameState == GameState.Play)
-		{
-			instance.StartCoroutine("FinishFirst",5.0f);
-			instance.StartCoroutine("DoLast");
-		}
 
 		previousGameState = gameState;
 		switch(state)
@@ -81,6 +76,11 @@ public class GameManager : MonoBehaviour {
 		}
 		return;
 	}
+
+	public static void SetGameStateBack() {
+		instance.StartCoroutine("FinishFirst",2.0f);
+		instance.StartCoroutine("DoLast");
+    }
 
 	public IEnumerator FinishFirst(float waitTime) {
 		inFirst = true;

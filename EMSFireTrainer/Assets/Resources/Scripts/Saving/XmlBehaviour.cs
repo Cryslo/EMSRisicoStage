@@ -192,23 +192,23 @@ public class XmlBehaviour : MonoBehaviour
 					//Debug.Log(itemNodusElement.Current.Name);
 					switch(scenePropertiesElement.Current.Name) {
 					case "TimerActive":
-						print(scenePropertiesElement.Current.Value);
+//						print(scenePropertiesElement.Current.Value);
 						sceneOptions.timerActive = Convert.ToBoolean(scenePropertiesElement.Current.Value);
 						break;
 					case "Scenelength":
-						print(scenePropertiesElement.Current.Value);
+						//print(scenePropertiesElement.Current.Value);
 						sceneOptions.scenelength = float.Parse(scenePropertiesElement.Current.Value);
 						break;
 					case "TimerVisable":
-						print(scenePropertiesElement.Current.Value);
+						//print(scenePropertiesElement.Current.Value);
 						sceneOptions.timerVisable = Convert.ToBoolean(scenePropertiesElement.Current.Value);
 						break;
 					case "AudioNumber":		
-						print(scenePropertiesElement.Current.Value);		
+						//print(scenePropertiesElement.Current.Value);		
 						sceneOptions.audioNumber = Convert.ToInt16(scenePropertiesElement.Current.Value);
 						break;
 					case "BackgroundName":
-						print(scenePropertiesElement.Current.Value);
+						//print(scenePropertiesElement.Current.Value);
 						sceneOptions.backgroundName = scenePropertiesElement.Current.Value;
 						break;
 						
@@ -252,7 +252,7 @@ public class XmlBehaviour : MonoBehaviour
 						posX = float.Parse(FiresElement.Current.Value);
 						break;
 					case "posY":
-						print("Test: " + FiresElement.Current.Value);
+//						print("Test: " + FiresElement.Current.Value);
 						posY = float.Parse(FiresElement.Current.Value);
 						break;
 					case "posZ":
@@ -315,7 +315,7 @@ public class XmlBehaviour : MonoBehaviour
 						posX = float.Parse(gameObjectElement.Current.Value);
 						break;
 					case "posY":
-						print("Test: " + gameObjectElement.Current.Value);
+						//print("Test: " + gameObjectElement.Current.Value);
 						posY = float.Parse(gameObjectElement.Current.Value);
 						break;
 					case "posZ":
@@ -326,7 +326,7 @@ public class XmlBehaviour : MonoBehaviour
 						break;
 					case "RotationY":
 						rotationY = float.Parse(gameObjectElement.Current.Value);
-						print(rotationY);
+						//print(rotationY);
 						break;
 					case "RotationZ":
 						rotationZ = float.Parse(gameObjectElement.Current.Value);
