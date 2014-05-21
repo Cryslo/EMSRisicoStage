@@ -19,9 +19,8 @@ public class Create_Bars_fire_Script {
         Topbar.transform.parent = parent.transform;
         topBar_Sprite = Resources.LoadAll<Sprite>("BackGrounds/TopBar/TopBar");
         topBar_Renderer = Topbar.AddComponent<SpriteRenderer>();
-        
-
         topBar_Renderer.sprite = topBar_Sprite[0];
+
         scale = 1f / topBar_Sprite[0].texture.width;
         Topbar.transform.position = position;
         Topbar.transform.localScale = new Vector3(1, 1, 1);
@@ -38,17 +37,19 @@ public class Create_Bars_fire_Script {
 
     private void AddFire(int i, GameObject parent)
     {
+        float pixelRatio = (camera.orthographicSize * 2) / camera.pixelHeight;
         GameObject sprite;
         GameObject sprite2;
         FireAnimation = (GameObject)Resources.Load("Prefabs/Scene_1_Prefabs/fireSprite_01");
         Debug.Log("ScaleX: " + parent.transform.localScale.x);
-        FireAnimation.transform.localScale = new Vector3(parent.transform.localScale.x, parent.transform.localScale.x / 1.5f, parent.transform.localScale.z);
-        sprite = GameObject.Instantiate(FireAnimation, new Vector3(parent.transform.position.x, parent.transform.position.y, parent.transform.position.z), parent.transform.rotation) as GameObject;
-        sprite2 = GameObject.Instantiate(FireAnimation, new Vector3(parent.transform.position.x + (FireAnimation.transform.localScale.DpToPixel().x * 2), parent.transform.position.y, parent.transform.position.z), parent.transform.rotation) as GameObject;
+        sprite = GameObject.Instantiate(FireAnimation, new Vector3(parent.transform.position.x + 0.15f, parent.transform.position.y, parent.transform.position.z), parent.transform.rotation) as GameObject;
+        sprite2 = GameObject.Instantiate(FireAnimation, new Vector3(parent.transform.position.x + (FireAnimation.transform.localScale.DpToPixel().x * 2) + 0.30f, parent.transform.position.y, parent.transform.position.z), parent.transform.rotation) as GameObject;
         sprite.name = "Fire_" + i;
         sprite2.name = "Fire_" + i + i;
         sprite.transform.parent = parent.transform;
         sprite2.transform.parent = parent.transform;
+        sprite.transform.localScale = new Vector3(Topbar.transform.localScale.x / 1.25f, Topbar.transform.localScale.y / 1.75f, parent.transform.localScale.z);
+        sprite2.transform.localScale = new Vector3(Topbar.transform.localScale.x / 1.25f, Topbar.transform.localScale.y / 1.75f, parent.transform.localScale.z);
     }
 
     private void AddText(int i, GameObject parent, string text)

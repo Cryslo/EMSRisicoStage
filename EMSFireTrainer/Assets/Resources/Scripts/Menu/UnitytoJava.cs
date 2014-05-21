@@ -2,9 +2,9 @@
 using System.Collections;
 using System.IO;
 
-public class UnitytoJava : MonoBehaviour
+public class UnitytoJava
 {
-	#if UNITY_ANDROID
+    //#if UNITY_ANDROID
     private AndroidJavaClass jc;
     private AndroidJavaObject jo;
     private GameObject bg;
@@ -17,23 +17,27 @@ public class UnitytoJava : MonoBehaviour
     public string deviceName;
     private WebCamTexture wct;
 
-	// Use this for initialization
-	void Start () {
+    private BackGround_Image_Load_Script BGILscript;
+
+    // Use this for initialization
+    void Start()
+    {
+        BGILscript = GameObject.Find("CreateMenuScriptHolder").GetComponent<BackGround_Image_Load_Script>();
         bgTexture = new Texture2D(1, 1);
         bg = GameObject.Find("BackGround");
         dataPath = Application.persistentDataPath;
         WebCamDevice[] devices = WebCamTexture.devices;
         deviceName = devices[0].name;
-	}
-	//Receive the image from JAVA from either the Camera or Image browser
+    }
+    //Receive the image from JAVA from either the Camera or Image browser
     public void receive(string message)
     {
         name = Path.GetFileName(message);
         //Copy image to app data location
         File.Copy(message, dataPath + "/" + name, true);
-        print(dataPath + "/" + name);
+        Debug.Log(dataPath + "/" + name);
         image = dataPath + "/" + name;
-        
+
         if (System.IO.File.Exists(image))
         {
             //Set image as background texture
@@ -41,7 +45,24 @@ public class UnitytoJava : MonoBehaviour
             bg.renderer.material.mainTexture = bgTexture;
         }
     }
-    private void OnGUI()
+
+    public void openImageBrowser()
+    {
+        //Create new java class instance and activity
+        //Call function from MyPlugin
+        jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
+        jo.Call("getImageLoc");
+    }
+
+    public void openCameraApp()
+    {
+        jc = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        jo = jc.GetStatic<AndroidJavaObject>("currentActivity");
+        jo.Call("openCamera");
+    }
+
+    /*private void OnGUI()
     {
             if (GUI.Button(new Rect(0, 0, 200, 150), "Select Image from Browser"))
             {
@@ -59,6 +80,6 @@ public class UnitytoJava : MonoBehaviour
                 jo.Call("openCamera");
 
             }
-    }
-#endif
+    }*/
+    //#endif
 }
