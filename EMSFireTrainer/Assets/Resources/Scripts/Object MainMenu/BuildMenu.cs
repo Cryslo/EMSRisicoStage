@@ -602,12 +602,12 @@ public class BuildMenu : MonoBehaviour
         //position
         homeButton.transform.position = new Vector3(0, 0, 0);
 
-		homeTexture.pixelInset = new Rect(50, Screen.height - 30 - 70, 30, 70);
+        homeTexture.pixelInset = new Rect(50, Screen.height - 30 - 70, 30, 70);
 
         //scale
         homeButton.transform.localScale = new Vector3(0, 0, 1);
 
-		homeIconRect = new Rect(50, 50, 30, 70);
+        homeIconRect = new Rect(50, 50, 30, 70);
     }
 
     private static void DeconstructPlayMenu()
@@ -635,7 +635,7 @@ public class BuildMenu : MonoBehaviour
         createdSceneObjectHolder = new GameObject("createdSceneObjectHolder");
         createMenuScriptHolder = new GameObject("CreateMenuScriptHolder");
         createMenuScriptHolder.AddComponent<TopBar_Script>();
-        
+
         Objects.AddMany(settingsIcon, fireIcon, plusIcon, saveIcon, backIcon);
 
         settingsIcon.name = "Settings_Icon";
@@ -842,12 +842,12 @@ public class BuildMenu : MonoBehaviour
         //position
         homeButton.transform.position = new Vector3(0, 0, 0);
 
-		homeTexture.pixelInset = new Rect(50, Screen.height - 30 - 70, 30, 70);
+        homeTexture.pixelInset = new Rect(50, Screen.height - 30 - 70, 30, 70);
 
         //scale
         homeButton.transform.localScale = new Vector3(0, 0, 1);
 
-		homeIconRect = new Rect(50, 50, 30, 70);
+        homeIconRect = new Rect(50, 50, 30, 70);
     }
 
     private static void DeconstructConnectMenu()
