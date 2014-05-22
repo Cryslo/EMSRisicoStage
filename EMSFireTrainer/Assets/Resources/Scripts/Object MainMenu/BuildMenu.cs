@@ -15,8 +15,8 @@ public class BuildMenu : MonoBehaviour
 
     private static List<GameObject> Objects;
 
-    private static GameObject background;
-    private static GUITexture backgroundTexture;
+	public static GameObject background;
+	public static GUITexture backgroundTexture;
     public static Texture2D backgroundImage;
 
     private static GameObject connectButton;
