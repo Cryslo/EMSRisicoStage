@@ -52,6 +52,7 @@ public class Fire_Propertie_Menu_Script : MonoBehaviour
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
                 if (this.transform == hit.transform)
                 {
+                    removeMenu();
                     obj = hit.transform;
                     if (havePos == false)
                     {
@@ -63,7 +64,6 @@ public class Fire_Propertie_Menu_Script : MonoBehaviour
             }
             if (menuOn)
             {
-                print("Works");
                 menuRec = new Rect(propertyMenuObject.transform.position.x, propertyMenuObject.transform.position.y, propertyMenuRenderer.sprite.bounds.size.x, propertyMenuRenderer.sprite.bounds.size.y);
                 if (!menuRec.Contains(Input.mousePosition))
                 {
@@ -85,6 +85,7 @@ public class Fire_Propertie_Menu_Script : MonoBehaviour
                 {
                     if (this.gameObject.name == obj.transform.name)
                     {
+                        removeMenu();
                         screenPos = camera.WorldToScreenPoint(obj.position);
                         menuOn = true;
                         oldX = obj.position.x;
@@ -131,7 +132,10 @@ public class Fire_Propertie_Menu_Script : MonoBehaviour
 
     void removeMenu()
     {
-        Destroy(propertyMenuObject);
+        if (propertyMenuObject)
+        {
+            Destroy(propertyMenuObject);
+        }
     }
 
     void addMenu(Vector3 position)
