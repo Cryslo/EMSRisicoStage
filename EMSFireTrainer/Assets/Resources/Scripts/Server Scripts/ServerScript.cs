@@ -6,7 +6,6 @@ public class ServerScript : MonoBehaviour
 	
 	private PasswordGui passGui;
 
-	private string ip = "127.0.0.1";
 	private LANBroadcastService broadcastSever;
 
 	public static string username = "";
