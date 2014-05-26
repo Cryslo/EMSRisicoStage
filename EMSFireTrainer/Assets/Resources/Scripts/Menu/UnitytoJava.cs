@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-public class UnitytoJava
+public class UnitytoJava : MonoBehaviour
 {
     //#if UNITY_ANDROID
     private AndroidJavaClass jc;
@@ -18,6 +18,7 @@ public class UnitytoJava
     private WebCamTexture wct;
 
     private BackGround_Image_Load_Script BGILscript;
+    
 
     // Use this for initialization
     void Start()
@@ -32,6 +33,7 @@ public class UnitytoJava
     //Receive the image from JAVA from either the Camera or Image browser
     public void receive(string message)
     {
+        Debug.Log(message);
         name = Path.GetFileName(message);
         //Copy image to app data location
         File.Copy(message, dataPath + "/" + name, true);
@@ -41,8 +43,9 @@ public class UnitytoJava
         if (System.IO.File.Exists(image))
         {
             //Set image as background texture
+            Debug.Log("LoadBG: " + image);
             bgTexture.LoadImage(File.ReadAllBytes(image));
-            bg.renderer.material.mainTexture = bgTexture;
+            BuildMenu.backgroundTexture.texture = bgTexture;
         }
     }
 

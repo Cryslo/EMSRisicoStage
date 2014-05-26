@@ -15,8 +15,8 @@ public class BuildMenu : MonoBehaviour
 
     private static List<GameObject> Objects;
 
-    private static GameObject background;
-    private static GUITexture backgroundTexture;
+    public static GameObject background;
+    public static GUITexture backgroundTexture;
     public static Texture2D backgroundImage;
 
     private static GameObject connectButton;
@@ -57,36 +57,36 @@ public class BuildMenu : MonoBehaviour
     private static int createButtonHeight = 86;
 
     private static GameObject settingsIcon;
-    private static GUITexture settingsTexture;
-    private static Texture2D settingsImage;
+    private static Sprite settingsIconSprite;
+    private static SpriteRenderer settingsIconRenderer;
     private static GUIText settingsTitle;
     private static Rect settingsRect;
     private static Rect settingsTextRect;
 
     private static GameObject fireIcon;
-    private static GUITexture fireTexture;
-    private static Texture2D fireImage;
+    private static Sprite fireIconSprite;
+    private static SpriteRenderer fireIconRenderer;
     private static GUIText fireTitle;
     private static Rect fireIconRect;
     private static Rect fireTextRect;
 
     private static GameObject plusIcon;
-    private static GUITexture plusTexture;
-    private static Texture2D plusImage;
+    private static Sprite plusIconSprite;
+    private static SpriteRenderer plusIconRenderer;
     private static GUIText plusTitle;
     private static Rect plusIconRect;
     private static Rect plusTextRect;
 
     private static GameObject saveIcon;
-    private static GUITexture saveTexture;
-    private static Texture2D saveImage;
+    private static Sprite saveIconSprite;
+    private static SpriteRenderer saveIconRenderer;
     private static GUIText saveTitle;
     private static Rect saveIconRect;
     private static Rect saveTextRect;
 
     private static GameObject backIcon;
-    private static GUITexture backTexture;
-    private static Texture2D backImage;
+    private static Sprite backIconSprite;
+    private static SpriteRenderer backIconRenderer;
     private static GUIText backTitle;
     private static Rect backIconRect;
 
@@ -117,11 +117,11 @@ public class BuildMenu : MonoBehaviour
         homeIcon = Resources.Load("Icons/Play_Icons/previous-36") as Texture2D;
         companyIcon = Resources.Load("Icons/Company_Icons/ISCRisk-36") as Texture2D;
         backgroundImage = Resources.Load("Backgrounds/MenuBackgrounds/MenuBackgrounds/Orange") as Texture2D;
-        settingsImage = Resources.Load("Icons/Create_Icons/SettingsIcon") as Texture2D;
-        fireImage = Resources.Load("Icons/Create_Icons/FireIcon") as Texture2D;
-        plusImage = Resources.Load("Icons/Create_Icons/PlusIcon") as Texture2D;
-        saveImage = Resources.Load("Icons/Create_Icons/SaveIcon") as Texture2D;
-        backImage = Resources.Load("Icons/Create_Icons/CrossIcon") as Texture2D;
+        settingsIconSprite = Resources.Load("Icons/Create_Icons/SettingsIcon") as Sprite;
+        fireIconSprite = Resources.Load("Icons/Create_Icons/FireIcon") as Sprite;
+        plusIconSprite = Resources.Load("Icons/Create_Icons/PlusIcon") as Sprite;
+        saveIconSprite = Resources.Load("Icons/Create_Icons/SaveIcon") as Sprite;
+        backIconSprite = Resources.Load("Icons/Create_Icons/CrossIcon") as Sprite;
 
 
         background = new GameObject();
@@ -686,34 +686,35 @@ public class BuildMenu : MonoBehaviour
         Deconstruct();
         #region createmenu onnodig voor nu
         //Creating Scene Buttons
-        settingsIcon = new GameObject();
-        fireIcon = new GameObject();
-        plusIcon = new GameObject();
-        saveIcon = new GameObject();
-        backIcon = new GameObject();
+        settingsIcon = new GameObject("Settings_Icon");
+        fireIcon = new GameObject("Fire_Icon");
+        plusIcon = new GameObject("Fire_Icon");
+        saveIcon = new GameObject("Plus_Icon");
+        backIcon = new GameObject("Back_Icon");
         createdSceneObjectHolder = new GameObject("createdSceneObjectHolder");
         createMenuScriptHolder = new GameObject("CreateMenuScriptHolder");
         createMenuScriptHolder.AddComponent<TopBar_Script>();
 
         Objects.AddMany(settingsIcon, fireIcon, plusIcon, saveIcon, backIcon);
 
-        settingsIcon.name = "Settings_Icon";
-        fireIcon.name = "Fire_Icon";
-        plusIcon.name = "Plus_Icon";
-        saveIcon.name = "Save_Icon";
-        backIcon.name = "Back_Icon";
-
-        settingsIcon.AddComponent<GUITexture>();
-        fireIcon.AddComponent<GUITexture>();
-        plusIcon.AddComponent<GUITexture>();
-        saveIcon.AddComponent<GUITexture>();
-        backIcon.AddComponent<GUITexture>();
+        settingsIconRenderer = settingsIcon.AddComponent<SpriteRenderer>();
+        fireIconRenderer = fireIcon.AddComponent<SpriteRenderer>();
+        plusIconRenderer = plusIcon.AddComponent<SpriteRenderer>();
+        saveIconRenderer = saveIcon.AddComponent<SpriteRenderer>();
+        backIconRenderer = backIcon.AddComponent<SpriteRenderer>();
 
         settingsIcon.AddComponent<GUIText>();
         fireIcon.AddComponent<GUIText>();
         plusIcon.AddComponent<GUIText>();
         saveIcon.AddComponent<GUIText>();
         backIcon.AddComponent<GUIText>();
+        ///////////////////////////////////
+        ///////////////////////////////////
+        ///////////////////////////////////
+        ////////HIER BEN JE BEZIG/////////
+        ///////////////////////////////////
+        ///////////////////////////////////
+        ///////////////////////////////////
 
         settingsTexture = settingsIcon.GetComponent<GUITexture>();
         fireTexture = fireIcon.GetComponent<GUITexture>();
@@ -743,6 +744,11 @@ public class BuildMenu : MonoBehaviour
         backgroundImage = Resources.Load("Backgrounds/MenuBackgrounds/Yellow") as Texture2D;
         backgroundTexture.texture = backgroundImage;
 
+        int defaultWidth = 1280;
+        int defaultHeight = 800;
+        Vector3 scale;
+        scale = new Vector3(defaultWidth / Screen.width, defaultHeight / Screen.height, 1f);
+
         //position
         settingsIcon.transform.position = new Vector3(0, 0, 0);
         fireIcon.transform.position = new Vector3(0, 0, 0);
@@ -750,13 +756,22 @@ public class BuildMenu : MonoBehaviour
         saveIcon.transform.position = new Vector3(0, 0, 0);
         backIcon.transform.position = new Vector3(0, 0, 0);
 
+
+
+        //plusTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2), 50, createButtonWidth, 0);
         //settingsTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) - (2 * createButtonWidth + (10 * 2)), 50, createButtonWidth, createButtonHeight);
-        plusTexture.pixelInset = new Rect((Screen.width / 2) - (createButtonWidth / 2) - (2 * createButtonWidth + (10 * 2)), 50, createButtonWidth, createButtonHeight);
-        settingsTexture.pixelInset = new Rect((Screen.width / 2) - (createButtonWidth / 2) - (1 * createButtonWidth + (10 * 1)), 50, createButtonWidth, createButtonHeight);
-        //plusTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2), 50, createButtonWidth, createButtonHeight);
-        fireTexture.pixelInset = new Rect((Screen.width / 2) - (createButtonWidth / 2), 50, createButtonWidth, createButtonHeight);
-        saveTexture.pixelInset = new Rect((Screen.width / 2) - (createButtonWidth / 2) + (1 * createButtonWidth + (10 * 1)), 50, createButtonWidth, createButtonHeight);
-        backTexture.pixelInset = new Rect((Screen.width / 2) - (createButtonWidth / 2) + (2 * createButtonWidth + (10 * 2)), 50, createButtonWidth, createButtonHeight);
+        plusTexture.pixelInset      = new Rect((Screen.width / 2) - (createButtonWidth / 2) - (2 * createButtonWidth + (10 * 2)), 50, 1, 1);
+        settingsTexture.pixelInset  = new Rect((Screen.width / 2) - (createButtonWidth / 2) - (1 * createButtonWidth + (10 * 1)), 50, 1, 1);
+        fireTexture.pixelInset      = new Rect((Screen.width / 2) - (createButtonWidth / 2), 50, 1, 1);
+        saveTexture.pixelInset      = new Rect((Screen.width / 2) - (createButtonWidth / 2) + (1 * createButtonWidth + (10 * 1)), 50, 1, 1);
+        backTexture.pixelInset      = new Rect((Screen.width / 2) - (createButtonWidth / 2) + (2 * createButtonWidth + (10 * 2)), 50, 1, 1);
+
+
+        plusTexture.pixelInset = scaleGuiTexture(plusTexture, scale);
+        settingsTexture.pixelInset = scaleGuiTexture(settingsTexture, scale);
+        fireTexture.pixelInset = scaleGuiTexture(fireTexture, scale);
+        saveTexture.pixelInset = scaleGuiTexture(saveTexture, scale);
+        backTexture.pixelInset = scaleGuiTexture(backTexture, scale);
 
         plusTitle.pixelOffset = new Vector2(50, (Screen.height - 65));
         settingsTitle.pixelOffset = new Vector2(50, (Screen.height - 132));
@@ -796,11 +811,11 @@ public class BuildMenu : MonoBehaviour
 
 
         //scale
-        settingsIcon.transform.localScale = new Vector3(0, 0, 1);
-        fireIcon.transform.localScale = new Vector3(0, 0, 1);
-        plusIcon.transform.localScale = new Vector3(0, 0, 1);
-        saveIcon.transform.localScale = new Vector3(0, 0, 1);
-        backIcon.transform.localScale = new Vector3(0, 0, 1);
+        settingsIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
+        fireIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
+        plusIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
+        saveIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
+        backIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
         #endregion
 
         //Rect
@@ -855,6 +870,16 @@ public class BuildMenu : MonoBehaviour
             backTexture.GetScreenRect().height);
         //Left Top Width Height
 
+    }
+
+    private static Rect scaleGuiTexture(GUITexture texture, Vector3 scale)
+    {
+        Rect size = texture.pixelInset;
+        size.x *= scale.x;
+        size.width *= scale.x;
+        size.y *= scale.x;
+        size.height *= scale.x;
+        return size;
     }
 
     private static void DeconstructCreateMenu()

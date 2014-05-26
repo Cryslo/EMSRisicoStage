@@ -1,4 +1,5 @@
 ﻿<Properties>
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/Scripts/Object MainMenu/FolderManager.cs">
     <Files>
@@ -13,6 +14,14 @@
       <File FileName="Assets/Resources/Scripts/Object GameManager/GameManager.cs" Line="78" Column="1" />
       <File FileName="Assets/Resources/Scripts/Object MainMenu/FolderBuilder.cs" Line="185" Column="59" />
       <File FileName="Assets/Resources/Scripts/Object MainMenu/FolderManager.cs" Line="303" Column="1" />
+=======
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../../Documents/Projects/UnityNetworkingTest/UnityNetworkingTest/Assets/PlayController.cs">
+    <Files>
+      <File FileName="../../../Documents/Projects/UnityNetworkingTest/UnityNetworkingTest/Assets/Connect.cs" Line="117" Column="65" />
+      <File FileName="../../../Documents/Projects/UnityNetworkingTest/UnityNetworkingTest/Assets/PlayController.cs" Line="93" Column="4" />
+      <File FileName="Assets/Resources/Scripts/Object MainMenu/FolderBuilder.cs" Line="194" Column="39" />
+>>>>>>> FETCH_HEAD
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

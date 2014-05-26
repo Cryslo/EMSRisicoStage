@@ -11,6 +11,7 @@ public class BackGround_Image_Load_Script : MonoBehaviour {
     private GameObject Camera_Button_Object;
     private GameObject Browser_Button_Object;
     private GameObject ButtonHolder;
+    private GameObject scriptHolder;
 
     private Rect CameraRect;
     private Rect BrowserRect;
@@ -32,6 +33,7 @@ public class BackGround_Image_Load_Script : MonoBehaviour {
         Camera_Button_Renderer.sprite = Camera_Button_Sprite[0];
         Camera_Button_Object.transform.position = new Vector3(ButtonHolder.transform.position.x - Camera_Button_Renderer.sprite.bounds.size.x, 0, 0);
         Camera_Button_Object.AddComponent<BoxCollider2D>();
+        Camera_Button_Renderer.sortingOrder = 1;
 
         Browser_Button_Object = new GameObject("Browser_Button");
         Browser_Button_Object.transform.parent = ButtonHolder.transform;
@@ -40,8 +42,11 @@ public class BackGround_Image_Load_Script : MonoBehaviour {
         Browser_Button_Renderer.sprite = Browser_Button_Sprite[0];
         Browser_Button_Object.transform.position = new Vector3(ButtonHolder.transform.position.x + Browser_Button_Renderer.sprite.bounds.size.x, 0, 0);
         Browser_Button_Object.AddComponent<BoxCollider2D>();
+        Browser_Button_Renderer.sortingOrder = 1;
 
-        unityToJava = new UnitytoJava();
+        scriptHolder = new GameObject("ScriptHolder");
+        scriptHolder.AddComponent<UnitytoJava>();
+        unityToJava = scriptHolder.GetComponent<UnitytoJava>();
 	}
 
 	void Update ()
@@ -51,7 +56,6 @@ public class BackGround_Image_Load_Script : MonoBehaviour {
 
         if (hit.transform == Camera_Button_Object.transform)
         {
-            print("Inside Camera Button");
             Camera_Button_Renderer.sprite = Camera_Button_Sprite[1];
         }
         else
@@ -60,7 +64,6 @@ public class BackGround_Image_Load_Script : MonoBehaviour {
         }
         if (hit.transform == Browser_Button_Object.transform)
         {
-            print("Inside Browser Button");
             Browser_Button_Renderer.sprite = Browser_Button_Sprite[1];
         }
         else
@@ -72,10 +75,12 @@ public class BackGround_Image_Load_Script : MonoBehaviour {
         {
             if (hit.transform == Camera_Button_Object.transform)
             {
+                Camera_Button_Renderer.sprite = Camera_Button_Sprite[0];
                 unityToJava.openCameraApp();
             }
             if (hit.transform == Browser_Button_Object.transform)
             {
+                Browser_Button_Renderer.sprite = Browser_Button_Sprite[0];
                 unityToJava.openImageBrowser();
             }
         }

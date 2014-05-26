@@ -62,61 +62,62 @@ public class Fire_Propertie_Menu_Script : MonoBehaviour
                     offset = obj.position - mousePos;
                 }
             }
-            if (menuOn)
+            if (menuOn && propertyMenuObject != null)
             {
-                menuRec = new Rect(propertyMenuObject.transform.position.x, propertyMenuObject.transform.position.y, propertyMenuRenderer.sprite.bounds.size.x, propertyMenuRenderer.sprite.bounds.size.y);
-                if (!menuRec.Contains(Input.mousePosition))
-                {
+                print("ShouldRemove 1");
+                //menuRec = new Rect(propertyMenuObject.transform.position.x, propertyMenuObject.transform.position.y, propertyMenuRenderer.sprite.bounds.size.x, propertyMenuRenderer.sprite.bounds.size.y);
+                //if (!menuRec.Contains(Input.mousePosition))
+                //{
                 RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
                     if (!hit.transform == propertyMenuObject.transform)
                     {
-                        menuOn = false;
+                        print("ShouldRemove 2");
                         removeMenu();
+                        menuOn = false;
                     }
-                }
+                //}
             }
         }
         else if (Input.GetMouseButtonUp(0))
         {
             if (obj)
             {
-                print("Ohai");
-                if (prefPoint == obj.position)
-                {
-                    if (this.gameObject.name == obj.transform.name)
+                    if (prefPoint == obj.position)
                     {
-                        removeMenu();
-                        screenPos = camera.WorldToScreenPoint(obj.position);
-                        menuOn = true;
-                        oldX = obj.position.x;
-                        oldY = obj.position.y;
-                        print(oldX);
-                        print(oldY);
-                        lastObject = obj.gameObject;
+                        if (this.gameObject.name == obj.transform.name)
+                        {
+                            removeMenu();
+                            screenPos = camera.WorldToScreenPoint(obj.position);
+                            menuOn = true;
+                            oldX = obj.position.x;
+                            oldY = obj.position.y;
+                            print(oldX);
+                            print(oldY);
+                            lastObject = obj.gameObject;
 
-                        //addMenu(obj.position);
+                            //addMenu(obj.position);
 
-                        if (oldX < 0 && oldY > 0)
-                        {
-                            print("Upper Left");
-                            addMenu(new Vector3(obj.position.x + 2, obj.position.y - 2, 0));
+                            if (oldX < 0 && oldY > 0)
+                            {
+                                print("Upper Left");
+                                addMenu(new Vector3(obj.position.x + 2, obj.position.y - 2, 0));
+                            }
+                            if (oldX > 0 && oldY > 0)
+                            {
+                                print("Upper Right");
+                                addMenu(new Vector3(obj.position.x - 4, obj.position.y - 2, 0));
+                            }
+                            if (oldX < 0 && oldY < 0)
+                            {
+                                print("Lower Left");
+                                addMenu(new Vector3(obj.position.x + 2, obj.position.y, 0));
+                            }
+                            if (oldX > 0 && oldY < 0)
+                            {
+                                print("Lower Right");
+                                addMenu(new Vector3(obj.position.x - 4, obj.position.y, 0));
+                            }
                         }
-                        if (oldX > 0 && oldY > 0)
-                        {
-                            print("Upper Right");
-                            addMenu(new Vector3(obj.position.x - 4, obj.position.y - 2, 0));
-                        }
-                        if (oldX < 0 && oldY < 0)
-                        {
-                            print("Lower Left");
-                            addMenu(new Vector3(obj.position.x + 2, obj.position.y, 0));
-                        }
-                        if (oldX > 0 && oldY < 0)
-                        {
-                            print("Lower Right");
-                            addMenu(new Vector3(obj.position.x - 4, obj.position.y, 0));
-                        }
-                    }
                 }
             }
             obj = null;
@@ -132,9 +133,10 @@ public class Fire_Propertie_Menu_Script : MonoBehaviour
 
     void removeMenu()
     {
-        if (propertyMenuObject)
+        if (GameObject.Find("propertyMenuObject"))
         {
-            Destroy(propertyMenuObject);
+
+            Destroy(GameObject.Find("propertyMenuObject"));
         }
     }
 
