@@ -581,8 +581,6 @@ public class BuildMenu : MonoBehaviour
         productName.color = Color.white;
         companyName.color = Color.white;
 
-
-
         //Font
         connectButtonText.font = menuFont;
         createButtonText.font = menuFont;
@@ -708,31 +706,20 @@ public class BuildMenu : MonoBehaviour
         plusIcon.AddComponent<GUIText>();
         saveIcon.AddComponent<GUIText>();
         backIcon.AddComponent<GUIText>();
-        ///////////////////////////////////
-        ///////////////////////////////////
-        ///////////////////////////////////
-        ////////HIER BEN JE BEZIG/////////
-        ///////////////////////////////////
-        ///////////////////////////////////
-        ///////////////////////////////////
 
-        settingsTexture = settingsIcon.GetComponent<GUITexture>();
-        fireTexture = fireIcon.GetComponent<GUITexture>();
-        plusTexture = plusIcon.GetComponent<GUITexture>();
-        saveTexture = saveIcon.GetComponent<GUITexture>();
-        backTexture = backIcon.GetComponent<GUITexture>();
+        ///////////////////////////////////
+        ///////////////////////////////////
+        ///////////////////////////////////
+        ////////HIER BEN JE BEZIG//////////
+        ///////////////////////////////////
+        ///////////////////////////////////
+        ///////////////////////////////////
 
         settingsTitle = settingsIcon.GetComponent<GUIText>();
         fireTitle = fireIcon.GetComponent<GUIText>();
         plusTitle = plusIcon.GetComponent<GUIText>();
         saveTitle = saveIcon.GetComponent<GUIText>();
         backTitle = backIcon.GetComponent<GUIText>();
-
-        settingsTexture.texture = settingsImage;
-        fireTexture.texture = fireImage;
-        plusTexture.texture = plusImage;
-        saveTexture.texture = saveImage;
-        backTexture.texture = backImage;
 
         settingsTitle.text = "SETTINGS";
         fireTitle.text = "FIRE";
@@ -755,23 +742,6 @@ public class BuildMenu : MonoBehaviour
         plusIcon.transform.position = new Vector3(0, 0, 0);
         saveIcon.transform.position = new Vector3(0, 0, 0);
         backIcon.transform.position = new Vector3(0, 0, 0);
-
-
-
-        //plusTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2), 50, createButtonWidth, 0);
-        //settingsTexture.pixelInset = new Rect( (Screen.width / 2) - (createButtonWidth / 2) - (2 * createButtonWidth + (10 * 2)), 50, createButtonWidth, createButtonHeight);
-        plusTexture.pixelInset      = new Rect((Screen.width / 2) - (createButtonWidth / 2) - (2 * createButtonWidth + (10 * 2)), 50, 1, 1);
-        settingsTexture.pixelInset  = new Rect((Screen.width / 2) - (createButtonWidth / 2) - (1 * createButtonWidth + (10 * 1)), 50, 1, 1);
-        fireTexture.pixelInset      = new Rect((Screen.width / 2) - (createButtonWidth / 2), 50, 1, 1);
-        saveTexture.pixelInset      = new Rect((Screen.width / 2) - (createButtonWidth / 2) + (1 * createButtonWidth + (10 * 1)), 50, 1, 1);
-        backTexture.pixelInset      = new Rect((Screen.width / 2) - (createButtonWidth / 2) + (2 * createButtonWidth + (10 * 2)), 50, 1, 1);
-
-
-        plusTexture.pixelInset = scaleGuiTexture(plusTexture, scale);
-        settingsTexture.pixelInset = scaleGuiTexture(settingsTexture, scale);
-        fireTexture.pixelInset = scaleGuiTexture(fireTexture, scale);
-        saveTexture.pixelInset = scaleGuiTexture(saveTexture, scale);
-        backTexture.pixelInset = scaleGuiTexture(backTexture, scale);
 
         plusTitle.pixelOffset = new Vector2(50, (Screen.height - 65));
         settingsTitle.pixelOffset = new Vector2(50, (Screen.height - 132));
@@ -818,58 +788,6 @@ public class BuildMenu : MonoBehaviour
         backIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
         #endregion
 
-        //Rect
-        //PlusIcon
-        plusTextRect = new Rect(50,
-            (Screen.height - plusTitle.GetScreenRect().yMax + 14),
-            plusTitle.GetScreenRect().width,
-            fontSize - 20);
-
-        plusIconRect = new Rect(plusTexture.GetScreenRect().xMin,
-            Screen.height - plusTexture.GetScreenRect().yMax,
-            plusTexture.GetScreenRect().width,
-            plusTexture.GetScreenRect().height);
-
-        //FireIcon
-        fireTextRect = new Rect(50,
-            (Screen.height - fireTitle.GetScreenRect().yMax + 14),
-            fireTitle.GetScreenRect().width,
-            fontSize - 20);
-
-        fireIconRect = new Rect(fireTexture.GetScreenRect().xMin,
-            Screen.height - fireTexture.GetScreenRect().yMax,
-            fireTexture.GetScreenRect().width,
-            fireTexture.GetScreenRect().height);
-
-        //SettingsIcon
-        settingsTextRect = new Rect(50,
-            (Screen.height - settingsTitle.GetScreenRect().yMax + 14),
-            settingsTitle.GetScreenRect().width,
-            fontSize - 20);
-
-        settingsRect = new Rect(settingsTexture.GetScreenRect().xMin,
-            Screen.height - settingsTexture.GetScreenRect().yMax,
-            settingsTexture.GetScreenRect().width,
-            settingsTexture.GetScreenRect().height);
-
-        //SaveIcon
-        saveTextRect = new Rect(50,
-            (Screen.height - saveTitle.GetScreenRect().yMax + 14),
-            saveTitle.GetScreenRect().width,
-            fontSize - 20);
-
-        saveIconRect = new Rect(saveTexture.GetScreenRect().xMin,
-            Screen.height - saveTexture.GetScreenRect().yMax,
-            saveTexture.GetScreenRect().width,
-            saveTexture.GetScreenRect().height);
-
-        //Backicon
-        backIconRect = new Rect(backTexture.GetScreenRect().xMin,
-            Screen.height - backTexture.GetScreenRect().yMax,
-            backTexture.GetScreenRect().width,
-            backTexture.GetScreenRect().height);
-        //Left Top Width Height
-
     }
 
     private static Rect scaleGuiTexture(GUITexture texture, Vector3 scale)
@@ -888,14 +806,9 @@ public class BuildMenu : MonoBehaviour
         {
             Destroy(Objects[i]);
         }
+
         Destroy(createMenuScriptHolder);
         Destroy(createdSceneObjectHolder);
-
-        backIconRect = new Rect();
-        saveIconRect = new Rect();
-        fireIconRect = new Rect();
-        settingsRect = new Rect();
-        plusIconRect = new Rect();
 
         saveTextRect = new Rect();
         fireTextRect = new Rect();
