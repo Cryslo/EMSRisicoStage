@@ -60,38 +60,52 @@ public class BuildMenu : MonoBehaviour
     private static Sprite settingsIconSprite;
     private static SpriteRenderer settingsIconRenderer;
     private static GUIText settingsTitle;
-    private static Rect settingsRect;
+    private static GameObject settingsTitleObject;
+    private static BoxCollider2D settingsCollider;
     private static Rect settingsTextRect;
 
     private static GameObject fireIcon;
     private static Sprite fireIconSprite;
     private static SpriteRenderer fireIconRenderer;
     private static GUIText fireTitle;
-    private static Rect fireIconRect;
+    private static GameObject fireTitleObject;
+    private static BoxCollider2D fireCollider;
     private static Rect fireTextRect;
 
     private static GameObject plusIcon;
     private static Sprite plusIconSprite;
     private static SpriteRenderer plusIconRenderer;
     private static GUIText plusTitle;
-    private static Rect plusIconRect;
+    private static GameObject plusTitleObject;
+    private static BoxCollider2D plusCollider;
     private static Rect plusTextRect;
 
     private static GameObject saveIcon;
     private static Sprite saveIconSprite;
     private static SpriteRenderer saveIconRenderer;
     private static GUIText saveTitle;
-    private static Rect saveIconRect;
+    private static GameObject saveTitleObject;
+    private static BoxCollider2D saveCollider;
     private static Rect saveTextRect;
 
     private static GameObject backIcon;
     private static Sprite backIconSprite;
     private static SpriteRenderer backIconRenderer;
+    private static GameObject backTitleObject;
     private static GUIText backTitle;
-    private static Rect backIconRect;
+    private static BoxCollider2D backCollider;
 
     private static bool textClicked = false;
 
+    private static Camera camera;
+
+
+    private static float startTime;
+    private static Vector2 startPos;
+    private static bool couldBeSwipe;
+    private static float comfortZone;
+    private static float minSwipeDist;
+    private static float maxSwipeTime;
 
     #endregion
 
@@ -102,10 +116,16 @@ public class BuildMenu : MonoBehaviour
     public Vector3 test1;
     public Rect test2;
 
+    public static float screenDPI;
+
     void Awake()
     {
+        maxSwipeTime = 10;
+        minSwipeDist = 5;
+        comfortZone = 500;
+        screenDPI = Screen.dpi / 160;
         folderBuilder = gameObject.GetComponent<FolderBuilder>();
-
+        camera = GameObject.Find("Main Camera").camera;
         Objects = new List<GameObject>();
 
         //Init Font
@@ -146,6 +166,7 @@ public class BuildMenu : MonoBehaviour
     void Update()
     {
         Vector2 mousePos = new Vector2(Input.mousePosition.x, Screen.height - Input.mousePosition.y);
+        Vector3 mouseStoWoldPos = camera.ScreenToWorldPoint(Input.mousePosition);
         #region MainMenu
         if (GameManager.getGameState == GameState.MainMenu)
         {
@@ -219,6 +240,8 @@ public class BuildMenu : MonoBehaviour
             //Find an object to attach the script to
             GameObject FPM = GameObject.Find("CreateMenuScriptHolder");
 
+            RaycastHit2D hit = Physics2D.Raycast(mouseStoWoldPos, Vector2.zero);
+            IconMenuBehaviour();
 
             if (plusTextRect.Contains(mousePos) && !textClicked)
             {
@@ -239,7 +262,7 @@ public class BuildMenu : MonoBehaviour
                 plusTitle.fontSize = fontSize;
             }
 
-            if (plusIconRect.Contains(mousePos))
+            if (hit.transform == plusIcon.transform)
             {
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -280,7 +303,7 @@ public class BuildMenu : MonoBehaviour
                 fireTitle.fontSize = fontSize;
             }
 
-            if (fireIconRect.Contains(mousePos))
+            if (hit.transform == fireIcon.transform)
             {
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -323,7 +346,7 @@ public class BuildMenu : MonoBehaviour
                 settingsTitle.fontSize = fontSize;
             }
 
-            if (settingsRect.Contains(mousePos))
+            if (hit.transform == settingsIcon.transform)
             {
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -365,7 +388,7 @@ public class BuildMenu : MonoBehaviour
                 saveTitle.fontSize = fontSize;
             }
 
-            if (saveIconRect.Contains(mousePos))
+            if (hit.transform == saveIcon.transform)
             {
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -385,7 +408,7 @@ public class BuildMenu : MonoBehaviour
             {
             }
             //Quit
-            if (backIconRect.Contains(mousePos))
+            if (hit.transform == backIcon.transform)
             {
                 if (Input.GetMouseButtonUp(0))
                 {
@@ -420,6 +443,66 @@ public class BuildMenu : MonoBehaviour
             {
                 homeTexture.color = Color.white;
             }
+        }
+    }
+
+    private static void IconMenuBehaviour()
+    {
+        if (Input.touchCount > 0)
+        {
+            var touch = Input.touches[0];
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    print("Began");
+                    couldBeSwipe = true;
+                    startPos = touch.position;
+                    startTime = Time.time;
+                    break;
+
+                case TouchPhase.Moved:
+                    if (Mathf.Abs(touch.position.y - startPos.y) > comfortZone)
+                    {
+                        print("Swipe false!");
+                        couldBeSwipe = false;
+                    }
+                    break;
+
+                case TouchPhase.Stationary:
+                    print("Stationary!");
+                    //couldBeSwipe = false;
+                    break;
+
+                case TouchPhase.Ended:
+                    print("Ended");
+
+                    float swipeTime = Time.time - startTime;
+                    float swipeDist = (touch.position - startPos).magnitude;
+
+                    if (couldBeSwipe && (swipeTime < maxSwipeTime) && (swipeDist > minSwipeDist))
+                    {
+                        print("Its a Swipe!");
+                        // It's a swiiiiiiiiiiiipe!
+                        float swipeDirection = Mathf.Sign(touch.position.y - startPos.y);
+                        print(swipeDirection);
+
+                        // Do something here in reaction to the swipe.
+                        foreach (GameObject item in Objects)
+                        {
+                            if (swipeDirection < 0)
+                            {
+                                item.transform.position.y = Vector3.Lerp(item.transform.position, new Vector3(item.transform.position.x, -50, item.transform.position.z), Time.deltaTime);
+                            }
+                            if (swipeDirection > 0)
+                            {
+                                item.transform.position = Vector3.Lerp(item.transform.position, new Vector3(item.transform.position.x, 50, item.transform.position.z), Time.deltaTime);
+                            }
+                        }
+                    }
+                    break;
+
+            }
+
         }
     }
 
@@ -683,17 +766,39 @@ public class BuildMenu : MonoBehaviour
     {
         Deconstruct();
         #region createmenu onnodig voor nu
+        List<GUIText> textList = new List<GUIText>();
+        List<GameObject> textObjectList = new List<GameObject>();
+        textList.Clear();
+        textObjectList.Clear();
         //Creating Scene Buttons
         settingsIcon = new GameObject("Settings_Icon");
         fireIcon = new GameObject("Fire_Icon");
-        plusIcon = new GameObject("Fire_Icon");
-        saveIcon = new GameObject("Plus_Icon");
+        plusIcon = new GameObject("Plus_Icon");
+        saveIcon = new GameObject("Save_Icon");
         backIcon = new GameObject("Back_Icon");
+
+        settingsCollider = settingsIcon.AddComponent<BoxCollider2D>();
+        fireCollider = fireIcon.AddComponent<BoxCollider2D>();
+        plusCollider = plusIcon.AddComponent<BoxCollider2D>();
+        saveCollider = saveIcon.AddComponent<BoxCollider2D>();
+        backCollider = backIcon.AddComponent<BoxCollider2D>();
+
+        settingsIconSprite = Resources.Load<Sprite>("Sprites/Create_Icons/SettingsIcon");
+        fireIconSprite = Resources.Load<Sprite>("Sprites/Create_Icons/FireIcon");
+        plusIconSprite = Resources.Load<Sprite>("Sprites/Create_Icons/PlusIcon");
+        saveIconSprite = Resources.Load<Sprite>("Sprites/Create_Icons/SaveIcon");
+        backIconSprite = Resources.Load<Sprite>("Sprites/Create_Icons/Crossicon");
+
+        settingsTitleObject = new GameObject("Settings_Text");
+        fireTitleObject = new GameObject("Fire_Text");
+        plusTitleObject = new GameObject("Plus_Text");
+        saveTitleObject = new GameObject("Save_Text");
+
         createdSceneObjectHolder = new GameObject("createdSceneObjectHolder");
         createMenuScriptHolder = new GameObject("CreateMenuScriptHolder");
         createMenuScriptHolder.AddComponent<TopBar_Script>();
 
-        Objects.AddMany(settingsIcon, fireIcon, plusIcon, saveIcon, backIcon);
+        Objects.AddMany(settingsIcon, fireIcon, plusIcon, saveIcon, backIcon, settingsTitleObject, fireTitleObject, plusTitleObject, saveTitleObject);
 
         settingsIconRenderer = settingsIcon.AddComponent<SpriteRenderer>();
         fireIconRenderer = fireIcon.AddComponent<SpriteRenderer>();
@@ -701,91 +806,111 @@ public class BuildMenu : MonoBehaviour
         saveIconRenderer = saveIcon.AddComponent<SpriteRenderer>();
         backIconRenderer = backIcon.AddComponent<SpriteRenderer>();
 
-        settingsIcon.AddComponent<GUIText>();
-        fireIcon.AddComponent<GUIText>();
-        plusIcon.AddComponent<GUIText>();
-        saveIcon.AddComponent<GUIText>();
-        backIcon.AddComponent<GUIText>();
+        settingsIconRenderer.sprite = settingsIconSprite;
+        fireIconRenderer.sprite = fireIconSprite;
+        plusIconRenderer.sprite = plusIconSprite;
+        saveIconRenderer.sprite = saveIconSprite;
+        backIconRenderer.sprite = backIconSprite;
 
-        ///////////////////////////////////
-        ///////////////////////////////////
-        ///////////////////////////////////
-        ////////HIER BEN JE BEZIG//////////
-        ///////////////////////////////////
-        ///////////////////////////////////
-        ///////////////////////////////////
-
-        settingsTitle = settingsIcon.GetComponent<GUIText>();
-        fireTitle = fireIcon.GetComponent<GUIText>();
-        plusTitle = plusIcon.GetComponent<GUIText>();
-        saveTitle = saveIcon.GetComponent<GUIText>();
-        backTitle = backIcon.GetComponent<GUIText>();
+        settingsTitle = settingsTitleObject.AddComponent<GUIText>();
+        fireTitle = fireTitleObject.AddComponent<GUIText>();
+        plusTitle = plusTitleObject.AddComponent<GUIText>();
+        saveTitle = saveTitleObject.AddComponent<GUIText>();
 
         settingsTitle.text = "SETTINGS";
         fireTitle.text = "FIRE";
         plusTitle.text = "BACKGROUND";
         saveTitle.text = "SAVE";
-        backTitle.text = "BACK";
+
+        textList.AddMany(settingsTitle, fireTitle, plusTitle, saveTitle);
 
         //Background
         backgroundImage = Resources.Load("Backgrounds/MenuBackgrounds/Yellow") as Texture2D;
         backgroundTexture.texture = backgroundImage;
 
-        int defaultWidth = 1280;
-        int defaultHeight = 800;
-        Vector3 scale;
-        scale = new Vector3(defaultWidth / Screen.width, defaultHeight / Screen.height, 1f);
+        //Scale
+
+        float xSize = settingsIconSprite.bounds.size.x;
+        float ySize = settingsIconSprite.bounds.size.y;
+        float width;
+        float height;
+
+        if (screenDPI > 0)
+        {
+            width = 76 * screenDPI;
+            height = 86 * screenDPI;
+        }
+        else
+        {
+            width = 76;
+            height = 86;
+        }
+
+        float worldwidth = (camera.orthographicSize * 2 / Screen.height * width) / xSize;
+        float worldHeight = (camera.orthographicSize * 2 / Screen.height * height) / ySize;
+
+        settingsIcon.transform.localScale = new Vector3(worldwidth, worldHeight, 1);
+        plusIcon.transform.localScale = new Vector3(worldwidth, worldHeight, 1);
+        fireIcon.transform.localScale = new Vector3(worldwidth, worldHeight, 1);
+        backIcon.transform.localScale = new Vector3(worldwidth, worldHeight, 1);
+        saveIcon.transform.localScale = new Vector3(worldwidth, worldHeight, 1);
+
 
         //position
-        settingsIcon.transform.position = new Vector3(0, 0, 0);
-        fireIcon.transform.position = new Vector3(0, 0, 0);
-        plusIcon.transform.position = new Vector3(0, 0, 0);
-        saveIcon.transform.position = new Vector3(0, 0, 0);
-        backIcon.transform.position = new Vector3(0, 0, 0);
+        float x = camera.ScreenToWorldPoint(new Vector3((Screen.width / 2), 0, 0)).x;
+        float y = camera.ScreenToWorldPoint(new Vector3(0, 50, 0)).y;
+        Vector3 position = new Vector3(x, y, -1);
+
+        //Left 2
+        plusIcon.transform.position = new Vector3(position.x - (plusIconSprite.bounds.size.x * 1.1f * 2) * settingsIcon.transform.localScale.x, position.y + (plusIconSprite.bounds.size.y / 2), 1);
+        //Left 1
+        fireIcon.transform.position = new Vector3(position.x - (fireIconSprite.bounds.size.x * 1.1f) * settingsIcon.transform.localScale.x, position.y + (fireIconSprite.bounds.size.y / 2), 1);
+        //Midle
+        settingsIcon.transform.position = new Vector3(position.x, position.y + (settingsIconSprite.bounds.size.y / 2), 1);
+        //Right 1
+        saveIcon.transform.position = new Vector3(position.x + (saveIconSprite.bounds.size.x * 1.1f) * settingsIcon.transform.localScale.x, position.y + (saveIconSprite.bounds.size.y / 2), 1);
+        //Right 2
+        backIcon.transform.position = new Vector3(position.x + (backIconSprite.bounds.size.x * 1.1f * 2) * settingsIcon.transform.localScale.x, position.y + (backIconSprite.bounds.size.y / 2), 1);
 
         plusTitle.pixelOffset = new Vector2(50, (Screen.height - 65));
         settingsTitle.pixelOffset = new Vector2(50, (Screen.height - 132));
         fireTitle.pixelOffset = new Vector2(50, (Screen.height - 200));
         saveTitle.pixelOffset = new Vector2(50, (Screen.height - 265));
 
-        //anchor
-        settingsTitle.anchor = TextAnchor.MiddleLeft;
-        fireTitle.anchor = TextAnchor.MiddleLeft;
-        plusTitle.anchor = TextAnchor.MiddleLeft;
-        saveTitle.anchor = TextAnchor.MiddleLeft;
+        foreach (GUIText item in textList)
+        {
+            item.anchor = TextAnchor.MiddleLeft;
+            item.color = Color.black;
+            item.font = menuFont;
+            item.fontStyle = FontStyle.Normal;
+            item.fontSize = fontSize;
+        }
 
-        //Color
-        settingsTitle.color = Color.black;
-        fireTitle.color = Color.black;
-        plusTitle.color = Color.black;
-        saveTitle.color = Color.black;
-        backTitle.color = Color.black;
+        //Rect
+        //PlusIcon
+        plusTextRect = new Rect(50,
+            (Screen.height - plusTitle.GetScreenRect().yMax + 14),
+            plusTitle.GetScreenRect().width,
+            fontSize - 20);
 
-        //Font
-        settingsTitle.font = menuFont;
-        fireTitle.font = menuFont;
-        plusTitle.font = menuFont;
-        saveTitle.font = menuFont;
+        //FireIcon
+        fireTextRect = new Rect(50,
+            (Screen.height - fireTitle.GetScreenRect().yMax + 14),
+            fireTitle.GetScreenRect().width,
+            fontSize - 20);
 
-        //Font Style
-        settingsTitle.fontStyle = FontStyle.Normal;
-        fireTitle.fontStyle = FontStyle.Normal;
-        plusTitle.fontStyle = FontStyle.Normal;
-        saveTitle.fontStyle = FontStyle.Normal;
+        //SettingsIcon
+        settingsTextRect = new Rect(50,
+            (Screen.height - settingsTitle.GetScreenRect().yMax + 14),
+            settingsTitle.GetScreenRect().width,
+            fontSize - 20);
 
-        //Font Size
-        settingsTitle.fontSize = fontSize;
-        fireTitle.fontSize = fontSize;
-        plusTitle.fontSize = fontSize;
-        saveTitle.fontSize = fontSize;
-
-
-        //scale
-        settingsIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
-        fireIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
-        plusIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
-        saveIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
-        backIcon.transform.localScale = new Vector3(0.1f, 0.1f, 0);
+        //SaveIcon
+        saveTextRect = new Rect(50,
+            (Screen.height - saveTitle.GetScreenRect().yMax + 14),
+            saveTitle.GetScreenRect().width,
+            fontSize - 20);
+        //Left Top Width Height
         #endregion
 
     }

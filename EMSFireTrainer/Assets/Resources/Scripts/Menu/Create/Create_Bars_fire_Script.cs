@@ -33,13 +33,16 @@ public class Create_Bars_fire_Script {
 
         Topbar.transform.localScale = new Vector3(worldScreenWidth / width, 1, 1);
         AddFire(i, Topbar);
+        AddSecondFire(i, Topbar);
     }
 
-    private void AddFire(int i, GameObject parent)
+    /*private void AddFire(int i, GameObject parent)
     {
         float pixelRatio = (camera.orthographicSize * 2) / camera.pixelHeight;
         GameObject sprite;
-        GameObject sprite2;
+        GameObject sprite2;s
+
+
         FireAnimation = (GameObject)Resources.Load("Prefabs/Scene_1_Prefabs/fireSprite_01");
         Debug.Log("ScaleX: " + parent.transform.localScale.x);
         sprite = GameObject.Instantiate(FireAnimation, new Vector3(parent.transform.position.x + 0.15f, parent.transform.position.y, parent.transform.position.z), parent.transform.rotation) as GameObject;
@@ -50,23 +53,95 @@ public class Create_Bars_fire_Script {
         sprite2.transform.parent = parent.transform;
         sprite.transform.localScale = new Vector3(Topbar.transform.localScale.x / 1.25f, Topbar.transform.localScale.y / 1.75f, parent.transform.localScale.z);
         sprite2.transform.localScale = new Vector3(Topbar.transform.localScale.x / 1.25f, Topbar.transform.localScale.y / 1.75f, parent.transform.localScale.z);
-    }
-
-    private void AddText(int i, GameObject parent, string text)
+    }*/
+    private void AddFire(int i, GameObject parent)
     {
-        naamText = new GameObject("Naam_" + i);
-        Font HelveticaNeue = Resources.Load<Font>("Fonts/HelveticaNeue");
-        TextMesh naamTextMesh = naamText.AddComponent<TextMesh>();
-        Material HelveticaNeueMat = Resources.Load<Material>("Fonts/HelveticaNeue");
+        GameObject fireObject;
+        Sprite[] fireSprite;
+        SpriteRenderer fireRenderer;
+        Bounds fireBounds;
+        BoxCollider2D fireCollider;
+        Vector3 position;
 
-        naamText.AddComponent<MeshRenderer>();
-        naamText.GetComponent<MeshRenderer>().material = HelveticaNeueMat;
-        naamTextMesh.text = "Vuurtje" + i;
-        naamTextMesh.font = HelveticaNeue;
-        naamTextMesh.fontSize = 40;
 
-        naamText.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        naamText.transform.localPosition = new Vector3(parent.transform.position.x + 2.2f, parent.transform.position.y, parent.transform.position.z - 1);
-        naamText.transform.parent = parent.transform;
+        fireObject = new GameObject("fire_" + i);
+        fireSprite = Resources.LoadAll<Sprite>("Sprites/Fire/SmallFire");
+        fireRenderer = fireObject.AddComponent<SpriteRenderer>();
+        fireRenderer.sprite = fireSprite[0];
+        fireCollider = fireObject.AddComponent<BoxCollider2D>();
+        fireRenderer.sortingOrder = 1;
+        fireObject.transform.parent = parent.transform;
+        fireObject.AddComponent<Drag_Fire_Script>();
+
+        float screenDPI = Screen.dpi / 160;
+
+        float xSize = fireSprite[0].bounds.size.x;
+        float ySize = fireSprite[0].bounds.size.y;
+
+        float width;
+        float height;
+
+        if (screenDPI > 0)
+        {
+            width = 204 * screenDPI;
+            height = 330 * screenDPI;
+        }
+        else
+        {
+            width = 204 * parent.transform.localScale.x / 2;
+            height = 280 * parent.transform.localScale.y / 2;
+        }
+
+        float worldwidth = (camera.orthographicSize * 2 / Screen.height * width) / xSize;
+        float worldHeight = (camera.orthographicSize * 2 / Screen.height * height) / ySize;
+
+        fireObject.transform.localScale = new Vector3(worldwidth, worldHeight, 1);
+        position = new Vector3(parent.transform.position.x + (parent.transform.localScale.DpToPixel().x / 4), parent.transform.position.y, parent.transform.position.z);
+        fireObject.transform.position = position;
+    }
+    private void AddSecondFire(int i, GameObject parent)
+    {
+        GameObject fireObject;
+        Sprite[] fireSprite;
+        SpriteRenderer fireRenderer;
+        Bounds fireBounds;
+        BoxCollider2D fireCollider;
+        Vector3 position;
+
+
+        fireObject = new GameObject("fire_" + i + i);
+        fireSprite = Resources.LoadAll<Sprite>("Sprites/Fire/SmallFire");
+        fireRenderer = fireObject.AddComponent<SpriteRenderer>();
+        fireRenderer.sprite = fireSprite[0];
+        fireCollider = fireObject.AddComponent<BoxCollider2D>();
+        fireRenderer.sortingOrder = 1;
+        fireObject.transform.parent = parent.transform;
+        fireObject.AddComponent<Drag_Fire_Script>();
+
+        float screenDPI = Screen.dpi / 160;
+
+        float xSize = fireSprite[0].bounds.size.x;
+        float ySize = fireSprite[0].bounds.size.y;
+
+        float width;
+        float height;
+
+        if (screenDPI > 0)
+        {
+            width = (204 * parent.transform.localScale.y / 2) * screenDPI;
+            height = (280 * parent.transform.localScale.y / 2) * screenDPI;
+        }
+        else
+        {
+            width = 204 * parent.transform.localScale.x / 2;
+            height = 280 * parent.transform.localScale.y / 2;
+        }
+
+        float worldwidth = (camera.orthographicSize * 2 / Screen.height * width) / xSize;
+        float worldHeight = (camera.orthographicSize * 2 / Screen.height * height) / ySize;
+
+        fireObject.transform.localScale = new Vector3(worldwidth, worldHeight, 1);
+        position = new Vector3(parent.transform.position.x + (parent.transform.localScale.DpToPixel().x / 2) + fireSprite[0].bounds.size.x, parent.transform.position.y, parent.transform.position.z);
+        fireObject.transform.position = position;
     }
 }

@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using pumpkin.display;
-using pumpkin.events;
 using System.IO;
 
 
@@ -17,16 +15,19 @@ public class Drag_Fire_Script : MonoBehaviour
     GameObject IconHolder;
     TopBar_Script CBFscript;
 
+    GameObject fireObject;
+    Sprite fireSprite;
+    SpriteRenderer fireRenderer;
+    Bounds fireBounds;
+    BoxCollider2D fireCollider;
+    Vector3 position;
+
     float tempx;
     float tempy;
 
     Vector2 mPos;
     GameObject fireHolder;
 
-    public void Create_ObjectMenu()
-    {
-
-    }
     void Start()
     {
         camera = GameObject.Find("Main Camera").camera;
@@ -41,12 +42,8 @@ public class Drag_Fire_Script : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
             if (hit.transform == this.transform && obj == null)
             {
-                print(hit.transform.name);
-                FireIcon = Resources.Load("Prefabs/Scene_1_Prefabs/fireSprite_03") as GameObject;
-                IconHolder = (GameObject)Instantiate(FireIcon, new Vector3(0, 0, 0), Quaternion.identity);
-                IconHolder.transform.parent = fireHolder.transform;
-                IconHolder.name = "FireIcon_" + IconHolder.transform.parent.childCount;
-                obj = IconHolder.transform;
+                addFire(fireHolder.transform);
+                obj = fireObject.transform;
                 offset = new Vector3(mousePos.x - hit.transform.position.x, mousePos.y - hit.transform.position.y, obj.position.z);
             }
         }
@@ -60,10 +57,49 @@ public class Drag_Fire_Script : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
+            if (obj != null && !obj.GetComponent<Fire_Propertie_Menu_Script>())
+            {
+                obj.gameObject.AddComponent<Fire_Propertie_Menu_Script>();
+            }
             obj = null;
             IconHolder = null;
             CBFscript.deleteTopBar();
         }
+    }
+
+    private void addFire(Transform parent)
+    {
+        fireObject = new GameObject("FireIcon_" + fireHolder.transform.childCount);
+        fireSprite = Resources.Load<Sprite>("Sprites/Fire/SmallFire");
+        fireRenderer = fireObject.AddComponent<SpriteRenderer>();
+        fireRenderer.sprite = fireSprite;
+        fireCollider = fireObject.AddComponent<BoxCollider2D>();
+        fireRenderer.sortingOrder = 1;
+        fireObject.transform.parent = fireHolder.transform;
+
+        float screenDPI = Screen.dpi / 160;
+
+        float xSize = fireSprite.bounds.size.x;
+        float ySize = fireSprite.bounds.size.y;
+
+        float width;
+        float height;
+
+        if (screenDPI > 0)
+        {
+            width = 204 * screenDPI;
+            height = 330 * screenDPI;
+        }
+        else
+        {
+            width = 204 * parent.transform.localScale.x / 2;
+            height = 280 * parent.transform.localScale.y / 2;
+        }
+
+        float worldwidth = (camera.orthographicSize * 2 / Screen.height * width) / xSize;
+        float worldHeight = (camera.orthographicSize * 2 / Screen.height * height) / ySize;
+
+        fireObject.transform.localScale = new Vector3(worldwidth, worldHeight, 1);
     }
 
 }
