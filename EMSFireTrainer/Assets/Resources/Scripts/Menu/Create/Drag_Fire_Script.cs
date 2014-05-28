@@ -44,7 +44,7 @@ public class Drag_Fire_Script : MonoBehaviour
             {
                 addFire(fireHolder.transform);
                 obj = fireObject.transform;
-                offset = new Vector3(mousePos.x - hit.transform.position.x, mousePos.y - hit.transform.position.y, obj.position.z);
+                //offset = new Vector3(mousePos.x - hit.transform.position.x, mousePos.y - hit.transform.position.y, obj.position.z);
             }
         }
         if (Input.GetMouseButton(0))
@@ -70,7 +70,7 @@ public class Drag_Fire_Script : MonoBehaviour
     private void addFire(Transform parent)
     {
         fireObject = new GameObject("FireIcon_" + fireHolder.transform.childCount);
-        fireSprite = Resources.Load<Sprite>("Sprites/Fire/SmallFire");
+        fireSprite = Resources.Load<Sprite>("Sprites/Fire/SmallFire_Object");
         fireRenderer = fireObject.AddComponent<SpriteRenderer>();
         fireRenderer.sprite = fireSprite;
         fireCollider = fireObject.AddComponent<BoxCollider2D>();

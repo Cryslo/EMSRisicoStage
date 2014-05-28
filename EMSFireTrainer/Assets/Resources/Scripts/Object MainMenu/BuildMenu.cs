@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.IO;
+using System;
 
 public class BuildMenu : MonoBehaviour
 {
@@ -100,12 +101,19 @@ public class BuildMenu : MonoBehaviour
     private static Camera camera;
 
 
-    private static float startTime;
-    private static Vector2 startPos;
-    private static bool couldBeSwipe;
-    private static float comfortZone;
-    private static float minSwipeDist;
-    private static float maxSwipeTime;
+    public enum SwipeDirection
+    {
+        Up,
+        Down,
+        Right,
+        Left
+    }
+
+    public static event Action<SwipeDirection> Swipe;
+    private static bool swiping = false;
+    private static bool eventSent = false;
+    private static Vector2 lastPosition;
+    private static SwipeDirection swipeDirection;
 
     #endregion
 
@@ -117,12 +125,12 @@ public class BuildMenu : MonoBehaviour
     public Rect test2;
 
     public static float screenDPI;
+    public static Rect leftScreenRect;
+    public static Rect rightScreenRect;
+    public static Rect bottomScreenRect;
 
     void Awake()
     {
-        maxSwipeTime = 10;
-        minSwipeDist = 5;
-        comfortZone = 500;
         screenDPI = Screen.dpi / 160;
         folderBuilder = gameObject.GetComponent<FolderBuilder>();
         camera = GameObject.Find("Main Camera").camera;
@@ -157,6 +165,7 @@ public class BuildMenu : MonoBehaviour
 
     void Start()
     {
+
         mainCamera = GameObject.Find("Main Camera").camera;
         //Screen.SetResolution(1280,720,true);
         Vector3 scale = new Vector3(nativeWidth, nativeHeight, 1.0f);
@@ -448,66 +457,37 @@ public class BuildMenu : MonoBehaviour
 
     private static void IconMenuBehaviour()
     {
-        if (Input.touchCount > 0)
+
+        leftScreenRect = new Rect(0, 0, Screen.width * 0.1f, Screen.height);
+        rightScreenRect = new Rect(Screen.width - (Screen.width * 0.1f), 0, Screen.width * 0.1f, Screen.height);
+        bottomScreenRect = new Rect(0, 0, Screen.width, Screen.height * 0.2f);
+        for (int i = 0; i < createdSceneObjectHolder.transform.childCount; i++)
         {
-            var touch = Input.touches[0];
-            switch (touch.phase)
+            if (bottomScreenRect.Contains(camera.WorldToScreenPoint(GameObject.Find("FireIcon_" + i).transform.position)))
             {
-                case TouchPhase.Began:
-                    print("Began");
-                    couldBeSwipe = true;
-                    startPos = touch.position;
-                    startTime = Time.time;
-                    break;
-
-                case TouchPhase.Moved:
-                    if (Mathf.Abs(touch.position.y - startPos.y) > comfortZone)
+                //print("Bottom");
+                if (!rightScreenRect.Contains(camera.WorldToScreenPoint(GameObject.Find("FireIcon_" + i).transform.position)))
+                {
+                    print("Right");
+                }
+                else if (rightScreenRect.Contains(camera.WorldToScreenPoint(GameObject.Find("FireIcon_" + i).transform.position)))
+                {
+                    if (!leftScreenRect.Contains(camera.WorldToScreenPoint(GameObject.Find("FireIcon_" + i).transform.position)))
                     {
-                        print("Swipe false!");
-                        couldBeSwipe = false;
+                        print("Left");
                     }
-                    break;
-
-                case TouchPhase.Stationary:
-                    print("Stationary!");
-                    //couldBeSwipe = false;
-                    break;
-
-                case TouchPhase.Ended:
-                    print("Ended");
-
-                    float swipeTime = Time.time - startTime;
-                    float swipeDist = (touch.position - startPos).magnitude;
-
-                    if (couldBeSwipe && (swipeTime < maxSwipeTime) && (swipeDist > minSwipeDist))
+                    else if (leftScreenRect.Contains(camera.WorldToScreenPoint(GameObject.Find("FireIcon_" + i).transform.position)))
                     {
-                        print("Its a Swipe!");
-                        // It's a swiiiiiiiiiiiipe!
-                        float swipeDirection = Mathf.Sign(touch.position.y - startPos.y);
-                        print(swipeDirection);
-
-                        // Do something here in reaction to the swipe.
-                        foreach (GameObject item in Objects)
-                        {
-                            if (swipeDirection < 0)
-                            {
-                                item.transform.position.y = Vector3.Lerp(item.transform.position, new Vector3(item.transform.position.x, -50, item.transform.position.z), Time.deltaTime);
-                            }
-                            if (swipeDirection > 0)
-                            {
-                                item.transform.position = Vector3.Lerp(item.transform.position, new Vector3(item.transform.position.x, 50, item.transform.position.z), Time.deltaTime);
-                            }
-                        }
+                                print("Bottom");
                     }
-                    break;
-
+                }
             }
-
         }
     }
 
     private static void DeleteText()
     {
+        
         if (!textClicked)
         {
             List<GUIText> textList = new List<GUIText>();
@@ -525,9 +505,9 @@ public class BuildMenu : MonoBehaviour
         if (playButtonText != null)
         {
         }
-        //GUI.Box(connectButtonRect, "Connect");
-        //GUI.Box(createButtonRect, "Create");
-        //GUI.Box(playButtonRect, "Play");
+        GUI.Box(leftScreenRect, "Left");
+        GUI.Box(rightScreenRect, "Right");
+        GUI.Box(new Rect(bottomScreenRect.x, new Vector2(0, Screen.height - bottomScreenRect.y).y, bottomScreenRect.width, -bottomScreenRect.height), "Bottom");
         //GUI.Box(smokeButtonRect, "Smoke");
         //GUI.Box(homeIconRect, "Home");
         /*GUI.Box(plusIconRect, "PlusIcon");
@@ -782,6 +762,8 @@ public class BuildMenu : MonoBehaviour
         plusCollider = plusIcon.AddComponent<BoxCollider2D>();
         saveCollider = saveIcon.AddComponent<BoxCollider2D>();
         backCollider = backIcon.AddComponent<BoxCollider2D>();
+
+
 
         settingsIconSprite = Resources.Load<Sprite>("Sprites/Create_Icons/SettingsIcon");
         fireIconSprite = Resources.Load<Sprite>("Sprites/Create_Icons/FireIcon");
