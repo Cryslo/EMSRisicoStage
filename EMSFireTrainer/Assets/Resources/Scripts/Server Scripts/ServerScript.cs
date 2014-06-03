@@ -53,8 +53,13 @@ public class ServerScript : MonoBehaviour
 	void OnPlayerConnected (NetworkPlayer player)
 	{
 		passGui.DeleteGui();
-		print("Player Connected");
+		print("Player Connected" + player);
 	}
+
+	void OnPlayerDisconnected(NetworkPlayer player) {
+		Debug.Log("Player Disconnected" + player);
+	}
+
 
     IEnumerator waitAndDestroy() {
         float waitForSeconds = 5.0f;

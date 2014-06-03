@@ -70,7 +70,7 @@ public class BackGround_Image_Load_Script : MonoBehaviour {
         {
             Browser_Button_Renderer.sprite = Browser_Button_Sprite[0];
         }
-
+		#if UNITY_ANDROID
         if (Input.GetMouseButtonDown(0))
         {
             if (hit.transform == Camera_Button_Object.transform)
@@ -84,6 +84,7 @@ public class BackGround_Image_Load_Script : MonoBehaviour {
                 unityToJava.openImageBrowser();
             }
         }
+#endif
 	}
 
     public void DestroyMe()

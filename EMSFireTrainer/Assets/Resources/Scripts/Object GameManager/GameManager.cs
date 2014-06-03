@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
 	public static bool inFirst;
 	private static bool created = false;
 
-    public static GameState getGameState{
+  public static GameState getGameState{
 		get{return gameState;}
 	}
 	public static GameState PreviousGameState{

@@ -4,7 +4,7 @@ using System.IO;
 
 public class UnitytoJava : MonoBehaviour
 {
-    //#if UNITY_ANDROID
+    #if UNITY_ANDROID
     private AndroidJavaClass jc;
     private AndroidJavaObject jo;
     private GameObject bg;
@@ -84,5 +84,5 @@ public class UnitytoJava : MonoBehaviour
 
             }
     }*/
-    //#endif
+    #endif
 }

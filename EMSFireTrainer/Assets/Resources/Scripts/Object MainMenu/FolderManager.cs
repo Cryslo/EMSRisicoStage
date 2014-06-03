@@ -38,9 +38,9 @@ public class FolderManager : MonoBehaviour
 		this.exampleDirectoryPath = directoryPath + "/" + exampleDirectoryName + "/" + savedDirectoryName;
 		this.exampleBackgroundsPath = directoryPath + "/" + exampleDirectoryName + "/" + savedBackgroundsName;
 		// Setting the savedDirectoryPath to the folder where all projects are stored
-		this.savedDirectoryPath = directoryPath + "/Files" + "/" + savedDirectoryName;
+		this.savedDirectoryPath = directoryPath + "/" + savedDirectoryName;
 		// Setting the savedBackgroundsPath to the folder where all Backgrounds are stored
-		this.savedBackgroundsPath = directoryPath + "/Files" + "/" + savedBackgroundsName;
+		this.savedBackgroundsPath = directoryPath + "/" + savedBackgroundsName;
 		// Setting the Directory folder to an variable
 		this.DirectoryFolder = new DirectoryInfo(savedDirectoryPath);
 		this.exampleDirectoryFolder = new DirectoryInfo(exampleDirectoryPath);

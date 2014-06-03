@@ -114,6 +114,7 @@ public class FolderBuilder : MonoBehaviour
 		
 		foreach(DirectoryInfo folder in folderManager.GetFolders())
 			buildedFolderArray.Add(folder);
+
 		//buildedFolderArray += folderManager.GetFolders();
 		rebuildGUI();
 		return false;
@@ -156,27 +157,19 @@ public class FolderBuilder : MonoBehaviour
 	
 	bool rebuildGUI()
 	{
-		
-		Destroy(Folders.gameObject);
+		if(Folders != null)
+		{
+			Destroy(Folders);
+		}
+
 		Folders = new GameObject();
 		Folders.name = "Folders";
 
-
-		
 		boxesDirectoryBox = new List<DirectoryBox>();
-		
-		float finalScale = 1;//checkScale();
-		
-		while(finalScale > 1.5f) {
-			boxesX++;
-			finalScale = 1;//checkScale();
-		}
-		
-		finalDirectoryWidth = 200 * finalScale; //* menuScript.getXScale();
-		finalDirectoryHight = 200 * finalScale; //* menuScript.getYScale();
-
 		columns = 3;
-		
+
+		Debug.Log("So far so good! AS I KNOW");
+
 		if(!folderOpen) {
 			for(int j = 0; j < exampleProjects.Count; j++) {
 //				Debug.Log("Test" + exampleProjects.Count);
@@ -193,8 +186,6 @@ public class FolderBuilder : MonoBehaviour
 				directoryBox.X = directoryBox.X = (j - (j / columns) * columns);   
 				directoryBox.Y = directoryBox.Y = (j / columns);
 				//print( Mathf.Round(((j - 1)%2) + 1));
-				//directoryBox.X = (((Mathf.Round((j)/2))) * finalDirectoryWidth) + (finalDirectoryWidth / 2);
-				//directoryBox.Y = ((Screen.height - (finalDirectoryWidth * 2)) - ((2 - ((int)(((j)%2)) + 1f) * finalDirectoryWidth ) + (finalDirectoryHight /2)));
 				directoryBox.BoxNumber = j;
 				
 				directoryBox.Setup();
@@ -217,8 +208,6 @@ public class FolderBuilder : MonoBehaviour
 				}
 				directoryBox.X = directoryBox.X = (number - (number / columns) * columns);   
 				directoryBox.Y = directoryBox.Y = (number / columns);
-				//directoryBox.X = (((Mathf.Round((number)/2))) * finalDirectoryWidth) + (finalDirectoryWidth / 2);
-				//directoryBox.Y = ((Screen.height - (finalDirectoryWidth * 2)) - ((2 - ((int)(((number)%2)) + 1f) * finalDirectoryWidth ) + (finalDirectoryHight /2)));
 				directoryBox.BoxNumber = number;
 				
 				directoryBox.Setup();
@@ -243,8 +232,6 @@ public class FolderBuilder : MonoBehaviour
 			
 			directoryBox.X = directoryBox.X = (0 - (0 / columns) * columns);   
 			directoryBox.Y = directoryBox.Y = (0 / columns);
-			//directoryBox.X = (((Mathf.Round((0)/2))) * finalDirectoryWidth) + (finalDirectoryWidth / 2);
-			//directoryBox.Y = ((Screen.height - (finalDirectoryWidth * 2)) - ((2 - ((int)(((0)%2)) + 1f) * finalDirectoryWidth ) + (finalDirectoryHight /2)));
 			directoryBox.BoxNumber = 0;
 			
 			directoryBox.Setup();
@@ -266,14 +253,13 @@ public class FolderBuilder : MonoBehaviour
 				
 				directoryBox.X = directoryBox.X = (number - (number / columns) * columns);   
 				directoryBox.Y = directoryBox.Y = (number / columns);
-				//directoryBox.X = (((Mathf.Round((number)/2))) * finalDirectoryWidth) + (finalDirectoryWidth / 2);
-				//directoryBox.Y = ((Screen.height - (finalDirectoryWidth * 2)) - ((2 - ((int)(((number)%2)) + 1f) * finalDirectoryWidth ) + (finalDirectoryHight /2)));
 				directoryBox.BoxNumber = number;
 				
 				directoryBox.Setup();
 				boxesDirectoryBox.Add(directoryBox);
 			}
 		}
+
 		scrollPanel = new Rect(Screen.width - ((Screen.width / 4) * columns), 0, ((Screen.width / 4) * columns), boxesDirectoryBox.Count * ((Screen.height / 4)));
 		return false;
 		
@@ -295,11 +281,11 @@ public class FolderBuilder : MonoBehaviour
 		return true;
 	}
 	
-	public bool OpenLoading()
+	public void OpenLoading()
 	{
+		//rebuildFolderArray();
+		print("Folders Loaded: " + folderManager.GetFolders().Count);
 		rebuildFolderArray();
-		
-		return false;
 	}
 	
 	public bool CloseLoading()

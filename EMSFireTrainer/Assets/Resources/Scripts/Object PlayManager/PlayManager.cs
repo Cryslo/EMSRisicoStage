@@ -1,12 +1,16 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using System;
 
 public class PlayManager : MonoBehaviour {
 	static FolderManager folderManager;
-	static RPCReciver rPCReciver;
+	public static PlayManager instance;
+
 	private static GameObject scene;
 
 	private static string directoryName;
@@ -14,7 +18,7 @@ public class PlayManager : MonoBehaviour {
 
 	private static FileInfo currentScene;
 	private static List<FileInfo> scenes;
-	private static List<FileInfo> scenesWaiting;
+	public static List<FileInfo> scenesWaiting;
 	private static List<string> scenesDone;
 
 	private static int sceneNumber = 0;
@@ -23,14 +27,12 @@ public class PlayManager : MonoBehaviour {
 
 	void Awake () {
 		folderManager = this.gameObject.GetComponent<FolderManager>();
-		rPCReciver = GameObject.Find("Server").GetComponent<RPCReciver>();
 	}
 	// Use this for initialization
 	void Start () {
+		instance = this;
 		scene = new GameObject("Scene");
 		scenesDone = new List<string>();
-
-		rPCReciver.SendControllerOn();
 
 		directoryName = GameManager.directoryName;
 		sceneName = GameManager.sceneName;
@@ -50,6 +52,8 @@ public class PlayManager : MonoBehaviour {
 
 		print(currentScene.FullName);
 		print(scenes.Count);
+		RPCController.instance.SendScenes(scenes);
+
 		sceneOptions = XmlBehaviour.LoadScene(currentScene.FullName, scene);
 
 	}
@@ -69,9 +73,25 @@ public class PlayManager : MonoBehaviour {
 			
 			sceneOptions = XmlBehaviour.LoadScene(currentScene.FullName, scene);
 		}else{
-			rPCReciver.SendControllerOff();
 			GameManager.queGameState = GameState.PlayMenu;
 			GameManager.SetGameStateBack();
+		}
+	}
+
+	public static void PlayScene(FileInfo playScene) {
+		if(File.Exists(playScene.FullName))
+		{
+			GameObject.Destroy(scene);
+			scene = new GameObject("Scene");
+
+			currentScene = scenes[sceneNumber];
+			scenesDone.Add(scenes[sceneNumber].Name);
+			
+			print(playScene.Name);
+			string notifyName = playScene.Name;
+			Notify.notify(notifyName.Remove(notifyName.Length - 4));
+			
+			sceneOptions = XmlBehaviour.LoadScene(playScene.FullName, scene);
 		}
 	}
 
